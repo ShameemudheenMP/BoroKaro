@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="MACE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login to your MACE wallet!</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="whole fadeInDown">
+
+        <div id="form-Details">
+
+            <h2 class="active underlineHover"> MACE Wallet Login </h2>
+
+            <div class="fadeIn One">
+                <img src="Assets/login-icon.png" id="icon" alt="User Icon" width="212px" height="180px" />
+            </div>
+
+            <form>
+                <input type="text" id="login" class="fadeIn Two" name="login" placeholder="Login">
+                <input type="password" id="pass" class="fadeIn Three" name="login" placeholder="Password">
+                <input type="submit" id="login-btn" class="fadeIn Four" value="Login">
+            </form>
+
+            <p id="caps">WARNING! Caps lock is ON.</p>
+
+            <script>
+                var input = document.getElementById("pass");
+                var text = document.getElementById("caps");
+                input.addEventListener("keyup", function(event) {
+                    if (event.getModifierState("CapsLock")) {
+                        text.style.display = "block";
+                    } else {
+                        text.style.display = "none";
+                    }
+                });
+            </script>
+
+            <div id="form-Bottom">
+                <a class="forPass" href="#">Forgot Password?</a>
+            </div>
+
+            <script src="./script.js"></script>
+
+</body>
+
+</html>

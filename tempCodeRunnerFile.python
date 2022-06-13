@@ -1,0 +1,25 @@
+s1 = input()
+s2 = input()
+
+l1 = len(s1)
+l2 = len(s2)
+
+if l2>l1:
+	print("False")
+else:
+	j=0
+	for i in range(l2):
+		if s1[i] == s2[j]:
+			i+=1
+			j+=1
+		else:
+			j+=1
+		if j==l1:
+			break
+	
+	if i<l2:
+		print("False")
+	else:
+		print("True")
+        print(l1)
+        print(l2)
