@@ -7,6 +7,9 @@
     <title>BoroKaro</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
@@ -16,16 +19,26 @@
         </div>
         <div class="form_details">
             <form>
-                <div class="inputboxes">
-                    <div>
+                <div class="input">
+                    <div class="inputicon">
+                        <i class="fa fa-user icons"></i>
+
+                    </div>
+                    <div class="inputbox">
+                        <input type="text" id="email" name="email" class="textinputs" placeholder="EMAIL"><br><br>
+                    </div>
+                </div><br>
+                <div class="input">
+                    <div class="inputicon">
+                        <i class="fa fa-lock icons" aria-hidden="true"  style="font-size:20px"></i>
                         
                     </div>
-                    <div>
-                        <input type="text" id="email" name="email" class="textinputs" placeholder="  &#xf007   EMAIL"><br><br>
+                    <div class="inputbox">
+                        <input type="password" id="email" name="password" class="textinputs" placeholder="PASSWORD"><br><br>
                     </div>
-                </div>
+                </div><br>
                 
-                <input type="password" id="password" name="password" class="textinputs" placeholder="  &#xf023   PASSWORD"><br><br><br>
+                <!-- <input type="password" id="password" name="password" class="textinputs" placeholder="  &#xf023   PASSWORD"><br><br><br> -->
                 <input type="submit" value="LOGIN" class="submitbutton"><br>
                 <a href="http://" class>forgotpassword</a>
                 <p>Not yet registered</p> 
