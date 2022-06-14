@@ -53,6 +53,7 @@ body {
     float: left;
     padding: 3%;
     padding-left: 5%;
+    width: 10%;
 }
 
 .submitbutton{
@@ -88,11 +89,16 @@ body {
 .icons{
     font-size: 30px;
     color: rgba(255, 255, 255, 0.788);
+    position: absolute;
+    /* top: 50%; */
+    /* -ms-transform: translateY(-50%); */
+    /* transform: translateY(-50%); */
+    align-items : center;
 }
 
 .inputbox {
     float:left;
-    width: 100%;
+    width: 90%;
     /* text-align: right; */
     margin-left: -17px;;
     padding-left: 0;
