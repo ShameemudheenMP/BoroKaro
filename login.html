@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoroKaro</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 <body>
     <div class="form">
@@ -21,8 +17,7 @@
             <form>
                 <div class="input">
                     <div class="inputicon">
-                        <i class="fa fa-user icons"></i>
-
+                        <img src="Assets/email-icon.png" alt="email-icon">
                     </div>
                     <div class="inputbox">
                         <input type="text" id="email" name="email" class="textinputs" placeholder="EMAIL"><br><br>
@@ -30,8 +25,7 @@
                 </div><br>
                 <div class="input">
                     <div class="inputicon">
-                        <i class="fa fa-lock icons" aria-hidden="true"  style="font-size:20px"></i>
-                        
+                        <img src="Assets/lock-icon.png" alt="lock-icon">
                     </div>
                     <div class="inputbox">
                         <input type="password" id="email" name="password" class="textinputs" placeholder="PASSWORD"><br><br>
@@ -39,10 +33,12 @@
                 </div><br>
                 
                 <!-- <input type="password" id="password" name="password" class="textinputs" placeholder="  &#xf023   PASSWORD"><br><br><br> -->
-                <input type="submit" value="LOGIN" class="submitbutton"><br>
-                <a href="http://" class>forgotpassword</a>
-                <p>Not yet registered</p> 
-                <a href="http://">SIGN UP</a>
+                <a href="http://index.html"><input type="submit" value="LOGIN" class="submitbutton"></a><br>
+                <div class="bottom">
+                    <a href="http://" class="forgot">Forgot Password?</a><br><br>
+                    <div><p>Not yet registered?<a href="http://signup.html" style="margin-left:5px ;">SIGN UP</a> </p> </div>
+                </div>
+                
             </form>
         </div>
     </div>
