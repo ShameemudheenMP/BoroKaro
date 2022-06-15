@@ -1,0 +1,94 @@
+header {
+    background-color: #264ECA;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.navleft {
+    float: right;
+}
+
+.log-reg-btn {
+    /* text-align: center; */
+    background-color: #FFFFFF;
+    border: 2px solid white;
+    border-radius: 5px;
+    height: 30px;
+    width: 86px;
+}
+
+#regbtn {
+    color: #264ECA;
+}
+
+
+#logbtn {
+    color: #FFFFFF;
+    background:none;
+}
+
+.content {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    /* background-color: #264ECA; */
+}
+
+.body-left {
+    background-color: white;
+}
+
+
+.body-right {
+    background-color: #F5F5F5;
+}
+
+.input{
+    /* border: 2px solid rgba(10, 4, 4, 0.788); */
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    height: 39px;
+    margin: auto;
+    background-color: #E8EDFF;
+    font-size: 14px;
+}
+
+.inputicon{
+    float: left;
+    padding: 3%;
+    padding-left: 5%;
+    width: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.inputbox {
+    float:left;
+    width: 97%;
+    /* text-align: right; */
+    margin-left: -17px;;
+    padding-left: 0;
+    /* width : 100%; */
+    /* margin-right: 0; */
+    margin-right: -30px;
+    padding-right: 0;
+}
+
+.textinputs {
+    width: 100%;
+    height: 30px;
+    border: none;
+    background: none;
+    /* border-color: white; */
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    font-family: 'Montserrat', 'sans-serif';
+    color: black;
+    margin-left: -3%;
+    margin-right: 0;
+}

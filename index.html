@@ -5,12 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoroKaro</title>
+    <link rel="stylesheet" href="homestyle.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 <body>
-    <div>
-        <h1 style="color: red; padding-top: 10px;">BoroKaro</h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <div class="container-fluid p-0">
+        <header>
+            <nav class="navbar navbar-dark">
+                <div class="container-fluid p-1 ps-5">
+                  <a class="navbar-brand" href="#">
+                    <img src="Assets/home-logo.png" alt="home-logo">
+                  </a>
+                  <div class="navleft pe-5">
+                    <a href="login.html" style="text-decoration:none;">
+                      <button class="log-reg-btn fw-bold me-4" id="logbtn">LOGIN</button>
+                    </a>
+                    <a href="signup.html" style="text-decoration:none;">
+                      <button class="log-reg-btn fw-bold me-4" id="regbtn">SIGN UP</button>
+                    </a>
+                  </div>
+                </div>
+              </nav>
+        </header>
+
+        <div class="row container-fluid content p-0 m-0">
+          <div class="col-xl-2 col-md-2 col-sm-3 col-3 colbody-left">
+            <div class="search-form pt-3 ps-1">
+              <form action="">
+                <div class="input ps-2 pt-1">
+                  <div class="inputicon p-2 flex-grow-1 bd-highlight">
+                      <img src="Assets/search-icon.png" alt="search-icon">
+                  </div>
+                  <div class="inputbox">
+                      <input type="text" id="search" name="search" class="textinputs ms-3" placeholder="Search for Product"><br><br>
+                  </div>
+                </div>
+                <!-- <div class="search-input input-group flex-nowrap pe-2">
+                  <span class="input-group-text input-icon" id="addon-wrapping"><img src="Assets/search-icon.png" alt="search-icon"></span>
+                  <input type="text" class="form-control search-" placeholder="Search for product" aria-label="Username" aria-describedby="addon-wrapping">
+                </div> -->
+              </form>
+            </div>
+          </div>
+          <div class="col-xl-10 col-md-10 col-sm-9 col-9 body-right">
+            products
+          </div>
+        </div>
+
     </div>
+   
     
-    <p style="">This is a trial run</p>
 </body>
 </html>
