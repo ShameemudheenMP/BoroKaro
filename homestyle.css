@@ -90,7 +90,14 @@ header {
     border-radius: 5px 5px 5px 5px;
     outline: none;
     /* font-family: 'Montserrat', 'sans-serif'; */
-    color: black;
+    color: rgb(0, 0, 0);
     margin-left: -3%;
     margin-right: 0;
 }
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(0, 0, 0);
+    opacity: 1; /* Firefox */
+}
+
