@@ -35,17 +35,35 @@
         </header>
 
         <div class="row container-fluid content p-0 m-0">
-          <div class="col-xl-2 col-md-2 col-sm-3 col-3 colbody-left">
+          <div class="col-xl-3 col-md-3 col-sm-4 col-xs-12 body-left">
             <div class="search-form pt-3 ps-1">
               <form action="">
-                <div class="input ps-2 pt-1">
-                  <div class="inputicon p-2 flex-grow-1 bd-highlight">
+                <div class="input d-flex align-items-center">
+                  <div class="inputicon flex-grow-1 bd-highlight">
                       <img src="Assets/search-icon.png" alt="search-icon">
                   </div>
-                  <div class="inputbox">
-                      <input type="text" id="search" name="search" class="textinputs ms-3" placeholder="Search for Product"><br><br>
+                  <div class="inputbox  d-flex align-items-center">
+                      <input type="text" id="search" name="search" class="textinputs ms-1" placeholder="Search for Product"><br><br>
                   </div>
                 </div>
+                <select class="form-select mt-3" aria-label="">
+                  <option selected >Range</option>
+                  <option value="1">5 km</option>
+                  <option value="2">10 km</option>
+                  <option value="3">11 km</option>
+                </select>
+                <select class="form-select mt-3" aria-label="">
+                  <option selected >Price</option>
+                  <option value="1">Below 500</option>
+                  <option value="2">501 - 1000</option>
+                  <option value="3">1001 - 2000</option>
+                </select>
+                <select class="form-select mt-3" aria-label="">
+                  <option selected >Rating</option>
+                  <option value="1">5</option>
+                  <option value="2">Above 4</option>
+                  <option value="3">Above 3</option>
+                </select>
                 <!-- <div class="search-input input-group flex-nowrap pe-2">
                   <span class="input-group-text input-icon" id="addon-wrapping"><img src="Assets/search-icon.png" alt="search-icon"></span>
                   <input type="text" class="form-control search-" placeholder="Search for product" aria-label="Username" aria-describedby="addon-wrapping">
@@ -53,7 +71,7 @@
               </form>
             </div>
           </div>
-          <div class="col-xl-10 col-md-10 col-sm-9 col-9 body-right">
+          <div class="col-xl-9 col-md-9 col-sm-8 col-xs-12 body-right">
             products
           </div>
         </div>
