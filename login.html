@@ -14,7 +14,7 @@
             <img src="Assets/login-logo.png" alt="login-logo.png"  class="logo">
         </div>
         <div class="form_details">
-            <form>
+            <form id="form">
                 <div class="input">
                     <div class="inputicon">
                         <img src="Assets/email-icon.png" alt="email-icon">
@@ -33,14 +33,21 @@
                 </div><br>
                 
                 <!-- <input type="password" id="password" name="password" class="textinputs" placeholder="  &#xf023   PASSWORD"><br><br><br> -->
-                <a href="index.html"><input type="submit" value="LOGIN" class="submitbutton"></a><br>
+                <input type="submit" value="LOGIN" class="submitbutton"><br>
                 <div class="bottom">
                     <a href="http://" class="forgot">Forgot Password?</a><br><br>
                     <div><p>Not yet registered?<a href="signup.html" style="margin-left:5px ;">SIGN UP</a> </p> </div>
                 </div>
-                
             </form>
         </div>
     </div>
+
+    <script>
+        const form = document.querySelector("#form")
+        form.addEventListener("submit", (e) => {
+            e.preventDefault()
+            window.location = "index.html"
+        })
+    </script>
 </body>
 </html>
