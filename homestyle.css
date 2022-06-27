@@ -131,8 +131,6 @@ header {
     color: #00C087;
 }
 
-
-a {
-    text-decoration: none;
-    
+#filter-button {
+    background-color: #264ECA;
 }
