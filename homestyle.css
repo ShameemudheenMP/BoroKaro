@@ -169,3 +169,7 @@ header {
 .rating-value {
     width: 5px;
 }
+
+.card-title {
+    text-decoration: none;
+}
