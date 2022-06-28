@@ -1,5 +1,5 @@
 body {
-    padding-top: 7em;
+    padding-top: 6.9em;
 
 }
 
@@ -18,9 +18,7 @@ header {
     line-height: 18px;
 }
 
-.navleft {
-    float: right;
-}
+
 
 .log-reg-btn {
     /* text-align: center; */
@@ -173,3 +171,4 @@ header {
 .card-title {
     text-decoration: none;
 }
+
