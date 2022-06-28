@@ -134,3 +134,8 @@ header {
 #filter-button {
     background-color: #264ECA;
 }
+
+.filter {
+    /* align-items: center; */
+    text-align: center;
+}
