@@ -50,13 +50,22 @@ header {
 
 .body-left {
     background-color: white;
-    font-family: 'Montserrat', 'sans-serif';;
+    font-family: 'Montserrat', 'sans-serif';
+    position: fixed;
+    z-index: 1000;
 }
 
 
 .body-right {
+    margin-left: auto ;
     background-color: #F5F5F5;
     font-family: 'Poppins';
+}
+
+@media only screen and (max-width: 600px) {
+    .body-right {
+        padding-top: 17em;
+    }
 }
 
 .input{
@@ -138,4 +147,25 @@ header {
 .filter {
     /* align-items: center; */
     text-align: center;
+}
+
+.card-img {
+    height: 242px; 
+    object-fit: contain; /*to fit image in the divx */
+}
+
+.star-rating {
+    width: 35px;
+    height: 18px;
+    background-color: #00A3FF;
+    border-radius: 3px;
+}
+
+.star-rating {
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+.rating-value {
+    width: 5px;
 }
