@@ -12,65 +12,125 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body id="product-body">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <div class="container-fluid ps-0 pe-0">
-        <header class="fixed-top">
-            <nav class="navbar navbar-dark">
-              <div class="container-fluid p-1 ps-5">
-                <a class="navbar-brand" href="#">
-                  <img src="Assets/home-logo.png" alt="home-logo">
-                </a>
-                <div class="navleft">
-                  <div class="float-start pt-2 pe-3">
-                    <a href="messages.html" class="link-light me-4">
-                      YOUR ACTIVITY
-                    </a>
-  
-                    <a href="messages.html" class="link-light me-4">
-                      WISHLIST
-                    </a>
-                    <a href="messages.html" class="link-light me-4">
-                      MESSAGES
-                    </a>
-                    <a href="lend.html" class="text-decoration-none">
-                      <button class="log-reg-btn fw-bold me-4 link-primary" id="">LEND</button>
-                    </a>
-                  </div>
-                  <div class="dropdown float-end pe-5 ps-3">
-                    <a href="#" class="" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="Assets/Profileicon.png" alt="Profile">
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
-                      <li><a class="dropdown-item" href="#">Your Profile</a></li>
-                      <li><a class="dropdown-item" href="#">Logout</a></li>
-                    </ul>
-                  </div>
-                </div>
-                
-              </div>
-            </nav>
-          </header>
+      <header class="fixed-top">
+          <nav class="navbar navbar-dark">
+            <div class="container-fluid p-1 ps-5">
+              <a class="navbar-brand" href="#">
+                <img src="Assets/home-logo.png" alt="home-logo">
+              </a>
+              <div class="navleft">
+                <div class="float-start pt-2 pe-3">
+                  <a href="messages.html" class="link-light me-4">
+                    YOUR ACTIVITY
+                  </a>
 
-          <div class="container-fluid ms-0 m-5 m-lg-0 pt-5" id="product-view-body">
-            <div class="row prod-details mt-5">
-              <div class="prod-desc col-12 col-md-6 d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                  </div>
+                  <a href="messages.html" class="link-light me-4">
+                    WISHLIST
+                  </a>
+                  <a href="messages.html" class="link-light me-4">
+                    MESSAGES
+                  </a>
+                  <a href="lend.html" class="text-decoration-none">
+                    <button class="log-reg-btn fw-bold me-4 link-primary" id="">LEND</button>
+                  </a>
+                </div>
+                <div class="dropdown float-end pe-5 ps-3">
+                  <a href="#" class="" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="Assets/Profileicon.png" alt="Profile">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
+                    <li><a class="dropdown-item" href="#">Your Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                  </ul>
                 </div>
               </div>
-              <div class="prod-img col-12 col-md-6 d-flex justify-content-center">
+              
+            </div>
+          </nav>
+      </header>
+
+      <div class="container-fluid ms-0 m-5 m-lg-0 pt-5 pt-md-4" id="product-view-body">
+        <div class="row prod-details mt-5 mt-md-0">
+          <div class="prod-desc col-12 col-md-6 d-flex justify-content-center mb-5">
+            <div class="card" style="width: 28rem; height: 500px;">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">DELL OptiPlex 7490 All-in-One Monitor Black color</h5>
+                <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">₹500/day</h6>
+                <div class="star-rating float-end text-center">
+                  <div class="rating-value float-start ms-2">
+                    <p >4</p>
+                  </div>
+                  <img src="Assets/star.png" alt="star" class="float-start mt-1 ms-1">
+                </div>
+                <br>
+                <hr>
+                <p class="card-text" id="prod-details">Windows 10 Pro (Windows 11 Pro license included), 11th Gen Intel Core i5-11500 (12 MB cache, 6 cores, 12 threads, 2.70 to 4.60 GHz Turbo, 65W)</p>
+                <p class="semi-bold">Lender details:</p>
+                <p>Full Name,</p>
+                <p>Full Address Address Address <a href="" class="red-text fw-bold">REPORT USER</a></p>
+                <div class="d-flex justify-content-start">
+                  <h6 class="me-2 pt-1 fw-bold">Rent for</h6>
+                  <button class="me-2 rounded-circle bg-transparent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                  </button>
+                  <h6 id="days" class="me-2 pt-1 fw-bold">5</h6>
+                  <button class="me-2 rounded-circle bg-transparent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                  </button>
+                  <h6 class="fw-bold pt-1">days</h6>
+                </div>
+                <br>
+                <br>
+                <div class="d-flex justify-content-center">
+                  <a href="#" class="card-link btn btn-outline-danger btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">ADD TO WISHLIST</a>
+                  <a href="#" class="card-link btn btn-green btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" id="wishlist-btn">BORROW NOW</a>
+                </div>
+               
                 
               </div>
             </div>
           </div>
+          <div class="prod-img  col-12 col-md-6 d-flex justify-content-center">
+            <div class="card justify-content-center ps-3 pe-3"  style="width: 35rem; height: 500px;">
+              <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
+                <div class="carousel-inner">
+                  <div class="carousel-item active justify-content-center" data-bs-interval="10000">
+                    <img src="Assets/ProductImages/Product3-1.jpg" class="d-block w-100 card-imgs" alt="...">
+                  </div>
+                  <div class="carousel-item" data-bs-interval="2000">
+                    <img src="Assets/ProductImages/Product3-2.jpg" class="d-block w-100 card-imgs" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="Assets/ProductImages/Product3-3.jpg" class="d-block w-100 card-imgs" alt="...">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- <div class="prod-img  col-12 col-md-6 d-flex" >
+            <div class="card justify-content-center ps-3 pe-3"  style="width: 35rem; height: 500px;">
+              <img src="Assets/ProductImages/Product2.jpg" class="card-imgs" alt="product image">
+            </div>
+          </div> -->
+        </div>
+      </div>
     </div>
 </body>
 

@@ -1,5 +1,7 @@
 body{
     padding-top: 6.9em;
+    height: 100vh;
+    background-color: #C8D5FF;
 }
 
 
@@ -7,6 +9,7 @@ body{
 @media only screen and (max-width: 600px) {
     body {
         padding-top: 8em;
+        background-color: #C8D5FF;
     }
 }
 
@@ -175,6 +178,37 @@ header {
 
 #product-view-body {
     
-    height: 100vh; /*to get full screen div */
-    background-color: #C8D5FF;
+    height: 100vh;
+    font-family: 'Poppins';
+    /*to get full screen div */ 
+    /* background-color: #C8D5FF; */
+}
+
+/* * { border: 1px solid red; } */
+
+
+.card-imgs {
+    width: auto;
+    height: auto;
+    max-height: 412px;
+    object-fit: contain; /*to fit image in the divx */
+    border-radius: 1%;
+}
+
+
+#product-body {
+    background-color: #C8D5FF;;
+}
+
+.red-text {
+    color: #FF0000;
+}
+
+.semi-bold {
+    font-weight:900;
+}
+
+#wishlist-btn {
+    background-color: #45C917;
+    color: #FFFFFF;
 }
