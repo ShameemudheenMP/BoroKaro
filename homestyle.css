@@ -9,7 +9,7 @@ body{
 @media only screen and (max-width: 600px) {
     body {
         padding-top: 8em;
-        background-color: #C8D5FF;
+        /* background-color: #C8D5FF; */
     }
 }
 
@@ -196,9 +196,6 @@ header {
 }
 
 
-#product-body {
-    background-color: #C8D5FF;;
-}
 
 .red-text {
     color: #FF0000;
@@ -211,4 +208,8 @@ header {
 #wishlist-btn {
     background-color: #45C917;
     color: #FFFFFF;
+}
+
+.def-background {
+    background-color: #C8D5FF;
 }
