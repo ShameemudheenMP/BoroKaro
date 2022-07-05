@@ -23,32 +23,44 @@
               <a class="navbar-brand" href="#">
                 <img src="{% static 'Assets/home-logo.png' %}" alt="home-logo">
               </a>
-              <div class="navleft">
-                <div class="float-start pt-2 pe-3">
-                  <a href="/activity" class="link-light me-4">
-                    YOUR ACTIVITY
-                  </a>
+              {% if user.is_authenticated %}
+                <div class="navleft">
+                  <div class="float-start pt-2 pe-3">
+                    <a href="/activity" class="link-light me-4">
+                      YOUR ACTIVITY
+                    </a>
 
-                  <a href="/wishlist" class="link-light me-4">
-                    WISHLIST
+                    <a href="/wishlist" class="link-light me-4">
+                      WISHLIST
+                    </a>
+                    <a href="/messages" class="link-light me-4">
+                      MESSAGES
+                    </a>
+                    <a href="lend.html" class="text-decoration-none">
+                      <button class="log-reg-btn fw-bold me-4 link-primary" id="">LEND</button>
+                    </a>
+                  </div>
+                  <div class="dropdown float-end pe-5 ps-3">
+                    <a href="#" class="" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="{% static 'Assets/Profileicon.png' %}" alt="Profile">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
+                      <li><a class="dropdown-item" href="/profile">{{user.name}}</a></li>
+                      <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+              {% else %}
+                <div class="navleft pe-5">
+                  <a href="/login" style="text-decoration:none;">
+                    <button class="log-reg-btn fw-bold me-4" id="logbtn">LOGIN</button>
                   </a>
-                  <a href="/messages" class="link-light me-4">
-                    MESSAGES
-                  </a>
-                  <a href="lend.html" class="text-decoration-none">
-                    <button class="log-reg-btn fw-bold me-4 link-primary" id="">LEND</button>
+                  <a href="/signup" style="text-decoration:none;">
+                    <button class="log-reg-btn fw-bold me-4" id="regbtn">SIGN UP</button>
                   </a>
                 </div>
-                <div class="dropdown float-end pe-5 ps-3">
-                  <a href="#" class="" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{% static 'Assets/Profileicon.png' %}" alt="Profile">
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
-                    <li><a class="dropdown-item" href="/profile">Your Profile</a></li>
-                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                  </ul>
-                </div>
-              </div>
+              {% endif %}
+
               
             </div>
           </nav>
