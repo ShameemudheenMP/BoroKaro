@@ -1,0 +1,216 @@
+body{
+    padding-top: 6.9em;
+    height: 100vh;
+    background-color: #C8D5FF;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    body {
+        padding-top: 8em;
+        /* background-color: #C8D5FF; */
+    }
+}
+
+header {
+    background-color: #264ECA;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+
+
+.log-reg-btn {
+    /* text-align: center; */
+    background-color: #FFFFFF;
+    border: 2px solid white;
+    border-radius: 5px;
+    height: 30px;
+    width: 86px;
+}
+
+#regbtn {
+    color: #264ECA;
+}
+
+
+#logbtn {
+    color: #FFFFFF;
+    background:none;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    /* background-color: #264ECA; */
+}
+
+
+.body-left {
+    background-color: white;
+    font-family: 'Montserrat', 'sans-serif';
+    position: fixed;
+    z-index: 1000;
+    height: 100vh;
+}
+
+
+.body-right {
+    margin-left: auto ;
+    background-color: #C8D5FF;
+    font-family: 'Poppins';
+}
+
+@media only screen and (max-width: 600px) {
+    .body-right {
+        padding-top: 17em;
+    }
+}
+
+.input{
+    /* border: 2px solid rgba(10, 4, 4, 0.788); */
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    height: 39px;
+    margin: auto;
+    background-color: #E8EDFF;
+    font-size: 14px;
+}
+
+.inputicon{
+    float: left;
+    padding: 3%;
+    padding-left: 5%;
+    width: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.inputbox {
+    float:left;
+    width: 97%;
+    /* text-align: right; */
+    margin-left: -17px;;
+    padding-left: 0;
+    /* width : 100%; */
+    /* margin-right: 0; */
+    margin-right: -30px;
+    padding-right: 0;
+}
+
+.textinputs {
+    width: 80%;
+    /* height: 32px; */
+    border: none;
+    background: none;
+    /* border-color: white; */
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    /* font-family: 'Montserrat', 'sans-serif'; */
+    color: rgb(0, 0, 0);
+    margin-left: -3%;
+    margin-right: 0;
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(0, 0, 0);
+    opacity: 1; /* Firefox */
+}
+
+.main-heading {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    letter-spacing: 0.075em;
+
+    color: #000000;
+
+}
+.prod-icon {
+    vertical-align: unset;
+}
+
+.available {
+    color: #00C087;
+}
+
+#filter-button {
+    background-color: #264ECA;
+}
+
+.filter {
+    /* align-items: center; */
+    text-align: center;
+}
+
+.card-img {
+    height: 242px; 
+    object-fit: contain; /*to fit image in the divx */
+}
+
+.star-rating {
+    width: 35px;
+    height: 18px;
+    background-color: #00A3FF;
+    border-radius: 3px;
+}
+
+.star-rating {
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+.rating-value {
+    width: 5px;
+}
+
+.card-title {
+    text-decoration: none;
+}
+
+#product-view-body {
+    
+    height: 100vh;
+    font-family: 'Poppins';
+    /*to get full screen div */ 
+    /* background-color: #C8D5FF; */
+}
+
+/* * { border: 1px solid red; } */
+
+
+.card-imgs {
+    width: auto;
+    height: auto;
+    max-height: 412px;
+    object-fit: contain; /*to fit image in the divx */
+    border-radius: 1%;
+}
+
+
+
+.red-text {
+    color: #FF0000;
+}
+
+.semi-bold {
+    font-weight:900;
+}
+
+#wishlist-btn {
+    background-color: #45C917;
+    color: #FFFFFF;
+}
+
+.def-background {
+    background-color: #C8D5FF;
+}

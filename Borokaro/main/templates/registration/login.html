@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoroKaro</title>
+    <link rel="stylesheet" href="{% static 'css/loginstyles.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+<body>
+    <div class="login-form">
+        <div class="form_logo">
+            <img src="{% static 'Assets/login-logo.png' %}" alt="login-logo.png"  class="logo">
+        </div>
+        <div class="form_details">
+            <form id="loginform" method="post"> {% csrf_token %}
+                <div class="input">
+                    <div class="inputicon">
+                        <img src="{% static 'Assets/email-icon.png' %}" alt="email-icon">
+                    </div>
+                    <div class="inputbox">
+                        <input type="text" id="email" name="email" class="textinputs" placeholder="EMAIL"><br><br>
+                    </div>
+                </div><br>
+                <div class="input">
+                    <div class="inputicon">
+                        <img src="{% static 'Assets/lock-icon.png' %}" alt="lock-icon">
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" id="email" name="password" class="textinputs" placeholder="PASSWORD"><br><br>
+                    </div>
+                </div><br>
+                
+                <!-- <input type="password" id="password" name="password" class="textinputs" placeholder="  &#xf023   PASSWORD"><br><br><br> -->
+                <input type="submit" value="LOGIN" class="submitbutton"><br>
+                <div class="bottom">
+                    <a href="http://" class="forgot">Forgot Password?</a><br><br>
+                    <div><p>Not yet registered?<a href="/signup" style="margin-left:5px ;">SIGN UP</a> </p> </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- <script>
+        const form = document.querySelector("#loginform")
+        form.addEventListener("submit", (e) => {
+            e.preventDefault()
+            window.location = "index.html"
+        })
+    </script> -->
+</body>
+</html>
