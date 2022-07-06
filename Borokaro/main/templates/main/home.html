@@ -1,0 +1,164 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row container-fluid content p-0 m-0">
+    <div class="col-xl-3 col-md-3 col-sm-4 col-xs-12 body-left">
+        <div class="search-form pt-3 ps-1">
+            <form action="">
+                <div class="input d-flex align-items-center">
+                    <div class="inputicon flex-grow-1 bd-highlight">
+                        <img src="{% static 'Assets/search-icon.png' %}" alt="search-icon">
+                    </div>
+                    <div class="inputbox d-flex align-items-center">
+                        <input type="text" id="search" name="search" class="textinputs ms-1"
+                            placeholder="Search for Product"><br><br>
+                    </div>
+                </div>
+                <select class="border-dark form-select form-select-sm mt-3 text-secondary myselect" aria-label="">
+                    <option selected>Range</option>
+                    <option value="1">5 km</option>
+                    <option value="2">10 km</option>
+                    <option value="3">11 km</option>
+                </select>
+                <select class="border-dark form-select form-select-sm mt-3 text-secondary" aria-label="">
+                    <option selected>Price</option>
+                    <option value="1">Below 500</option>
+                    <option value="2">501 - 1000</option>
+                    <option value="3">1001 - 2000</option>
+                </select>
+                <select class="border-dark form-select form-select-sm mt-3 text-secondary" aria-label="">
+                    <option selected>Rating</option>
+                    <option value="1">5</option>
+                    <option value="2">Above 4</option>
+                    <option value="3">Above 3</option>
+                </select>
+                
+                <div class="filter pt-3">
+                    <button type="submit" class="btn btn-outline-light" id="filter-button"><a class="text-light fw-bold"
+                            href="" style="text-decoration: none; font-size: .8em;">APPLY FILTER</a></button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="col-xl-9 col-md-9 col-sm-8 col-xs-12 body-right">
+        <div class="heading ps-4">
+            <h2 class="main-heading">PRODUCTS NEAR YOU <img class="prod-icon" src="{% static 'Assets/product-icon.png' %}"
+                    alt="prod-icon"></h2>
+        </div>
+
+        <div class="row">
+            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
+                <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
+                    <div class="text-center  p-2">
+                        <img src="{% static 'Assets/ProductImages/Product1.jpg' %}" class="card-img" alt="Product1">
+                    </div>
+                    <div class="card-body">
+                        <div class="topdisp">
+                            <h6 class="available fw-bold float-start">Available Now</h6>
+                            <div class="star-rating float-end text-center">
+                                <div class="rating-value float-start ms-2">
+                                    <p>4</p>
+                                </div>
+                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
+                            </div>
+                        </div>
+
+                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
+                        <h6 class="fw-bold text-dark">Location</h6>
+                        <div class="mt-4 text-dark">
+                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> Rate/day</h6>
+                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+
+            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
+                <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
+                    <div class="text-center p-2">
+                        <img src="{% static 'Assets/ProductImages/Product2-1.jpg' %}" class="card-img" alt="Product1">
+                    </div>
+                    <div class="card-body">
+                        <div class="topdisp">
+                            <h6 class="available fw-bold float-start">Available Now</h6>
+                            <div class="star-rating float-end text-center">
+                                <div class="rating-value float-start ms-2">
+                                    <p>4</p>
+                                </div>
+                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
+                            </div>
+                        </div>
+
+                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
+                        <h6 class="fw-bold text-dark">Location</h6>
+                        <div class="mt-4">
+                            <h6 class="fw-bold float-start text-dark"><i class="fa fa-rupee"></i> Rate/day</h6>
+                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </a>
+
+            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
+                <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
+                    <div class="text-center  p-2">
+                        <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" class="card-img" alt="Product1">
+                    </div>
+                    <div class="card-body">
+                        <div class="topdisp">
+                            <h6 class="available fw-bold float-start">Available Now</h6>
+                            <div class="star-rating float-end text-center">
+                                <div class="rating-value float-start ms-2">
+                                    <p>4</p>
+                                </div>
+                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
+                            </div>
+                        </div>
+
+                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
+                        <h6 class="fw-bold text-dark">Location</h6>
+                        <div class="mt-4 text-dark">
+                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> Rate/day</h6>
+                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+
+            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
+                <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
+                    <div class="text-center  p-2">
+                        <img src="{% static 'Assets/ProductImages/Product4.jpg' %}" class="card-img" alt="Product1">
+                    </div>
+                    <div class="card-body">
+                        <div class="topdisp">
+                            <h6 class="available fw-bold float-start">Available Now</h6>
+                            <div class="star-rating float-end text-center">
+                                <div class="rating-value float-start ms-2">
+                                    <p>4</p>
+                                </div>
+                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
+                            </div>
+                        </div>
+
+                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
+                        <h6 class="fw-bold text-dark">Location</h6>
+                        <div class="mt-4 text-dark">
+                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> Rate/day</h6>
+                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
