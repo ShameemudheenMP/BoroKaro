@@ -55,6 +55,7 @@ header {
     font-family: 'Montserrat', 'sans-serif';
     position: fixed;
     z-index: 1000;
+    height: 100vh
 }
 
 
@@ -200,6 +201,9 @@ header {
 .red-text {
     color: #FF0000;
 }
+.blue-text {
+    color : #264ECA
+}
 
 .semi-bold {
     font-weight:900;
@@ -213,3 +217,34 @@ header {
 .def-background {
     background-color: #C8D5FF;
 }
+
+.act-nav-option {
+    height: 56px;
+    width: 100%;
+    color: black;
+    background: #ffffff;
+    border-bottom: 1px solid #264ECA;
+}
+
+.body-left a {
+    text-decoration: none;
+}
+
+.body-left input {
+    visibility:hidden;
+}
+
+.body-left input:checked + label {
+    background-color: #264ECA;
+}
+
+#act-menu-div-1 {
+    background-color: #264ECA;
+    color:white
+}
+
+#rent-requests {
+    display: none !important;
+}
+
+

@@ -16,8 +16,6 @@
 </head>
 
 <body class="def-background">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  
 
   <div class="container-fluid p-0">
     <header class="fixed-top">
@@ -58,16 +56,196 @@
     </header>
 
     <div class="row container-fluid content p-0 m-0">
-      <div class="col-xl-3 col-md-3 col-sm-4 col-xs-12 body-left">
-        
+      <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 body-left pt-sm-5 pt-md-2 pt-lg-0 d-flex flex-column" id="act-body-left" style="--bs-gutter-x: none;">
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-1">
+          <input type='radio' value='1' name='actvity' id="act-menu-opt-1" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-1">Rent Requests</label>
+        </div>
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-2">
+          <input type='radio' value='2' name='actvity' id="act-menu-opt-2" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-2">Ratings</label>
+        </div>
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-3">
+          <input type='radio' value='3' name='actvity' id="act-menu-opt-3" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-3">Comments</label>
+        </div>
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-4">
+          <input type='radio' value='4' name='actvity' id="act-menu-opt-4" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-4">Rent Lists</label>
+        </div>
+      
       </div>
-      <div class="col-xl-9 col-md-9 col-sm-8 col-xs-12 body-right">
-        
+      <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
+        <div id="rent-requests" class="d-flex flex-column mt-5 mx-5 px-4">
+          <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
+            <div class="row bg-white rounded-2 p-3 mx-1">
+              <div class="col-12 col-lg-2 d-flex align-items-center">
+                <a href="#" id="" class="text-primary">UsernameofBorrower</a>
+              </div>
+              <div class="col-12 col-lg-6">
+                <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+              </div>
+              <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-primary me-3">CHAT</button>
+                <button type="button" class="btn btn-success me-3">ACCEPT</button>
+                <button type="button" class="btn btn-danger me-3">DECLINE</button>
+              </div>
+            </div>
+
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">ACCEPTED REQUESTS</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          
+          <div class="row bg-white rounded-2 p-3 mx-1">
+            <div class="col-12 col-lg-2 d-flex align-items-center">
+              <a href="#" id="" class="text-primary">UsernameofBorrower</a>
+            </div>
+            <div class="col-12 col-lg-6">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+            </div>
+            <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
+              <button type="button" class="btn btn-primary btn-sm me-3">PRODUCT RECIVED</button>
+              <button type="button" class="btn btn-danger btn-sm me-3">REPORT USER</button>
+            </div>
+          </div>
+
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">DECLINED REQUESTS</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          <div class="row bg-white rounded-2 p-3 mx-1">
+            <div class="col-12 col-lg-2 d-flex align-items-center">
+              <a href="#" id="" class="text-primary">UsernameofBorrower</a>
+            </div>
+            <div class="col-12 col-lg-6">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+            </div>
+            
+          </div>
+
+        </div>
+
+        <div id="ratings" class="d-flex flex-column mt-3 mx-5 px-4 pb-5">
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">BORROWED</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          <div class="row bg-white rounded-2 p-3 py-4 mx-1">
+            <div class="col-12 col-lg-4 d-flex align-items-center" style="width: 250px; height: 150px;">
+              <img src="Assets/ProductImages/Product3-1.jpg" alt="porduct-image" style="width: 100%; height:100%">
+            </div>
+            <div class="col-12 col-lg-8 mt-sm-3 mt-md-0 d-flex flex-column">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+              <div class="d-flex justify-content-start">
+                <div class="lender-rating ms-5 mt-4">
+                  <h6>Lender Rating</h6>
+                </div>
+                <div class="lender-rating ms-5 mt-4">
+                  <h6>Product Rating</h6>
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">LENT</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          <div class="row bg-white rounded-2 p-3 py-4 mx-1">
+            <div class="col-12 col-lg-4 d-flex align-items-center" style="width: 250px; height: 150px;">
+              <img src="Assets/ProductImages/Product3-1.jpg" alt="porduct-image" style="width: 100%; height:100%">
+            </div>
+            <div class="col-12 col-lg-8 mt-sm-3 mt-md-0 d-flex flex-column">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+              <div class="d-flex justify-content-start">
+                <div class="lender-rating ms-5 mt-4">
+                  <h6>Lender Rating</h6>
+                </div>
+                <div class="lender-rating ms-5 mt-4">
+                  <h6>Product Rating</h6>
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+        </div>
+
       </div>
     </div>
 
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  <script>
+    function changeColor(IncValue)
+    {
+        if(IncValue=="1")
+        {
+            document.getElementById('act-menu-div-1').style.backgroundColor="#264ECA";
+            document.getElementById('act-menu-div-1').style.color="#ffffff";
+            document.getElementById('act-menu-div-2').style.backgroundColor="#ffffff";
+            document.getElementById('act-menu-div-2').style.color="black";
+            document.getElementById('act-menu-div-3').style.backgroundColor="#ffffff";
+            document.getElementById('act-menu-div-3').style.color="black";
+            document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
+            document.getElementById('act-menu-div-4').style.color="black";
+
+        }
+        else if(IncValue=="2")
+        {
+          document.getElementById('act-menu-div-1').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-1').style.color="black";
+          document.getElementById('act-menu-div-2').style.backgroundColor="#264ECA";
+          document.getElementById('act-menu-div-2').style.color="#ffffff";
+          document.getElementById('act-menu-div-3').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-3').style.color="black";
+          document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-4').style.color="black";
+        }
+        else if(IncValue=="3")
+        {
+          document.getElementById('act-menu-div-1').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-1').style.color="black";
+          document.getElementById('act-menu-div-2').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-2').style.color="black";
+          document.getElementById('act-menu-div-3').style.backgroundColor="#264ECA";
+          document.getElementById('act-menu-div-3').style.color="#ffffff";
+          document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-4').style.color="black";
+        }
+        else if(IncValue=="4")
+        {
+          document.getElementById('act-menu-div-1').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-1').style.color="black";
+          document.getElementById('act-menu-div-2').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-2').style.color="black";
+          document.getElementById('act-menu-div-3').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-3').style.color="black";
+          document.getElementById('act-menu-div-4').style.backgroundColor="#264ECA";
+          document.getElementById('act-menu-div-4').style.color="#ffffff";
+        }
+
+
+    }
+  </script>
 
 </body>
 

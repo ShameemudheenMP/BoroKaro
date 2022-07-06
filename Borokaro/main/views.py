@@ -42,12 +42,12 @@ def log_in(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            print("Helllooooooo")
+            # print("Helllooooooo")
             return redirect('home')
         else:
             pass
     # else:
-    #     # return HttpResponse("Wrong credds bud!")
+    #     return HttpResponse("Wrong credds bud!")
     return render(request, 'registration/login.html')
 
 
