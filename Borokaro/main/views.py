@@ -49,3 +49,9 @@ def log_in(request):
     # else:
     #     # return HttpResponse("Wrong credds bud!")
     return render(request, 'registration/login.html')
+
+
+
+#ADDED PRODUCT PAGE JUST FOR PRESENTATION
+def product(request):
+    return render(request, 'main/product.html')
