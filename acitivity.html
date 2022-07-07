@@ -12,8 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- bootstrap icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 </head>
 
 <body class="def-background">
@@ -56,24 +55,239 @@
         </nav>
     </header>
 
-    <div class="mt-5 pt-4 container-fluid content p-0 m-0 d-flex flex-column align-items-center">
-      <h3 class="fw-bold mb-5">ACTIVATE YOUR LENDER ACCOUNT <i class="bi bi-patch-check"></i></h3>
-      <form class="d-flex flex-column align-items-center justify-content-center">
-        <div class="d-flex justify-content-center align-items-center mb-4">
-          <input type="text" class="form-control" id="" placeholder="Enter your Address" style="width: 350px;">
-          <button type="button" class="btn btn-secondary ms-4" style="width: 150px;"><i class="bi bi-geo-alt-fill"></i> ALLOW GPS</button>
+    <div class="row container-fluid content p-0 m-0">
+      <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 body-left pt-sm-5 pt-md-2 pt-lg-0 d-flex flex-column" id="act-body-left" style="--bs-gutter-x: none;">
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-1">
+          <input type='radio' value='1' name='actvity' id="act-menu-opt-1" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-1">Rent Requests</label>
         </div>
-        <div class="mb-4">
-          <label for="formID" class="form-label fw-bold">Upload Your Address Proof:</label>
-          <input class="form-control" type="file" id="formID" style="width: 528px;">
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-2">
+          <input type='radio' value='2' name='actvity' id="act-menu-opt-2" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-2">Ratings</label>
         </div>
-        <button type="submit" class="btn btn-success" style="width: 120px;">Submit</button>
-      </form>
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-3">
+          <input type='radio' value='3' name='actvity' id="act-menu-opt-3" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-3">Comments</label>
+        </div>
+        <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-4">
+          <input type='radio' value='4' name='actvity' id="act-menu-opt-4" onClick="changeColor(this.value)">
+          <label for="act-menu-opt-4">Rent Lists</label>
+        </div>
+      
+      </div>
+      <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
+        <!-- Rent requests section -->
+        <div id="rent-requests" class="mt-5 mx-5 px-4">
+          <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
+            <div class="row bg-white rounded-2 p-3 mx-1">
+              <div class="col-12 col-lg-2 d-flex align-items-center">
+                <a href="#" id="" class="text-primary">UsernameofBorrower</a>
+              </div>
+              <div class="col-12 col-lg-6">
+                <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+              </div>
+              <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-primary me-3">CHAT</button>
+                <button type="button" class="btn btn-success me-3">ACCEPT</button>
+                <button type="button" class="btn btn-danger me-3">DECLINE</button>
+              </div>
+            </div>
+
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">ACCEPTED REQUESTS</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          
+          <div class="row bg-white rounded-2 p-3 mx-1">
+            <div class="col-12 col-lg-2 d-flex align-items-center">
+              <a href="#" id="" class="text-primary">UsernameofBorrower</a>
+            </div>
+            <div class="col-12 col-lg-6">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+            </div>
+            <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
+              <button type="button" class="btn btn-primary btn-sm me-3">PRODUCT RECIVED</button>
+              <button type="button" class="btn btn-danger btn-sm me-3">REPORT USER</button>
+            </div>
+          </div>
+
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">DECLINED REQUESTS</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          <div class="row bg-white rounded-2 p-3 mx-1">
+            <div class="col-12 col-lg-2 d-flex align-items-center">
+              <a href="#" id="" class="text-primary">UsernameofBorrower</a>
+            </div>
+            <div class="col-12 col-lg-6">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+            </div>
+            
+          </div>
+
+        </div>
+
+        <!-- Rating section  -->
+        <div id="ratings" class="mt-3 mx-5 px-4 pb-5">
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">BORROWED</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          <div class="row bg-white rounded-3 p-3 py-4 mx-1">
+            <div class="col-12 col-lg-4 d-flex align-items-center" style="width: 250px; height: 150px;">
+              <img src="Assets/ProductImages/Product3-1.jpg" alt="porduct-image" style="width: 100%; height:100%">
+            </div>
+            <div class="col-12 col-lg-8 mt-sm-3 mt-md-0 d-flex flex-column">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+              <div class="d-flex justify-content-start">
+                <div class="lender-rating ms-5 mt-4">
+                  <h6>Lender Rating</h6>
+                  <input type="radio" id="1-star-lender" name="lender-rating" value="1">
+                  <label for="1-star-lender">1</label>
+                  <input type="radio" id="2-star-lender" name="lender-rating" value="2">
+                  <label for="2-star-lender">2</label>
+                  <input type="radio" id="3-star-lender" name="lender-rating" value="3">
+                  <label for="3-star-lender">3</label>
+                  <input type="radio" id="4-star-lender" name="lender-rating" value="4">
+                  <label for="4-star-lender">4</label>
+                  <input type="radio" id="5-star-lender" name="lender-rating" value="5">
+                  <label for="5-star-lender">5</label>
+                </div>
+                <div class="lender-rating ms-5 mt-4">
+                  <h6>Product Rating</h6>
+                  <input type="radio" id="1-star-product" name="product-rating" value="1">
+                  <label for="1-star-product">1</label>
+                  <input type="radio" id="2-star-product" name="product-rating" value="2">
+                  <label for="2-star-product">2</label>
+                  <input type="radio" id="3-star-product" name="product-rating" value="3">
+                  <label for="3-star-product">3</label>
+                  <input type="radio" id="4-star-product" name="product-rating" value="4">
+                  <label for="4-star-product">4</label>
+                  <input type="radio" id="5-star-product" name="product-rating" value="5">
+                  <label for="5-star-product">5</label>
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+          <div class="d-flex mx-1 mt-5">
+            <h5 class="blue-text fw-bold me-auto">LENT</h5>
+            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
+            <select name="" id="acc-req-filter" class="mb-2">
+              <option value="NewToOldest">New To Oldest</option>
+            </select>
+          </div>
+          <div class="row bg-white rounded-3 p-3 py-4 mx-1">
+            <div class="col-12 col-lg-4 d-flex align-items-center" style="width: 250px; height: 150px;">
+              <img src="Assets/ProductImages/Product3-1.jpg" alt="porduct-image" style="width: 100%; height:100%">
+            </div>
+            <div class="col-12 col-lg-8 mt-sm-3 mt-md-0 d-flex flex-column">
+              <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+              <div class="d-flex justify-content-start">
+                <div class="lender-rating ms-5 mt-4">
+                  <h6>Borrower Rating</h6>
+                  <input type="radio" id="1-star-borrower" name="borrower-rating" value="1">
+                  <label for="1-star-borrower">1</label>
+                  <input type="radio" id="2-star-borrower" name="borrower-rating" value="2">
+                  <label for="2-star-borrower">2</label>
+                  <input type="radio" id="3-star-borrower" name="borrower-rating" value="3">
+                  <label for="3-star-borrower">3</label>
+                  <input type="radio" id="4-star-borrower" name="borrower-rating" value="4">
+                  <label for="4-star-borrower">4</label>
+                  <input type="radio" id="5-star-borrower" name="borrower-rating" value="5">
+                  <label for="5-star-borrower">5</label>
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  <script>
+    function changeColor(IncValue)
+    {
+        if(IncValue=="1")
+        {
+            document.getElementById('act-menu-div-1').style.backgroundColor="#264ECA";
+            document.getElementById('act-menu-div-1').style.color="#ffffff";
+            document.getElementById('act-menu-div-2').style.backgroundColor="#ffffff";
+            document.getElementById('act-menu-div-2').style.color="black";
+            document.getElementById('act-menu-div-3').style.backgroundColor="#ffffff";
+            document.getElementById('act-menu-div-3').style.color="black";
+            document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
+            document.getElementById('act-menu-div-4').style.color="black";
+
+            document.getElementById('rent-requests').style.display="block";
+            document.getElementById('ratings').style.display="none";
+
+        }
+        else if(IncValue=="2")
+        {
+          document.getElementById('act-menu-div-1').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-1').style.color="black";
+          document.getElementById('act-menu-div-2').style.backgroundColor="#264ECA";
+          document.getElementById('act-menu-div-2').style.color="#ffffff";
+          document.getElementById('act-menu-div-3').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-3').style.color="black";
+          document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-4').style.color="black";
+
+          document.getElementById('rent-requests').style.display="none";
+          document.getElementById('ratings').style.display="block";
+        }
+        else if(IncValue=="3")
+        {
+          document.getElementById('act-menu-div-1').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-1').style.color="black";
+          document.getElementById('act-menu-div-2').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-2').style.color="black";
+          document.getElementById('act-menu-div-3').style.backgroundColor="#264ECA";
+          document.getElementById('act-menu-div-3').style.color="#ffffff";
+          document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-4').style.color="black";
+
+          document.getElementById('rent-requests').style.display="none";
+            document.getElementById('ratings').style.display="none";
+        }
+        else if(IncValue=="4")
+        {
+          document.getElementById('act-menu-div-1').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-1').style.color="black";
+          document.getElementById('act-menu-div-2').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-2').style.color="black";
+          document.getElementById('act-menu-div-3').style.backgroundColor="#ffffff";
+          document.getElementById('act-menu-div-3').style.color="black";
+          document.getElementById('act-menu-div-4').style.backgroundColor="#264ECA";
+          document.getElementById('act-menu-div-4').style.color="#ffffff";
+
+          document.getElementById('rent-requests').style.display="none";
+            document.getElementById('ratings').style.display="none";
+        }
+
+
+    }
+  </script>
+
 </body>
 
 </html>
