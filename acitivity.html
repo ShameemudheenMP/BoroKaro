@@ -76,7 +76,7 @@
       
       </div>
       <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
-        <div id="rent-requests" class="d-flex flex-column mt-5 mx-5 px-4">
+        <div id="rent-requests" class="mt-5 mx-5 px-4">
           <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
             <div class="row bg-white rounded-2 p-3 mx-1">
               <div class="col-12 col-lg-2 d-flex align-items-center">
@@ -132,7 +132,7 @@
 
         </div>
 
-        <div id="ratings" class="d-flex flex-column mt-3 mx-5 px-4 pb-5">
+        <div id="ratings" class="mt-3 mx-5 px-4 pb-5">
           <div class="d-flex mx-1 mt-5">
             <h5 class="blue-text fw-bold me-auto">BORROWED</h5>
             <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
@@ -235,8 +235,8 @@
             document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
             document.getElementById('act-menu-div-4').style.color="black";
 
-            document.getElementById('rent-requests').style.display="flex"
-            document.getElementById('ratings').style.display="none"
+            document.getElementById('rent-requests').style.display="block";
+            document.getElementById('ratings').style.display="none";
 
         }
         else if(IncValue=="2")
@@ -250,8 +250,8 @@
           document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
           document.getElementById('act-menu-div-4').style.color="black";
 
-          document.getElementById('rent-requests').style.display="none"
-          document.getElementById('ratings').style.display="flex"
+          document.getElementById('rent-requests').style.display="none";
+          document.getElementById('ratings').style.display="block";
         }
         else if(IncValue=="3")
         {
@@ -263,6 +263,9 @@
           document.getElementById('act-menu-div-3').style.color="#ffffff";
           document.getElementById('act-menu-div-4').style.backgroundColor="#ffffff";
           document.getElementById('act-menu-div-4').style.color="black";
+
+          document.getElementById('rent-requests').style.display="none";
+            document.getElementById('ratings').style.display="none";
         }
         else if(IncValue=="4")
         {
@@ -274,6 +277,9 @@
           document.getElementById('act-menu-div-3').style.color="black";
           document.getElementById('act-menu-div-4').style.backgroundColor="#264ECA";
           document.getElementById('act-menu-div-4').style.color="#ffffff";
+
+          document.getElementById('rent-requests').style.display="none";
+            document.getElementById('ratings').style.display="none";
         }
 
 

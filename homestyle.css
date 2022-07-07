@@ -246,9 +246,12 @@ header {
 /* #rent-requests {
     display: none !important;
 } */
-/* 
+
+
+
+
 #ratings {
-    visibility: hidden;
-} */
+    display: none;
+}
 
 
