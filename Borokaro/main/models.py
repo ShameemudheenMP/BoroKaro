@@ -1,3 +1,5 @@
+from calendar import month
+from operator import mod
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
@@ -39,9 +41,10 @@ class User(AbstractUser):
     """User model."""
 
     username = None
+    u_type = models.IntegerField()
     name = models.CharField(max_length=26)
     email = models.EmailField(unique=True)
-    phone_no = models.CharField(max_length=11)
+    phoneno = models.CharField(max_length=11)
     STATE_CHOICES = [
         ('KL','Kerala'),
         ('TN','Tamilnadu'),
@@ -64,3 +67,19 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
+class Product(models.Model):
+    p_name = models.CharField(max_length=50)
+    p_rate = models.IntegerField(default=0)
+    p_desc = models.CharField(max_length=70)
+    p_image1 = models.ImageField(upload_to = user_directory_path)
+    p_image2 = models.ImageField(upload_to = user_directory_path)
+    p_image3 = models.ImageField(upload_to = user_directory_path)
+    u_id = models.IntegerField(default=0)
+    month =  models.DateField(auto_now=False, auto_now_add=False)
+    year = models.DateField(auto_now=False, auto_now_add=False)
+    created_at = models.DateTimeField(auto_now_add=True)
