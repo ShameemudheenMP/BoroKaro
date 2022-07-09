@@ -24,7 +24,8 @@ def sign_up(request):
         try:
             user = User.objects.get(email=email)
         except ObjectDoesNotExist:
-            user = User.objects.create_user(name=name,email=email,password=password,phone_no=phoneno,state=state,district=district)
+            #BY DEFAULT USER IS BORROWER = 0, LENDER AANENGI 1
+            user = User.objects.create_user(u_type=0,name=name,email=email,password=password,phone_no=phoneno,state=state,district=district)
             login(request,user)
             return redirect('/home')
         return HttpResponse("User already exists!!")
@@ -36,7 +37,7 @@ def sign_up(request):
 
 def log_in(request):
     if request.method == 'POST':
-        print("joelannanjoelannanjoelannanjoelannan")
+        #print("joelannanjoelannanjoelannanjoelannan")
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
