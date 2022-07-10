@@ -43,126 +43,44 @@
     </div>
     <div class="col-xl-9 col-md-9 col-sm-8 col-xs-12 body-right">
         <div class="heading ps-4">
-            <h2 class="main-heading">PRODUCTS NEAR YOU <img class="prod-icon" src="{% static 'Assets/product-icon.png' %}"
+            <!-- PRODUCT LIST ENN VERUTHE KODUTHATHA, PINNE ORU DIVASAM PRODUCTS NEAR YOU AAKKENAM-->
+            <h2 class="main-heading">PRODUCT LIST <img class="prod-icon" src="{% static 'Assets/product-icon.png' %}"
                     alt="prod-icon"></h2>
         </div>
 
         <div class="row">
-            <ul>
-                <!-- {% for s in sampleproducts %}
-                    <li>{{ s.s_name }}</li>
-                {% endfor %} -->
-            </ul>
-            
-            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
+            {% for product in products %}
+            <a href="/product/{{ product.id }}" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
                 <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
                     <div class="text-center  p-2">
-                        <img src="{% static 'Assets/ProductImages/Product1.jpg' %}" class="card-img" alt="Product1">
+                        <img src="{{ product.p_image1.url }}" class="card-img" alt="Product1">
                     </div>
                     <div class="card-body">
                         <div class="topdisp">
-                            <h6 class="available fw-bold float-start">Available Now</h6>
+                            {% if not product.status %}
+                                <h6 class="available fw-bold float-start">Available Now</h6>
+                            {% else %}
+                                <h6 class="available fw-bold float-start">Not Available</h6>
+                            {% endif %}
                             <div class="star-rating float-end text-center">
                                 <div class="rating-value float-start ms-2">
-                                    <p>4</p>
+                                    <p>{{ product.rating }}</p>
                                 </div>
                                 <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
                             </div>
                         </div>
 
-                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
+                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">{{ product.p_name }}</h5>
                         <h6 class="fw-bold text-dark">Location</h6>
                         <div class="mt-4 text-dark">
-                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> Rate/day</h6>
+                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> {{ product.p_rate }}/day</h6>
                             <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
                         </div>
                     </div>
 
                 </div>
             </a>
-
-            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
-                <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
-                    <div class="text-center p-2">
-                        <img src="{% static 'Assets/ProductImages/Product2-1.jpg' %}" class="card-img" alt="Product1">
-                    </div>
-                    <div class="card-body">
-                        <div class="topdisp">
-                            <h6 class="available fw-bold float-start">Available Now</h6>
-                            <div class="star-rating float-end text-center">
-                                <div class="rating-value float-start ms-2">
-                                    <p>4</p>
-                                </div>
-                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
-                            </div>
-                        </div>
-
-                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
-                        <h6 class="fw-bold text-dark">Location</h6>
-                        <div class="mt-4">
-                            <h6 class="fw-bold float-start text-dark"><i class="fa fa-rupee"></i> Rate/day</h6>
-                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </a>
-
-            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
-                <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
-                    <div class="text-center  p-2">
-                        <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" class="card-img" alt="Product1">
-                    </div>
-                    <div class="card-body">
-                        <div class="topdisp">
-                            <h6 class="available fw-bold float-start">Available Now</h6>
-                            <div class="star-rating float-end text-center">
-                                <div class="rating-value float-start ms-2">
-                                    <p>4</p>
-                                </div>
-                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
-                            </div>
-                        </div>
-
-                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
-                        <h6 class="fw-bold text-dark">Location</h6>
-                        <div class="mt-4 text-dark">
-                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> Rate/day</h6>
-                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
-                        </div>
-                    </div>
-
-                </div>
-            </a>
-
-            <a href="/product" class="product col-md-6 col-sm-12 col-xs-12 text-decoration-none">
-                <div class="card m-3 ms-4 me-4 mb-4" style="width: 24rem;">
-                    <div class="text-center  p-2">
-                        <img src="{% static 'Assets/ProductImages/Product4.jpg' %}" class="card-img" alt="Product1">
-                    </div>
-                    <div class="card-body">
-                        <div class="topdisp">
-                            <h6 class="available fw-bold float-start">Available Now</h6>
-                            <div class="star-rating float-end text-center">
-                                <div class="rating-value float-start ms-2">
-                                    <p>4</p>
-                                </div>
-                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
-                            </div>
-                        </div>
-
-                        <h5 class="card-title prod-name fw-bold pt-5 text-dark">Vaccum Cleaner</h5>
-                        <h6 class="fw-bold text-dark">Location</h6>
-                        <div class="mt-4 text-dark">
-                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> Rate/day</h6>
-                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
-                        </div>
-                    </div>
-
-                </div>
-            </a>
+            {% endfor %}
 
         </div>
     </div>
