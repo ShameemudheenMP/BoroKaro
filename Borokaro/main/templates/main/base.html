@@ -2,75 +2,96 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoroKaro</title>
-    <link rel="stylesheet" href="homestyle.css">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoroKaro</title>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+        rel="stylesheet">
 </head>
-<body class="def-background">    
-    <div class="container-fluid ps-0 pe-0">
-      <header class="fixed-top">
-          <nav class="navbar navbar-dark">
-            <div class="container-fluid p-1 ps-5">
-              <a class="navbar-brand" href="#">
-                <img src="{% static 'Assets/home-logo.png' %}" alt="home-logo">
+
+<body class="def-background">
+  <div class="container-fluid ps-0 pe-0">
+    <header class="fixed-top">
+      <nav class="navbar navbar-dark">
+        <div class="container-fluid p-1 ps-5">
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'Assets/home-logo.png' %}" alt="home-logo">
+          </a>
+          {% if user.is_authenticated %}
+          <div class="navleft">
+            <div class="float-start pt-2 pe-3">
+              <a href="/activity" class="link-light me-4">
+                YOUR ACTIVITY
               </a>
-              {% if user.is_authenticated %}
-                <div class="navleft">
-                  <div class="float-start pt-2 pe-3">
-                    <a href="/activity" class="link-light me-4">
-                      YOUR ACTIVITY
-                    </a>
 
-                    <a href="/wishlist" class="link-light me-4">
-                      WISHLIST
-                    </a>
-                    <a href="/messages" class="link-light me-4">
-                      MESSAGES
-                    </a>
-                    <a href="lend.html" class="text-decoration-none">
-                      <button class="log-reg-btn fw-bold me-4 link-primary" id="">LEND</button>
-                    </a>
-                  </div>
-                  <div class="dropdown float-end pe-5 ps-3">
-                    <a href="#" class="" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="{% static 'Assets/Profileicon.png' %}" alt="Profile">
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
-                      <li><a class="dropdown-item" href="/profile">{{user.name}}</a></li>
-                      <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                    </ul>
-                  </div>
-                </div>
-              {% else %}
-                <div class="navleft pe-5">
-                  <a href="/login" style="text-decoration:none;">
-                    <button class="log-reg-btn fw-bold me-4" id="logbtn">LOGIN</button>
-                  </a>
-                  <a href="/signup" style="text-decoration:none;">
-                    <button class="log-reg-btn fw-bold me-4" id="regbtn">SIGN UP</button>
-                  </a>
-                </div>
-              {% endif %}
-
-              
+              <a href="/wishlist" class="link-light me-4">
+                WISHLIST
+              </a>
+              <a href="/messages" class="link-light me-4">
+                MESSAGES
+              </a>
+              <a href="/lend" class="text-decoration-none">
+                <button class="log-reg-btn fw-bold me-4 link-primary" id="">LEND</button>
+              </a>
             </div>
-          </nav>
-      </header>
+            <div class="dropdown float-end pe-5 ps-3">
+              <a href="#" class="" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'Assets/Profileicon.png' %}" alt="Profile">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
+                <li><a class="dropdown-item" href="/profile">{{user.name}}</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+          {% else %}
+          <div class="navleft pe-5">
+            <a href="/login" style="text-decoration:none;">
+              <button class="log-reg-btn fw-bold me-4" id="logbtn">LOGIN</button>
+            </a>
+            <a href="/signup" style="text-decoration:none;">
+              <button class="log-reg-btn fw-bold me-4" id="regbtn">SIGN UP</button>
+            </a>
+          </div>
+          {% endif %}
 
-      {% block content %} {% endblock %}
 
-    </div>
+        </div>
+      </nav>
+    </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    {% block content %} {% endblock %}
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
+  <script>
+    $("#datepicker").datepicker({
+      format: "mm-yyyy",
+      startView: "months",
+      minViewMode: "months"
+    });
+  </script>
 </body>
 
 </html>

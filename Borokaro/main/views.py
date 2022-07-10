@@ -1,16 +1,18 @@
 
 import re
 from django.shortcuts import redirect, render
-from .models import User
+from .models import *
 from django.contrib.auth import login,logout,authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+import datetime
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'main/home.html')
-
+    #products = Product.objects.select_related('prodimage').all()
+    products = Product.objects.all()
+    return render(request, 'main/home.html',{'products':products})
 
 def sign_up(request):
     if request.method == 'POST':
@@ -25,7 +27,7 @@ def sign_up(request):
             user = User.objects.get(email=email)
         except ObjectDoesNotExist:
             #BY DEFAULT USER IS BORROWER = 0, LENDER AANENGI 1
-            user = User.objects.create_user(u_type=0,name=name,email=email,password=password,phone_no=phoneno,state=state,district=district)
+            user = User.objects.create_user(name=name,email=email,password=password,phoneno=phoneno,state=state,district=district)
             login(request,user)
             return redirect('/home')
         return HttpResponse("User already exists!!")
@@ -51,8 +53,36 @@ def log_in(request):
     #     return HttpResponse("Wrong credds bud!")
     return render(request, 'registration/login.html')
 
+def product(request, idn):
+    product = Product.objects.get(id=idn)
+    # img1 = product.p_image1
+    # img2 = product.p_image2
+    # img3 = product.p_image3
+    # image = [img1,img2,img3]
+    #image = ProdImage.objects.filter(product=product)
+    #user = request.user
+    #DYNAMICALLY LOAD PRODUCT INFO
+    return render(request, 'main/product.html',{'product':product})
 
-
-#ADDED PRODUCT PAGE JUST FOR PRESENTATION
-def product(request):
-    return render(request, 'main/product.html')
+def lend(request):
+    if request.method == 'POST':
+        prod=Product()
+        prod.p_name=request.POST.get('name')
+        prod.p_rate=request.POST.get('rate')
+        prod.p_desc=request.POST.get('desc')
+        p_date=request.POST.get('date')
+        mon = int(p_date[0:2])
+        yr = int(p_date[3:7])
+        prod.date = datetime.date(yr, mon, 1)
+        prod.user = request.user
+        if len(request.FILES) != 0:
+            prod.p_image1=request.FILES['file1']
+            if len(request.FILES) == 2:
+                prod.p_image2=request.FILES['file2']
+            if len(request.FILES) == 3:
+                prod.p_image3=request.FILES['file3']
+        prod.save()
+        return redirect('home')
+    else:
+        pass
+    return render(request, 'main/lend.html')

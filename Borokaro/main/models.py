@@ -1,5 +1,6 @@
 from calendar import month
 from operator import mod
+from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
@@ -39,9 +40,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     """User model."""
-
+    #u_id = models.AutoField("User ID", primary_key=True)
     username = None
-    u_type = models.IntegerField()
+    u_type = models.IntegerField(default=0)
     name = models.CharField(max_length=26)
     email = models.EmailField(unique=True)
     phoneno = models.CharField(max_length=11)
@@ -60,6 +61,7 @@ class User(AbstractUser):
     ]
 
     district = models.CharField(max_length=3,choices=STATE_CHOICES,default='TVM')
+    address = models.CharField(max_length=50,default='')
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -67,19 +69,22 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
-
-def user_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
-    return 'user_{0}/{1}'.format(instance.user.id, filename)
+    def __str__(self):
+        return "%d" % (self.id)
 
 class Product(models.Model):
     p_name = models.CharField(max_length=50)
     p_rate = models.IntegerField(default=0)
     p_desc = models.CharField(max_length=70)
-    p_image1 = models.ImageField(upload_to = user_directory_path)
-    p_image2 = models.ImageField(upload_to = user_directory_path)
-    p_image3 = models.ImageField(upload_to = user_directory_path)
-    u_id = models.IntegerField(default=0)
-    month =  models.DateField(auto_now=False, auto_now_add=False)
-    year = models.DateField(auto_now=False, auto_now_add=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    p_image1 = models.ImageField(upload_to = 'uploads/',blank=True)
+    p_image2 = models.ImageField(upload_to = 'uploads/',blank=True)
+    p_image3 = models.ImageField(upload_to = 'uploads/',blank=True)
+    date =  models.DateField(auto_now=False, auto_now_add=False)
+    status = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+
+# class ProdImage(models.Model):
+#     product = models.ForeignKey(Product, related_name='prodimage',on_delete=models.CASCADE)
+#     image = models.ImageField(upload_to = 'uploads/')
