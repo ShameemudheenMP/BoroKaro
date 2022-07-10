@@ -6,8 +6,9 @@
       <div class="prod-desc col-12 col-md-6 d-flex justify-content-center mb-5">
         <div class="card" style="width: 28rem; height: 500px;">
           <div class="card-body">
-            <h5 class="card-title fw-bold">DELL OptiPlex 7490 All-in-One Monitor Black color</h5>
-            <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">₹500/day</h6>
+            <h5 class="card-title fw-bold">{{ product.p_name }}</h5>
+            <!-- <h5 class="card-title fw-bold">DELL OptiPlex 7490 All-in-One Monitor Black color</h5> -->
+            <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">{{ product.p_rate }}/day</h6>
             <div class="star-rating float-end text-center">
               <div class="rating-value float-start ms-2">
                 <p >4</p>
@@ -16,7 +17,8 @@
             </div>
             <br>
             <hr>
-            <p class="card-text" id="prod-details">Windows 10 Pro (Windows 11 Pro license included), 11th Gen Intel Core i5-11500 (12 MB cache, 6 cores, 12 threads, 2.70 to 4.60 GHz Turbo, 65W)</p>
+            <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
+            <!-- <p class="card-text" id="prod-details">Windows 10 Pro (Windows 11 Pro license included), 11th Gen Intel Core i5-11500 (12 MB cache, 6 cores, 12 threads, 2.70 to 4.60 GHz Turbo, 65W)</p> -->
             <p class="semi-bold">Lender details:</p>
             <p>Full Name,</p>
             <p>Full Address Address Address <a href="" class="red-text fw-bold">REPORT USER</a></p>
@@ -38,8 +40,8 @@
             <br>
             <br>
             <div class="d-flex justify-content-center">
-              <a href="#" class="card-link btn btn-outline-danger btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">ADD TO WISHLIST</a>
-              <a href="#" class="card-link btn btn-green btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" id="wishlist-btn">BORROW NOW</a>
+              <a href="#" class="card-link btn btn-outline-danger btn-lg" tabindex="-1" role="button" aria-disabled="true">ADD TO WISHLIST</a>
+              <a href="borrow/{{ product.id }}" class="card-link btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true" id="wishlist-btn">BORROW NOW</a>
             </div>
            
             
@@ -50,16 +52,21 @@
         <div class="card justify-content-center ps-3 pe-3"  style="width: 35rem; height: 500px;">
           <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
             <div class="carousel-inner" style="height: 400px;">
-              <div class="carousel-item active" data-bs-interval="5000">
-                <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" class="d-block w-100 h-100 card-imgs" alt="...">
+              <div class="carousel-item active justify-content-center" data-bs-interval="5000">
+                <img src="{{ product.p_image1.url }}" class="d-block w-100 h-100 card-imgs" alt="Image1">
               </div>
-              <div class="carousel-item" data-bs-interval="5000">
-                <img src="{% static 'Assets/ProductImages/Product3-2.jpg' %}" class="d-block w-100 h-100 card-imgs" alt="...">
+              {% if product.p_image2.url != NULL %}
+              <div class="carousel-item justify-content-center" data-bs-interval="5000">
+                <img src="{{ product.p_image2.url }}" class="d-block w-100 h-100 card-imgs" alt="Image2">
               </div>
-              <div class="carousel-item" data-bs-interval="5000">
-                <img src="{% static 'Assets/ProductImages/Product3-3.jpg' %}" class="d-block w-100 h-100 card-imgs" alt="...">
+              {% endif %}
+              {% if product.p_image3.url != NULL %}
+              <div class="carousel-item justify-content-center" data-bs-interval="5000">
+                <img src="{{ product.p_image3.url }}" class="d-block w-100 h-100 card-imgs" alt="Image3">
               </div>
+              {% endif %}
             </div>
+            {% if product.p_image2.url != NULL %}
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
@@ -68,6 +75,7 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
+            {% endif %}
           </div>
         </div>
       </div>
