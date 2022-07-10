@@ -81,10 +81,19 @@ class Product(models.Model):
     p_image2 = models.ImageField(upload_to = 'uploads/',blank=True)
     p_image3 = models.ImageField(upload_to = 'uploads/',blank=True)
     date =  models.DateField(auto_now=False, auto_now_add=False)
-    status = models.IntegerField(default=0)
+    status = models.IntegerField(default=0) #0 for available, 1 for not available
     rating = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
 # class ProdImage(models.Model):
 #     product = models.ForeignKey(Product, related_name='prodimage',on_delete=models.CASCADE)
 #     image = models.ImageField(upload_to = 'uploads/')
+
+class PReq(models.Model):
+    borrower = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined
+    days = models.IntegerField(default=5)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+#RENT HISTORY, REPORT USER, WISHLIST, OCR, SEARCH FILTER, USER SHOULD NOT REQUEST HIS OWN PRODUCT, RATINGS, COMMENTS, PROFILE PAGE & EDIT PROFILE, CHAT

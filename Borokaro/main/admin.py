@@ -15,3 +15,4 @@ from .models import *
 # admin.site.register(Product,ProdAdmin)
 admin.site.register(User)
 admin.site.register(Product)
+admin.site.register(PReq)

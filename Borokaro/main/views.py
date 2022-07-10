@@ -86,3 +86,34 @@ def lend(request):
     else:
         pass
     return render(request, 'main/lend.html')
+
+def activity(request):
+    reqs=[]
+    requests = PReq.objects.all()
+    present_user = request.user
+    my_products = Product.objects.filter(user = present_user)
+    for pro in my_products:
+        for req in requests:
+            if req.product == pro:
+                reqs.append(req)
+    print(reqs)
+    return render(request, 'main/activity.html',{'requests':reqs})
+
+def borrow(request, idn):
+    req = PReq()
+    req.borrower = request.user
+    req.product = Product.objects.get(id=idn)
+    req.save()
+    return redirect('home')
+
+def accept(request, idn):
+    req = PReq.objects.get(id=idn)
+    req.status = 1
+    req.save()
+    return redirect('activity')
+
+def decline(request, idn):
+    req = PReq.objects.get(id=idn)
+    req.status = 2
+    req.save()
+    return redirect('activity')
