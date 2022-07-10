@@ -1,7 +1,7 @@
 
 import re
 from django.shortcuts import redirect, render
-from .models import User
+from .models import Product, SampleProd, User
 from django.contrib.auth import login,logout,authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
@@ -9,7 +9,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return render(request, 'main/home.html')
+    s_products = SampleProd.objects.all()
+    return render(request, 'main/home.html', {'sampleproducts' : s_products})
 
 
 def sign_up(request):

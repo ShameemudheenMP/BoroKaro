@@ -230,11 +230,11 @@ header {
     text-decoration: none;
 }
 
-.body-left input {
+#act-body-left input {
     visibility:hidden;
 }
 
-.body-left input:checked + label {
+#act-body-left input:checked + label {
     background-color: #264ECA;
 }
 

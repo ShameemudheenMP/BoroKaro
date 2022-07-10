@@ -41,10 +41,10 @@ class User(AbstractUser):
     """User model."""
 
     username = None
-    u_type = models.IntegerField()
+    u_type = models.IntegerField(null=True)
     name = models.CharField(max_length=26)
     email = models.EmailField(unique=True)
-    phoneno = models.CharField(max_length=11)
+    phone_no = models.CharField(max_length=11, null=True)
     STATE_CHOICES = [
         ('KL','Kerala'),
         ('TN','Tamilnadu'),
@@ -83,3 +83,4 @@ class Product(models.Model):
     month =  models.DateField(auto_now=False, auto_now_add=False)
     year = models.DateField(auto_now=False, auto_now_add=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
