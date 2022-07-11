@@ -55,6 +55,7 @@ def log_in(request):
 
 def product(request, idn):
     product = Product.objects.get(id=idn)
+    userid = int(request.user.id)
     # img1 = product.p_image1
     # img2 = product.p_image2
     # img3 = product.p_image3
@@ -62,7 +63,7 @@ def product(request, idn):
     #image = ProdImage.objects.filter(product=product)
     #user = request.user
     #DYNAMICALLY LOAD PRODUCT INFO
-    return render(request, 'main/product.html',{'product':product})
+    return render(request, 'main/product.html',{'product':product,'userid':userid})
 
 def lend(request):
     if request.method == 'POST':

@@ -96,4 +96,5 @@ class PReq(models.Model):
     days = models.IntegerField(default=5)
     created_at = models.DateTimeField(auto_now_add=True)
 
+#disable borrow button if product is not available
 #RENT HISTORY, REPORT USER, WISHLIST, OCR, SEARCH FILTER, DAYS VECHULLA REQUEST, USER SHOULD NOT REQUEST HIS OWN PRODUCT, RATINGS, COMMENTS, REPORT COMMENTS, PROFILE PAGE & EDIT PROFILE, CHAT
