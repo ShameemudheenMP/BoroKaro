@@ -80,6 +80,7 @@ def lend(request):
             if len(request.FILES) == 2:
                 prod.p_image2=request.FILES['file2']
             if len(request.FILES) == 3:
+                prod.p_image2=request.FILES['file2']
                 prod.p_image3=request.FILES['file3']
         prod.save()
         return redirect('home')
