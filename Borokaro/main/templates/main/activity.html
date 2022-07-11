@@ -62,8 +62,8 @@
           <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
         </div>
         <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-primary btn-sm me-3">PRODUCT RECIVED</button>
-          <button type="button" class="btn btn-danger btn-sm me-3">REPORT USER</button>
+          <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.product.id }}" role="button">PRODUCT RECEIVED</a>
+          <a class="btn btn-primary btn-sm me-3" href="#" role="button">REPORT USER</a>
         </div>
       </div>
       {% endif %}

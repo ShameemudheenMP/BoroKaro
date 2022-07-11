@@ -110,11 +110,29 @@ def borrow(request, idn):
 def accept(request, idn):
     req = PReq.objects.get(id=idn)
     req.status = 1
+    idn = req.product.id
+    product = Product.objects.get(id=idn)
+    product.status = 1
     req.save()
+    product.save()
     return redirect('activity')
 
 def decline(request, idn):
     req = PReq.objects.get(id=idn)
     req.status = 2
+    idn = req.product.id
+    product = Product.objects.get(id=idn)
+    product.status = 0
     req.save()
+    product.save()
     return redirect('activity')
+
+def filterit(request):
+    products = Product.objects.all().order_by('p_rate','rating')
+    return render(request, 'main/home.html',{'products':products})
+
+def prodreceived(request, idn):
+    product = Product.objects.get(id=idn)
+    product.status = 0
+    product.save()
+    return redirect('home')

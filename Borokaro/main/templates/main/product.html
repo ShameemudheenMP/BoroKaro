@@ -7,21 +7,19 @@
         <div class="card" style="width: 28rem; height: 500px;">
           <div class="card-body">
             <h5 class="card-title fw-bold">{{ product.p_name }}</h5>
-            <!-- <h5 class="card-title fw-bold">DELL OptiPlex 7490 All-in-One Monitor Black color</h5> -->
-            <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">{{ product.p_rate }}/day</h6>
+            <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">₹{{ product.p_rate }}/day</h6>
             <div class="star-rating float-end text-center">
               <div class="rating-value float-start ms-2">
-                <p >4</p>
+                <p >{{ product.rating }}</p>
               </div>
               <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
             </div>
             <br>
             <hr>
             <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
-            <!-- <p class="card-text" id="prod-details">Windows 10 Pro (Windows 11 Pro license included), 11th Gen Intel Core i5-11500 (12 MB cache, 6 cores, 12 threads, 2.70 to 4.60 GHz Turbo, 65W)</p> -->
             <p class="semi-bold">Lender details:</p>
-            <p>Full Name,</p>
-            <p>Full Address Address Address <a href="" class="red-text fw-bold">REPORT USER</a></p>
+            <p>{{ product.user.name }}</p>
+            <p>{{ product.user.address }}<a href="" class="red-text fw-bold">REPORT USER</a></p>
             <div class="d-flex justify-content-start">
               <h6 class="me-2 pt-1 fw-bold">Rent for</h6>
               <button class="me-2 rounded-circle bg-transparent">
