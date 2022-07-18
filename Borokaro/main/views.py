@@ -55,6 +55,7 @@ def log_in(request):
 
 def product(request, idn):
     product = Product.objects.get(id=idn)
+    userid = int(request.user.id)
     # img1 = product.p_image1
     # img2 = product.p_image2
     # img3 = product.p_image3
@@ -62,7 +63,7 @@ def product(request, idn):
     #image = ProdImage.objects.filter(product=product)
     #user = request.user
     #DYNAMICALLY LOAD PRODUCT INFO
-    return render(request, 'main/product.html',{'product':product})
+    return render(request, 'main/product.html',{'product':product,'userid':userid})
 
 def lend(request):
     if request.method == 'POST':
@@ -110,11 +111,29 @@ def borrow(request, idn):
 def accept(request, idn):
     req = PReq.objects.get(id=idn)
     req.status = 1
+    idn = req.product.id
+    product = Product.objects.get(id=idn)
+    product.status = 1
     req.save()
+    product.save()
     return redirect('activity')
 
 def decline(request, idn):
     req = PReq.objects.get(id=idn)
     req.status = 2
+    idn = req.product.id
+    product = Product.objects.get(id=idn)
+    product.status = 0
     req.save()
+    product.save()
     return redirect('activity')
+
+def filterit(request):
+    products = Product.objects.all().order_by('p_rate','rating')
+    return render(request, 'main/home.html',{'products':products})
+
+def prodreceived(request, idn):
+    product = Product.objects.get(id=idn)
+    product.status = 0
+    product.save()
+    return redirect('home')

@@ -14,7 +14,9 @@ urlpatterns = [
     path('activity/',activity,name='activity'),
     path('product/borrow/<int:idn>',borrow,name='borrow'),
     path('accept/<int:idn>',accept,name='acceptreq'),
-    path('decline/<int:idn>',decline,name='declinereq')
+    path('decline/<int:idn>',decline,name='declinereq'),
+    path('filterit/',filterit,name='filterit'),
+    path('prodreceived/<int:idn>',prodreceived,name='prodreceived')
 ]
 
 if settings.DEBUG:
