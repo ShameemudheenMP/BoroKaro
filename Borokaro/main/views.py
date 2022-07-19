@@ -141,5 +141,12 @@ def prodreceived(request, idn):
 
 
 #report
-def report(request):
-    return render(request, 'main/report.html')
+def reportuser(request):
+    return render(request, 'main/reportuser.html')
+
+def reportcomment(request):
+    return render(request, 'main/reportcomment.html')
+
+
+def reportsuccess(request):
+    return render(request, 'main/reportsuccess.html')

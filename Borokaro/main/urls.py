@@ -17,7 +17,9 @@ urlpatterns = [
     path('decline/<int:idn>',decline,name='declinereq'),
     path('filterit/',filterit,name='filterit'),
     path('prodreceived/<int:idn>',prodreceived,name='prodreceived'),
-    path('report/', report, name='report')
+    path('reportuser/', reportuser, name='reportuser'),
+    path('reportcomment/', reportcomment, name='reportcomment'),
+    path('reportsuccess/', reportsuccess, name='reportsuccess'),
 ]
 
 if settings.DEBUG:

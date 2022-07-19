@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="d-flex flex-column align-items-center mt-5 pt-5">
+    <div class="card">
+      <div class="card-body">
+        <textarea class="form-control" id="" rows="3" placeholder="Enter Reason for report" style="width: 800px;"></textarea>
+        <div class="d-flex justify-content-center mt-4">
+          <a class="btn btn-danger" href="/reportsuccess">Submit Report</a>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+{% endblock %}

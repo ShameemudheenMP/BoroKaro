@@ -19,7 +19,7 @@
             <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
             <p class="semi-bold">Lender details:</p>
             <p>{{ product.user.name }}</p>
-            <p>{{ product.user.address }}<a href="/report" class="red-text fw-bold">REPORT USER</a></p>
+            <p>{{ product.user.address }}<a href="/reportuser" class="red-text fw-bold">REPORT USER</a></p>
             <div class="d-flex justify-content-start">
               <h6 class="me-2 pt-1 fw-bold">Rent for</h6>
               <button class="me-2 rounded-circle bg-transparent">
@@ -110,7 +110,7 @@
             <div class="comment-card-footer d-flex justify-content-between">
               <!-- date is here -->
               <p class="text-muted" name="">01 January 2022</p>
-              <button type="button" class="btn btn-sm btn-danger">Report Comment</button>
+              <a type="button" class="btn btn-sm btn-danger" href="/reportcomment">Report Comment</a>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@
             <div class="comment-card-footer d-flex justify-content-between">
               <!-- date is here -->
               <p class="text-muted" name="">01 January 2022</p>
-              <button type="button" class="btn btn-sm btn-danger">Report Comment</button>
+              <a type="button" class="btn btn-sm btn-danger" href="/reportcomment">Report Comment</a>
             </div>
           </div>
         </div>
