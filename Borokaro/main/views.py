@@ -137,3 +137,9 @@ def prodreceived(request, idn):
     product.status = 0
     product.save()
     return redirect('home')
+
+
+
+#report
+def report(request):
+    return render(request, 'main/report.html')
