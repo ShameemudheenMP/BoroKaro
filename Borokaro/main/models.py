@@ -45,7 +45,7 @@ class User(AbstractUser):
     u_type = models.IntegerField(default=0)
     name = models.CharField(max_length=26)
     email = models.EmailField(unique=True)
-    phoneno = models.CharField(max_length=11, null=True)
+    phoneno = models.CharField(max_length=11)
     STATE_CHOICES = [
         ('KL','Kerala'),
         ('TN','Tamilnadu'),
@@ -92,11 +92,23 @@ class Product(models.Model):
 class PReq(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined
+    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd
     days = models.IntegerField(default=5)
     created_at = models.DateTimeField(auto_now_add=True)
 
-
-#RENT HISTORY, REPORT USER, WISHLIST, OCR, SEARCH FILTER, USER SHOULD NOT REQUEST HIS OWN PRODUCT, RATINGS, COMMENTS, PROFILE PAGE & EDIT PROFILE, CHAT
-#disable borrow button if product is not available
-
+#USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
+#product recvd nekki kazhinjaal pinne aa button kanikkaruth activity page il - DONE
+#DAYS VECHULLA REQ
+#disable borrow button (not remove) if product is not available - DONE
+#user should not be able to request the same product more than once if the existing request is in pending list - DONE
+#RENT HISTORY
+#COMMENTS
+#REPORT USER, COMMENTS
+#WISHLIST
+#OCR
+#SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
+#RATINGS
+#PROFILE PAGE & EDIT PROFILE
+#CHAT
+#OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
+#login required for all pages other than home page

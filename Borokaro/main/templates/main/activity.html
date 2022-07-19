@@ -52,7 +52,8 @@
         </select>
       </div>
       {% for request in requests %}
-      {% if request.status == 1 %}
+      {% if request.status %}
+      {% if request.status != 2 %}
       <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
         <div class="col-12 col-lg-2 d-flex align-items-center">
           <!--ADD LINK TO PROFILE OF BORROWER-->
@@ -62,10 +63,13 @@
           <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
         </div>
         <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
-          <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.product.id }}" role="button">PRODUCT RECEIVED</a>
-          <a class="btn btn-danger btn-sm me-3" href="#" role="button">REPORT USER</a>
+          {% if request.status == 1 %}
+          <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.id }}" role="button">PRODUCT RECEIVED</a>
+          {% endif %}
+          <a class="btn btn-danger btn-sm me-3" href="/reportuser/{{ request.borrower.id }}" role="button">REPORT USER</a>
         </div>
       </div>
+      {% endif %}
       {% endif %}
       {% endfor %}
       <div class="d-flex mx-1 mt-4">
