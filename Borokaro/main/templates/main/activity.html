@@ -27,12 +27,12 @@
       <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
       {% for request in requests %}
       {% if not request.status %}
-        <div class="row bg-white rounded-2 p-3 mx-1">
+        <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
           <div class="col-12 col-lg-2 d-flex align-items-center">
             <!--ADD LINK TO PROFILE OF BORROWER-->
             <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
           </div>
-          <div class="col-12 col-lg-6">
+          <div class="col-12 col-lg-6 d-flex align-items-center">
             <h5 class="fw-bold mx-5">{{request.product.p_name}} </h5>
           </div>
           <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
@@ -44,7 +44,7 @@
       {% endif %}
       {% endfor %}
 
-      <div class="d-flex mx-1 mt-5">
+      <div class="d-flex mx-1 mt-4">
         <h5 class="blue-text fw-bold me-auto">ACCEPTED REQUESTS</h5>
         <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
         <select name="" id="acc-req-filter" class="mb-2">
@@ -53,22 +53,22 @@
       </div>
       {% for request in requests %}
       {% if request.status == 1 %}
-      <div class="row bg-white rounded-2 p-3 mx-1">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
         <div class="col-12 col-lg-2 d-flex align-items-center">
           <!--ADD LINK TO PROFILE OF BORROWER-->
           <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 d-flex align-items-center">
           <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
         </div>
         <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
           <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.product.id }}" role="button">PRODUCT RECEIVED</a>
-          <a class="btn btn-primary btn-sm me-3" href="#" role="button">REPORT USER</a>
+          <a class="btn btn-danger btn-sm me-3" href="#" role="button">REPORT USER</a>
         </div>
       </div>
       {% endif %}
       {% endfor %}
-      <div class="d-flex mx-1 mt-5">
+      <div class="d-flex mx-1 mt-4">
         <h5 class="blue-text fw-bold me-auto">DECLINED REQUESTS</h5>
         <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
         <select name="" id="acc-req-filter" class="mb-2">
@@ -82,7 +82,7 @@
           <!--ADD LINK TO PROFILE OF BORROWER-->
           <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 d-flex align-items-center">
           <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
         </div>
         
