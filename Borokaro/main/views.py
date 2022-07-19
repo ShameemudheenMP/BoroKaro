@@ -138,6 +138,8 @@ def prodreceived(request, idn):
     product.save()
     return redirect('home')
 
+def wishlist(request):
+    return render(request, 'main/wishlist.html')
 
 
 #report
