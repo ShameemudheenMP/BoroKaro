@@ -2,90 +2,155 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid ms-0 m-5 m-lg-0 pt-5 pt-md-4" id="product-view-body">
-    <div class="row prod-details mt-5 mt-md-0">
-      <div class="prod-desc col-12 col-md-6 d-flex justify-content-center mb-5">
-        <div class="card" style="width: 28rem; height: 500px;">
-          <div class="card-body">
-            <h5 class="card-title fw-bold">{{ product.p_name }}</h5>
-            <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">₹{{ product.p_rate }}/day</h6>
-            <div class="star-rating float-end text-center">
-              <div class="rating-value float-start ms-2">
-                <p >{{ product.rating }}</p>
-              </div>
-              <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
+  <div class="d-flex justify-content-evenly flex-wrap prod-details mt-5 mt-md-0">
+    <div class="prod-desc mb-5">
+      <div class="card" style="width: 28rem; height: 500px;">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ product.p_name }}</h5>
+          <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">₹{{ product.p_rate }}/day</h6>
+          <div class="star-rating float-end text-center">
+            <div class="rating-value float-start ms-2">
+              <p>{{ product.rating }}</p>
             </div>
-            <br>
-            <hr>
-            <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
-            <p class="semi-bold">Lender details:</p>
-            <p>{{ product.user.name }}</p>
-            <p>{{ product.user.address }}<a href="" class="red-text fw-bold">REPORT USER</a></p>
-            <div class="d-flex justify-content-start">
-              <h6 class="me-2 pt-1 fw-bold">Rent for</h6>
-              <button class="me-2 rounded-circle bg-transparent">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                </svg>
-              </button>
-              <h6 id="days" class="me-2 pt-1 fw-bold">5</h6>
-              <button class="me-2 rounded-circle bg-transparent">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                </svg>
-              </button>
-              <h6 class="fw-bold pt-1">days</h6>
-            </div>
-            <br>
-            <br>
-            {% if not product.user.id == userid%}
-            <div class="d-flex justify-content-center">
-              <a href="#" class="card-link btn btn-outline-danger btn-lg" tabindex="-1" role="button" aria-disabled="true">ADD TO WISHLIST</a>
-              <a href="borrow/{{ product.id }}" class="card-link btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true" id="wishlist-btn">BORROW NOW</a>
-            </div>
-            {% endif %}
-           
-            
+            <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
           </div>
+          <br>
+          <hr>
+          <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
+          <p class="semi-bold">Lender details:</p>
+          <p>{{ product.user.name }}</p>
+          <p>{{ product.user.address }}<a href="/reportuser/{{ product.user.id }}" class="red-text fw-bold">REPORT USER</a></p>
+          <div class="d-flex justify-content-start">
+            <h6 class="me-2 pt-1 fw-bold">Rent for</h6>
+            <button class="me-2 rounded-circle bg-transparent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+              </svg>
+            </button>
+            <h6 id="days" class="me-2 pt-1 fw-bold">5</h6>
+            <button class="me-2 rounded-circle bg-transparent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+              </svg>
+            </button>
+            <h6 class="fw-bold pt-1">days</h6>
+          </div>
+          <br>
+          <br>
+          {% if not product.user.id == userid %}
+          <div class="d-flex justify-content-center">
+            <a href="#" class="card-link btn btn-outline-danger btn-lg" tabindex="-1" role="button"
+              aria-disabled="true">ADD TO WISHLIST</a>
+            {% if product.status == 0 %}
+              {% if status == 0 %}
+                <a href="#" class="card-link btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
+                  aria-disabled="true">BORROW NOW</a>
+              {% else %}
+                <a href="borrow/{{ product.id }}" class="card-link btn btn-green btn-lg" tabindex="-1" role="button"
+                  aria-disabled="true" id="wishlist-btn">BORROW NOW</a>
+              {% endif %}
+            {% else %}
+              <a href="#" class="card-link btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
+                aria-disabled="true">BORROW NOW</a>
+            {% endif %}
+          </div>
+          {% endif %}
+
+
         </div>
       </div>
-      <div class="prod-img  col-12 col-md-6 d-flex justify-content-center">
-        <div class="card justify-content-center ps-3 pe-3"  style="width: 35rem; height: 500px;">
-          <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
-            <div class="carousel-inner" style="height: 400px;">
-              <div class="carousel-item active justify-content-center" data-bs-interval="5000">
-                <img src="{{ product.p_image1.url }}" class="d-block w-100 h-100 card-imgs" alt="Image1">
-              </div>
-              {% if product.p_image2.url != NULL %}
-              <div class="carousel-item justify-content-center" data-bs-interval="5000">
-                <img src="{{ product.p_image2.url }}" class="d-block w-100 h-100 card-imgs" alt="Image2">
-              </div>
-              {% endif %}
-              {% if product.p_image3.url != NULL %}
-              <div class="carousel-item justify-content-center" data-bs-interval="5000">
-                <img src="{{ product.p_image3.url }}" class="d-block w-100 h-100 card-imgs" alt="Image3">
-              </div>
-              {% endif %}
+    </div>
+    <div class="prod-img">
+      <div class="card justify-content-center ps-3 pe-3" style="width: 35rem; height: 500px;">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
+          <div class="carousel-inner" style="height: 400px;">
+            <div class="carousel-item active justify-content-center" data-bs-interval="5000">
+              <img src="{{ product.p_image1.url }}" class="d-block w-100 h-100 card-imgs" alt="Image1">
             </div>
             {% if product.p_image2.url != NULL %}
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+            <div class="carousel-item justify-content-center" data-bs-interval="5000">
+              <img src="{{ product.p_image2.url }}" class="d-block w-100 h-100 card-imgs" alt="Image2">
+            </div>
+            {% endif %}
+            {% if product.p_image3.url != NULL %}
+            <div class="carousel-item justify-content-center" data-bs-interval="5000">
+              <img src="{{ product.p_image3.url }}" class="d-block w-100 h-100 card-imgs" alt="Image3">
+            </div>
             {% endif %}
           </div>
+          {% if product.p_image2.url != NULL %}
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+          {% endif %}
         </div>
       </div>
-      
-      <!-- <div class="prod-img  col-12 col-md-6 d-flex" >
+    </div>
+
+    <!-- <div class="prod-img  col-12 col-md-6 d-flex" >
         <div class="card justify-content-center ps-3 pe-3"  style="width: 35rem; height: 500px;">
           <img src="Assets/ProductImages/Product2.jpg" class="card-imgs" alt="product image">
         </div>
       </div> -->
-    </div>
   </div>
+  <div class="d-flex justify-content-center  pb-4">
+    <div style="width: 84%;">
+      <h5 class="fw-bold">Comments</h5>
+      <!-- This is the space to add comment for user -->
+      <div class="card comment-card mb-3" id="" name="" style="width: 100%;">
+        <div class="card-body">
+          <div>
+            <textarea class="form-control" id="" rows="3" placeholder="Type Your Comment here..."
+              style="width: 100%;"></textarea>
+          </div>
+          <div class="float-end mt-3">
+            <button type="button" class="btn btn-primary">Add Comment</button>
+          </div>
+        </div>
+      </div>
+      <!-- Comments loop here -->
+      <div class="card comment-card" id="" name="" style="width: 100%;">
+        <div class="card-body">
+          <!-- name of the user here -->
+          <h6 class="card-title fw-bold mb-3" id="chat-user-name" name="">Username</h6>
+          <!-- comment is here -->
+          <p class="card-text" name="">Comments comments comments comments comments comments</p>
+          <div class="comment-card-footer d-flex justify-content-between">
+            <!-- date is here -->
+            <p class="text-muted" name="">01 January 2022</p>
+            <a type="button" class="btn btn-sm btn-danger" href="/reportcomment">Report Comment</a>
+          </div>
+        </div>
+      </div>
+      <!-- Demo for second command, Delete this when making dynamic -->
+      <div class="card comment-card" id="" name="" style="width: 100%;">
+        <div class="card-body">
+          <!-- name of the user here -->
+          <h6 class="card-title fw-bold mb-3" id="chat-user-name" name="">Username</h6>
+          <!-- comment is here -->
+          <p class="card-text" name="">Comments comments comments comments comments comments</p>
+          <div class="comment-card-footer d-flex justify-content-between">
+            <!-- date is here -->
+            <p class="text-muted" name="">01 January 2022</p>
+            <a type="button" class="btn btn-sm btn-danger" href="/reportcomment">Report Comment</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
 </div>
 {% endblock %}

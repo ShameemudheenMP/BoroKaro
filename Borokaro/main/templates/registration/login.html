@@ -32,6 +32,8 @@
                         <input type="password" id="email" name="password" class="textinputs" placeholder="PASSWORD"><br><br>
                     </div>
                 </div><br>
+                <!-- USED TO ALLOW REDIRECTS AFTER LOGIN -->
+                <input type="hidden" name="next" value="{{ request.GET.next }}" />
                 
                 <!-- <input type="password" id="password" name="password" class="textinputs" placeholder="  &#xf023   PASSWORD"><br><br><br> -->
                 <input type="submit" value="LOGIN" class="submitbutton"><br>
