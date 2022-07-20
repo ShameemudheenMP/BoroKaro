@@ -172,6 +172,9 @@ def reportcomment(request):
 def reportsuccess(request):
     return render(request, 'main/reportsuccess.html')
 
+@login_required(login_url='/login')
+def wishlist(request):
+    return render(request, 'main/wishlist.html')
 
 #profile view
 @login_required(login_url='/login')
