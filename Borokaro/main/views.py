@@ -171,3 +171,15 @@ def reportcomment(request):
 @login_required(login_url='/login')
 def reportsuccess(request):
     return render(request, 'main/reportsuccess.html')
+
+
+#profile view
+@login_required(login_url='/login')
+def profile(request):
+    return render(request, 'main/profile.html')
+
+
+#profile edit
+@login_required(login_url='/login')
+def profileedit(request):
+    return render(request, 'main/profileedit.html')

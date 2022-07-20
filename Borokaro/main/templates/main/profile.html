@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="d-flex justify-content-center pb-5">
+    <div class="profile d-flex flex-column mt-5 mt-lg-3 pt-5 pt-lg-0">
+        <h3 class="fw-bold mx-auto">USER PROFILE</h3>
+        <div class="mx-auto mt-3">   
+            <img src="{% static 'Assets/ProfileIconLarge.png' %}" alt="ProfileIcon">
+        </div>
+        <div class="profile-details">
+            <div class="mb-2">
+                <label for="profileFormInput1" class="form-label fw-bold">Name</label>
+                <input type="text" class="form-control" id="profileFormInput1" placeholder="" disabled="True" value="Joel">
+            </div>
+            <div class="mb-2">
+                <label for="profileFormInput2" class="form-label fw-bold">State</label>
+                <input type="text" class="form-control" id="profileFormInput2" placeholder="" disabled="True" value="Kerala">
+            </div>
+            <div class="mb-2">
+                <label for="profileFormInput3" class="form-label fw-bold">District</label>
+                <input type="text" class="form-control" id="profileFormInput3" placeholder="" disabled="True" value="Kollam">
+            </div>
+        </div>
+        <div id="borrower-rating" class="mt-3">
+            <h5 class="">User As Borrower</h5>
+            <div class="d-flex">
+                <!-- loop star here -->
+                <p><i class="bi bi-star-fill text-primary me-1"></i></p>
+                <p><i class="bi bi-star-fill text-primary me-1"></i></p>
+                <p><i class="bi bi-star-fill text-primary me-1"></i></p>
+                <p><i class="bi bi-star-half text-primary me-1"></i></p>
+                <p><i class="bi bi-star text-primary me-1"></i></p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div id="lender-rating" class="mt-1">
+                <h5 class="">User As Lender</h5>
+                <div class="d-flex">
+                    <!-- loop star here -->
+                    <p><i class="bi bi-star-fill text-primary me-1"></i></p>
+                    <p><i class="bi bi-star-fill text-primary me-1"></i></p>
+                    <p><i class="bi bi-star-half text-primary me-1"></i></p>
+                    <p><i class="bi bi-star text-primary me-1"></i></p>
+                    <p><i class="bi bi-star text-primary me-1"></i></p>
+                </div>
+            </div>
+            <!-- this is when view other's profile -->
+            <div class="d-flex align-items-center">
+                <a class="btn btn-sm btn-danger" href="/reportuser/{{ product.user.id }}">REPORT USER</a>
+            </div>
+            
+        </div>
+        <!-- this is when view his own profile -->
+        <div class="d-flex justify-content-center">
+            <a href="/profileedit" class="btn btn-primary" >Edit Profile</a>
+        </div>
+        
+    </div>
+  </div>
+  
+{% endblock %}

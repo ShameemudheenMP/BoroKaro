@@ -20,6 +20,8 @@ urlpatterns = [
     path('reportuser/<int:idn>', reportuser, name='reportuser'),
     path('reportcomment/', reportcomment, name='reportcomment'),
     path('reportsuccess/', reportsuccess, name='reportsuccess'),
+    path('profile/', profile, name='profile'),
+    path('profileedit/', profileedit, name='profileedit'),
 ]
 
 if settings.DEBUG:

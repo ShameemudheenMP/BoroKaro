@@ -261,3 +261,12 @@ header {
     font-family: 'poppins';
 }
 
+
+.profile-details {
+    width: 400px;
+}
+
+
+.profile-details input[type="text"]:disabled {
+    background: #ffffff;
+  }
