@@ -1,0 +1,60 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="d-flex justify-content-center pb-5">
+    <div class="profile d-flex flex-column mt-5 mt-lg-3 pt-5 pt-lg-0">
+        <h3 class="fw-bold mx-auto">EDIT YOUR PROFILE</h3>
+        <div class="mx-auto mt-3">   
+            <img src="{% static 'Assets/ProfileIconLarge.png' %}" alt="ProfileIcon">
+        </div>
+
+        <form style="width: 450px;">
+            <div class="mb-2">
+                <label for="profileEditFormInput1" class="form-label fw-bold">Name</label>
+                <input type="text" class="form-control bg-transparent border border-dark" id="profileEditFormInput1" placeholder="" value="Joel">
+            </div>
+            <div class="mb-2">
+                <label for="profileEditFormInput2" class="form-label fw-bold">E-Mail</label>
+                <input type="email" class="form-control bg-transparent border border-dark" id="profileEditFormInput2" placeholder="" value="joel@gmail.com">
+            </div>
+            <div class="mb-2">
+                <label for="profileEditFormInput3" class="form-label fw-bold">Phone No.</label>
+                <input type="tel" class="form-control bg-transparent border border-dark" id="profileEditFormInput3" placeholder="" value="+91 9487332141">
+            </div>
+            <div class="mb-2">
+                <label for="profileEditFormInput4" class="form-label fw-bold">Password</label>
+                <input type="password" class="form-control bg-transparent border border-dark" id="profileEditFormInput4" placeholder="" value="password">
+            </div>
+            <div class="mb-2 d-flex justify-content-between">
+                <div style="width: 47%;">   
+                    <label for="profileEditFormInput5" class="form-label fw-bold">State</label>
+                    <select class="form-select w-100 bg-transparent border border-dark" id="profileEditFormInput5">
+                        <option value="Kerala">Kerala</option>
+                        <option value="Kerala">Tamilnadu</option>
+                        <option value="Kerala">Karnataka</option>
+                        <option value="Kerala">Goa</option>
+                    </select>
+                </div>
+                <div style="width: 47%;">   
+                    <label for="profileEditFormInput6" class="form-label fw-bold">District</label>
+                    <select class="form-select w-100 bg-transparent border border-dark" id="profileEditFormInput6">
+                        <option value="Kerala">Malappuram</option>
+                        <option value="Kerala">Kollam</option>
+                        <option value="Kerala">Kottayam</option>
+                        <option value="Kerala">Alappuzha</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="profileEditFormInput7" class="form-label fw-bold">Address</label>
+                <textarea  class="form-control bg-transparent border border-dark" id="profileEditFormInput7" name="profileEditAddress" rows="3">Address</textarea>
+                <a href="/actlend" class="text-dark fw-bold float-end">Activate Lender Acount</a>
+            </div>
+        </form>
+        
+        
+    </div>
+  </div>
+  
+{% endblock %}
