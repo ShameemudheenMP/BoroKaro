@@ -19,18 +19,20 @@
           <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
           <p class="semi-bold">Lender details:</p>
           <p>{{ product.user.name }}</p>
-          <p>{{ product.user.address }}<a href="/reportuser/{{ product.user.id }}" class="red-text fw-bold">REPORT USER</a></p>
+          <p>{{ product.user.address }}<a href="/reportuser/{{ product.user.id }}" class="red-text fw-bold">REPORT
+              USER</a></p>
           <div class="d-flex justify-content-start">
             <h6 class="me-2 pt-1 fw-bold">Rent for</h6>
-            <button class="me-2 rounded-circle bg-transparent">
+            <!-- COUNTER BUTTON HERE -->
+            <button class="me-2 rounded-circle bg-transparent" onclick="decrease()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
               </svg>
             </button>
-            <h6 id="days" class="me-2 pt-1 fw-bold">5</h6>
-            <button class="me-2 rounded-circle bg-transparent">
+            <h6 id="days" class="me-2 pt-1 fw-bold">0</h6>
+            <button class="me-2 rounded-circle bg-transparent" onclick="increase()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-arrow-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -46,16 +48,16 @@
             <a href="#" class="card-link btn btn-outline-danger btn-lg" tabindex="-1" role="button"
               aria-disabled="true">ADD TO WISHLIST</a>
             {% if product.status == 0 %}
-              {% if status == 0 %}
-                <a href="#" class="card-link btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
-                  aria-disabled="true">BORROW NOW</a>
-              {% else %}
-                <a href="borrow/{{ product.id }}" class="card-link btn btn-green btn-lg" tabindex="-1" role="button"
-                  aria-disabled="true" id="wishlist-btn">BORROW NOW</a>
-              {% endif %}
+            {% if status == 0 %}
+            <a href="#" class="card-link btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
+              aria-disabled="true">BORROW NOW</a>
             {% else %}
-              <a href="#" class="card-link btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
-                aria-disabled="true">BORROW NOW</a>
+            <a href="borrow/{{ product.id }}" class="card-link btn btn-green btn-lg" tabindex="-1" role="button"
+              aria-disabled="true" id="wishlist-btn">BORROW NOW</a>
+            {% endif %}
+            {% else %}
+            <a href="#" class="card-link btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
+              aria-disabled="true">BORROW NOW</a>
             {% endif %}
           </div>
           {% endif %}
@@ -150,7 +152,6 @@
     </div>
 
   </div>
-
 </div>
 </div>
 {% endblock %}
