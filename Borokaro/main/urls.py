@@ -21,6 +21,8 @@ urlpatterns = [
     path('reportcomment/', reportcomment, name='reportcomment'),
     path('reportsuccess/', reportsuccess, name='reportsuccess'),
     path('wishlist/', wishlist, name='wishlist'),
+    path('profile/', profile, name='profile'),
+    path('profileedit/', profileedit, name='profileedit'),
 ]
 
 if settings.DEBUG:

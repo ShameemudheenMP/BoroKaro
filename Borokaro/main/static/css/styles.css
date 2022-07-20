@@ -260,3 +260,13 @@ header {
 .wishlist-body {
     font-family: 'poppins';
 }
+
+
+.profile-details {
+    width: 450px;
+}
+
+
+.profile-details input[type="text"]:disabled {
+    background: #ffffff;
+  } 

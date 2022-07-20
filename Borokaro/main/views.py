@@ -175,3 +175,13 @@ def reportsuccess(request):
 @login_required(login_url='/login')
 def wishlist(request):
     return render(request, 'main/wishlist.html')
+
+#profile view
+@login_required(login_url='/login')
+def profile(request):
+    return render(request, 'main/profile.html')
+
+#profile edit
+@login_required(login_url='/login')
+def profileedit(request):
+    return render(request, 'main/profileedit.html')
