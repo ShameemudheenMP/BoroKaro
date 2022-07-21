@@ -98,9 +98,9 @@ class PReq(models.Model):
 
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
 #product recvd nekki kazhinjaal pinne aa button kanikkaruth activity page il - DONE
-#DAYS VECHULLA REQ
 #disable borrow button (not remove) if product is not available - DONE
 #user should not be able to request the same product more than once if the existing request is in pending list - DONE
+#DAYS VECHULLA REQ
 #RENT HISTORY
 #COMMENTS
 #REPORT USER, COMMENTS

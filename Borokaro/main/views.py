@@ -181,7 +181,6 @@ def wishlist(request):
 def profile(request):
     return render(request, 'main/profile.html')
 
-
 #profile edit
 @login_required(login_url='/login')
 def profileedit(request):
