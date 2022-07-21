@@ -110,8 +110,18 @@ def activity(request):
         for req in requests:
             if req.product == pro:
                 reqs.append(req)
+    pend = 0
+    acc = 0
+    dec = 0
+    for req in reqs:
+        if req.status == 0:
+            pend = 1
+        if req.status == 1:
+            acc = 1
+        if req.status == 2:
+            dec = 1
     #print(reqs)
-    return render(request, 'main/activity.html',{'requests':reqs})
+    return render(request, 'main/activity.html',{'requests':reqs, 'pending':pend, 'accepted':acc, 'declained':dec})
 
 @login_required(login_url='/login')
 def borrow(request, idn):

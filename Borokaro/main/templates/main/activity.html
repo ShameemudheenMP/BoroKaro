@@ -23,27 +23,40 @@
   </div>
   <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
     <!-- Rent requests section -->
-    <div id="rent-requests" class="mt-5 mx-5 px-4">
+    <div id="rent-requests" class="pt-5 mx-5 px-4 pb-5">
       <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
-      {% for request in requests %}
-      {% if not request.status %}
-        <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
-          <div class="col-12 col-lg-2 d-flex align-items-center">
-            <!--ADD LINK TO PROFILE OF BORROWER-->
-            <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
-          </div>
-          <div class="col-12 col-lg-6 d-flex align-items-center">
-            <h5 class="fw-bold mx-5">{{request.product.p_name}} </h5>
-          </div>
-          <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
-            <a class="btn btn-primary me-3" href="#" role="button">CHAT</a>
-            <a class="btn btn-success me-3" href="/accept/{{ request.id }}" role="button">ACCEPT</a>
-            <a class="btn btn-danger me-3" href="/decline/{{ request.id }}" role="button">DECLINE</a>
-          </div>
-        </div>
+      <!-- to display no pending requests if there is no pending requests -->
+      {% if not pending %}
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+        <h6 class="my-auto">No Pending Requests</h6>  
+      </div>
       {% endif %}
+      {% for request in requests %}
+        {% if not request.status %}
+          <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+            <div class="col-12 col-lg-2 d-flex align-items-center">
+              <!--ADD LINK TO PROFILE OF BORROWER-->
+              <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
+            </div>
+            <div class="col-12 col-lg-5 d-flex align-items-center">
+              <h5 class="fw-bold mx-5">{{request.product.p_name}} </h5>
+            </div>
+            <div class="col-12 col-lg-5 d-flex flex-column mt-3">
+              <div class="d-flex justify-content-center align-items-center">
+                <a class="btn btn-sm btn-primary me-3" href="#" role="button">CHAT</a>
+                <a class="btn btn-sm btn-success me-3" href="/accept/{{ request.id }}" role="button">ACCEPT</a>
+                <a class="btn btn-sm btn-danger me-3" href="/decline/{{ request.id }}" role="button">DECLINE</a>
+              </div>
+              <!-- time and date -->
+              <div class="d-flex justify-content-end mt-3" style="height: 25px;">
+                <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>12:00 pm</em></p>
+                <p class="text-secondary my-auto" style="font-size: 14px;"><em>12/05/2022</em></p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
       {% endfor %}
-
+      
       <div class="d-flex mx-1 mt-4">
         <h5 class="blue-text fw-bold me-auto">ACCEPTED REQUESTS</h5>
         <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
@@ -51,6 +64,12 @@
           <option value="NewToOldest">New To Oldest</option>
         </select>
       </div>
+      <!-- to display no accepted requests if there is no accepted requests -->
+      {% if not accepted %}
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+        <h6 class="my-auto">No Accepted Requests</h6>  
+      </div>
+      {% endif %}
       {% for request in requests %}
       {% if request.status %}
       {% if request.status != 2 %}
@@ -59,14 +78,24 @@
           <!--ADD LINK TO PROFILE OF BORROWER-->
           <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
         </div>
-        <div class="col-12 col-lg-6 d-flex align-items-center">
+        <div class="col-12 col-lg-5 d-flex align-items-center">
           <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
         </div>
-        <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
-          {% if request.status == 1 %}
-          <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.id }}" role="button">PRODUCT RECEIVED</a>
-          {% endif %}
-          <a class="btn btn-danger btn-sm me-3" href="/reportuser/{{ request.borrower.id }}" role="button">REPORT USER</a>
+        <div class="col-12 col-lg-5 d-flex flex-column mt-3">
+          <div class="d-flex justify-content-center align-items-center">
+            {% if request.status == 1 %}
+              <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.id }}" role="button">PRODUCT RECEIVED</a>
+            {% else %}
+              <!-- rate borrower -->
+              <a class="btn btn-sm btn-success me-3" href="/rateborrower">RATE BORROWER</a>
+            {% endif %}
+              <a class="btn btn-danger btn-sm me-3" href="/reportuser/{{ request.borrower.id }}" role="button">REPORT USER</a>
+          </div>
+          <!-- time and date -->
+          <div class="d-flex justify-content-end mt-3" style="height: 25px;">
+            <p class="me-2 text-secondary my-auto"  style="font-size: 14px;"><em>12:00 pm</em></p>
+            <p class="text-secondary my-auto" style="font-size: 14px;"><em>12/05/2022</em></p>            
+          </div>
         </div>
       </div>
       {% endif %}
@@ -79,6 +108,12 @@
           <option value="NewToOldest">New To Oldest</option>
         </select>
       </div>
+      <!-- to display no declained requests if there is no declained requests -->
+      {% if not declained %}
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+        <h6 class="my-auto">No Declained Requests</h6>  
+      </div>
+      {% endif %}
       {% for request in requests %}
       {% if request.status == 2 %}
       <div class="row bg-white rounded-2 p-3 mx-1">
@@ -86,9 +121,19 @@
           <!--ADD LINK TO PROFILE OF BORROWER-->
           <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
         </div>
+        
         <div class="col-12 col-lg-6 d-flex align-items-center">
           <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
         </div>
+        <div class="col-12 col-lg-4 d-flex flex-column mt-3">
+          <!-- time and date -->
+          <div class="d-flex justify-content-end mt-3" style="height: 25px;">
+            <p class="me-2 text-secondary my-auto"  style="font-size: 14px;"><em>12:00 pm</em></p>
+            <p class="text-secondary my-auto" style="font-size: 14px;"><em>12/05/2022</em></p>            
+          </div>
+        </div>
+
+        
         
       </div>
       {% endif %}
