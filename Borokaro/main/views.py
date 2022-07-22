@@ -241,7 +241,25 @@ def wishlist(request):
 #profile view
 @login_required(login_url='/login')
 def profile(request,idn):
-    return render(request, 'main/profile.html')
+    user = User.objects.get(id=idn)
+    userid = request.user.id
+    l = int(user.len_rate)
+    b = int(user.bor_rate)
+    lx = 5 - l
+    bx = 5 - b
+    le = []
+    bo = []
+    lex = []
+    box = []
+    for i in range(l):
+        le.append(str(i))
+    for i in range(b):
+        bo.append(str(i))
+    for i in range(lx):
+        lex.append(str(i))
+    for i in range(bx):
+        box.append(str(i))
+    return render(request, 'main/profile.html',{'userid':userid,'user':user,'l':le,'b':bo,'lx':lex,'bx':box})
 
 #profile edit
 @login_required(login_url='/login')

@@ -70,6 +70,8 @@ class User(AbstractUser):
 
     district = models.CharField(max_length=3,choices=STATE_CHOICES,default='TVM')
     address = models.CharField(max_length=90,default='')
+    len_rate = models.IntegerField(default=0)
+    bor_rate = models.IntegerField(default=0)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -133,7 +135,7 @@ class ReportUser(models.Model):
 #REPORT COMMENTS - DONE
 #REPORT USER - DONE
 #comment section and product lender details il ninnu users ne click cheythu profile view cheyyaan pattanam - done
-#profile page & edit profile
+#profile page - done (some error in district info) & edit profile
 #WISHLIST
 #OCR
 #rent history
