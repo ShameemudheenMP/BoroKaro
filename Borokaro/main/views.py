@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 import datetime
+from django.urls import reverse
 
 # Create your views here.
 
@@ -64,6 +65,10 @@ def log_in(request):
 def product(request, idn):
     product = Product.objects.get(id=idn)
     userid = int(request.user.id)
+    comments = Comment.objects.filter(product = product).order_by('-created_at')
+    com = 0
+    if comments:
+        com = 1
     try:
         reqs = PReq.objects.filter(borrower = request.user,  product = product)
         req = reqs.latest('created_at')
@@ -77,7 +82,7 @@ def product(request, idn):
     #image = ProdImage.objects.filter(product=product)
     #user = request.user
     #DYNAMICALLY LOAD PRODUCT INFO
-    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status})
+    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status,'comments':comments,'com':com})
 
 @login_required(login_url='/login')
 def lend(request):
@@ -116,7 +121,8 @@ def activity(request):
                 reqs.append(req)
     if reqs:
         reqs.sort(reverse=True,key=myFunc)
-    print(reqs[0].created_at)
+    #print(reqs[0].created_at)
+    #print(type(reqs[0].created_at))
     pend = 0
     acc = 0
     dec = 0
@@ -131,11 +137,15 @@ def activity(request):
 
 @login_required(login_url='/login')
 def borrow(request, idn):
+    d = 0
+    if 'days' in request.POST:
+        d = int(request.POST.get('days'))
     req = PReq()
     req.borrower = request.user
     req.product = Product.objects.get(id=idn)
+    req.days = d
     req.save()
-    return redirect('home')
+    return redirect(reverse('product', kwargs={"idn": idn}))
 
 @login_required(login_url='/login')
 def accept(request, idn):
@@ -178,11 +188,47 @@ def prodreceived(request, idn):
 
 @login_required(login_url='/login')
 def reportuser(request, idn):
-    return render(request, 'main/reportuser.html')
+    try:
+        rep = ReportUser.objects.get(r_by=request.user,r_user=idn)
+        return render(request, 'main/reportsuccess.html')
+    except:
+        return render(request, 'main/reportuser.html',{'userid':idn})
 
 @login_required(login_url='/login')
-def reportcomment(request):
-    return render(request, 'main/reportcomment.html')
+def repous(request,idn):
+    if request.method == 'POST':
+        rep = ReportUser()
+        rep.r_user = idn
+        rep.r_by = request.user
+        rep.desc = request.POST.get('description')
+        rep.save()
+        return render(request, 'main/reportsuccess.html')
+    else:
+        pass
+    return None
+
+@login_required(login_url='/login')
+def reportcomment(request,idn):
+    comment = Comment.objects.get(id=idn)
+    try:
+        rep = ReportComment.objects.get(comment=comment,user=request.user)
+        return render(request, 'main/reportsuccess.html')
+    except:
+        return render(request, 'main/reportcomment.html',{'comid':idn})
+
+@login_required(login_url='/login')
+def repoco(request,idn):
+    if request.method == 'POST':
+        comment = Comment.objects.get(id=idn)
+        rep = ReportComment()
+        rep.comment = comment
+        rep.user = request.user
+        rep.desc = request.POST.get('description')
+        rep.save()
+        return render(request, 'main/reportsuccess.html')
+    else:
+        pass
+    return None
 
 @login_required(login_url='/login')
 def reportsuccess(request):
@@ -194,10 +240,25 @@ def wishlist(request):
 
 #profile view
 @login_required(login_url='/login')
-def profile(request):
+def profile(request,idn):
     return render(request, 'main/profile.html')
 
 #profile edit
 @login_required(login_url='/login')
 def profileedit(request):
     return render(request, 'main/profileedit.html')
+
+#add comment in product page or via product rating page
+@login_required(login_url='/login')
+def comment(request,idn):
+    if request.method == 'POST':
+        com = Comment()
+        com.product = Product.objects.get(id=idn)
+        com.user = request.user
+        com.content = request.POST.get('comment')
+        com.save()
+        #return redirect('product/<idn>')
+        return redirect(reverse('product', kwargs={"idn": idn}))
+    else:
+        pass
+    return None

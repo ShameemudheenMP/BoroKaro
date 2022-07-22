@@ -21,11 +21,14 @@ urlpatterns = [
     path('filterit/',filterit,name='filterit'),
     path('prodreceived/<int:idn>',prodreceived,name='prodreceived'),
     path('reportuser/<int:idn>', reportuser, name='reportuser'),
-    path('reportcomment/', reportcomment, name='reportcomment'),
+    path('repous/<int:idn>', repous, name='repous'),
+    path('reportcomment/<int:idn>', reportcomment, name='reportcomment'),
+    path('repoco/<int:idn>', repoco, name='repoco'),
     path('reportsuccess/', reportsuccess, name='reportsuccess'),
     path('wishlist/', wishlist, name='wishlist'),
-    path('profile/', profile, name='profile'),
+    path('profile/<int:idn>', profile, name='profile'),
     path('profileedit/', profileedit, name='profileedit'),
+    path('comment/<int:idn>',comment,name='comment'),
 ]
 
 if settings.DEBUG:

@@ -1,8 +1,16 @@
 from calendar import month
+from enum import auto
 from operator import mod
 from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from datetime import datetime
+
+def default_start_time():
+    now = datetime.now()
+    start = now.replace(microsecond=0)
+    ans = start.strftime("%I:%M %p %d/%m/%Y")
+    return ans
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -93,23 +101,45 @@ class PReq(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd
-    days = models.IntegerField(default=5)
+    days = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    time = models.CharField(max_length=20,default=default_start_time)
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
+    time = models.CharField(max_length=20,default=default_start_time)
+
+class ReportComment(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    desc = models.CharField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class ReportUser(models.Model):
+    r_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    r_user = models.IntegerField(default=0)
+    desc = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
 
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
 #product recvd nekki kazhinjaal pinne aa button kanikkaruth activity page il - DONE
 #disable borrow button (not remove) if product is not available - DONE
 #user should not be able to request the same product more than once if the existing request is in pending list - DONE
-#ratings kanikkumbo athinte koode user count bracket il kanikkenam
-#DAYS VECHULLA REQ
-#RENT HISTORY
-#COMMENTS
-#REPORT USER, COMMENTS
+#DAYS VECHULLA REQ - DONE
+#COMMENTS - DONE
+#REPORT COMMENTS - DONE
+#REPORT USER - DONE
+#comment section and product lender details il ninnu users ne click cheythu profile view cheyyaan pattanam - done
+#profile page & edit profile
 #WISHLIST
 #OCR
-#SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
+#rent history
 #RATINGS
-#PROFILE PAGE & EDIT PROFILE
+#SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
+#ratings kanikkumbo athinte koode user count bracket il kanikkenam
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
 #a user should not access another user's activity or lend page

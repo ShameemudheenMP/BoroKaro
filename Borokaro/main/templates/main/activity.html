@@ -35,9 +35,12 @@
         {% for request in requests %}
           {% if not request.status %}
             <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
-              <div class="col-12 col-lg-2 d-flex align-items-center">
+              <div class="col-12 d-flex justify-content-start" style="width: 60px; height: 20px; background-color: #C8D5FF;">
+                <h6>{{request.days}} days</h6>
+              </div>
+              <div class="col-12 col-lg-2 d-flex flex-column align-items-start">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
-                <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
+                <a href="#" id="" class="text-primary my-auto">{{request.borrower.name}}</a>
               </div>
               <div class="col-12 col-lg-5 d-flex align-items-center">
                 <h5 class="fw-bold mx-5">{{request.product.p_name}} </h5>
@@ -50,8 +53,7 @@
                 </div>
                 <!-- time and date -->
                 <div class="d-flex justify-content-end mt-3" style="height: 25px;">
-                  <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>12:00 pm</em></p>
-                  <p class="text-secondary my-auto" style="font-size: 14px;"><em>12/05/2022</em></p>
+                  <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>{{request.time}}</em></p>
                 </div>
               </div>
             </div>
@@ -97,8 +99,7 @@
                   </div>
                   <!-- time and date -->
                   <div class="d-flex justify-content-end mt-3" style="height: 25px;">
-                    <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>12:00 pm</em></p>
-                    <p class="text-secondary my-auto" style="font-size: 14px;"><em>12/05/2022</em></p>
+                    <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>{{request.time}}</em></p>
                   </div>
                 </div>
               </div>
@@ -134,8 +135,7 @@
               <div class="col-12 col-lg-4 d-flex flex-column mt-3">
                 <!-- time and date -->
                 <div class="d-flex justify-content-end mt-3" style="height: 25px;">
-                  <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>12:00 pm</em></p>
-                  <p class="text-secondary my-auto" style="font-size: 14px;"><em>12/05/2022</em></p>
+                  <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>{{request.time}}</em></p>
                 </div>
               </div>
             </div>
