@@ -2,9 +2,12 @@ from django.urls import path
 from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 urlpatterns = [
+    path('favicon.ico',RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),),
     path('home/', home, name='home'),
     path('', home, name='home'),
     path('signup/', sign_up, name='signup'),

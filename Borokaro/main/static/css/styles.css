@@ -270,3 +270,7 @@ header {
 .profile-details input[type="text"]:disabled {
     background: #ffffff;
   } 
+
+  .blue-text {
+    color :#264ECA
+}

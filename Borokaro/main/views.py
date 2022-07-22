@@ -10,6 +10,10 @@ import datetime
 
 # Create your views here.
 
+#sort by date function
+def myFunc(e):
+    return e.created_at
+
 def home(request):
     products = Product.objects.all()
     return render(request, 'main/home.html',{'products':products})
@@ -110,8 +114,20 @@ def activity(request):
         for req in requests:
             if req.product == pro:
                 reqs.append(req)
-    #print(reqs)
-    return render(request, 'main/activity.html',{'requests':reqs})
+    if reqs:
+        reqs.sort(reverse=True,key=myFunc)
+    print(reqs[0].created_at)
+    pend = 0
+    acc = 0
+    dec = 0
+    for req in reqs:
+        if req.status == 0:
+            pend = 1
+        elif req.status == 1 or req.status == 3:
+            acc = 1
+        elif req.status == 2:
+            dec = 1
+    return render(request, 'main/activity.html',{'requests':reqs, 'pending':pend, 'accepted':acc, 'declined':dec})
 
 @login_required(login_url='/login')
 def borrow(request, idn):

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="row container-fluid content px-0 mx-0 pt-5 pt-lg-0 mt-5 mt-lg-0">
-    <div class="col-xl-3 col-md-3 col-sm-4 col-xs-12 body-left">
+    <div class="col-xl-2 col-md-3 col-sm-4 col-12 body-left">
         <div class="search-form pt-3 ps-1">
             <form action="">
                 <div class="input d-flex align-items-center">
@@ -39,14 +39,14 @@
 
         </div>
     </div>
-    <div class="col-xl-9 col-md-9 col-sm-8 col-xs-12 body-right">
-        <div class="heading ps-4 ms-xl-5 mt-4">
+    <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
+        <div class="heading ps-4 mt-4">
             <!-- PRODUCT LIST ENN VERUTHE KODUTHATHA, PINNE ORU DIVASAM PRODUCTS NEAR YOU AAKKENAM-->
             <h2 class="main-heading">PRODUCT LIST <img class="prod-icon" src="{% static 'Assets/product-icon.png' %}"
                     alt="prod-icon"></h2>
         </div>
 
-        <div class="d-flex justify-content-around flex-wrap">
+        <div class="d-flex justify-content-between flex-wrap px-4">
             {% for product in products %}
             <a href="/product/{{ product.id }}" class="product text-decoration-none mb-5">
                 <div class="card pt-2" style="width: 21rem;">

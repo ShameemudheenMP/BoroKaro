@@ -61,7 +61,7 @@ class User(AbstractUser):
     ]
 
     district = models.CharField(max_length=3,choices=STATE_CHOICES,default='TVM')
-    address = models.CharField(max_length=50,default='')
+    address = models.CharField(max_length=90,default='')
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -75,7 +75,7 @@ class User(AbstractUser):
 class Product(models.Model):
     p_name = models.CharField(max_length=50)
     p_rate = models.IntegerField(default=0)
-    p_desc = models.CharField(max_length=70)
+    p_desc = models.CharField(max_length=90)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     p_image1 = models.ImageField(upload_to = 'uploads/',blank=True)
     p_image2 = models.ImageField(upload_to = 'uploads/',blank=True)
@@ -100,6 +100,7 @@ class PReq(models.Model):
 #product recvd nekki kazhinjaal pinne aa button kanikkaruth activity page il - DONE
 #disable borrow button (not remove) if product is not available - DONE
 #user should not be able to request the same product more than once if the existing request is in pending list - DONE
+#ratings kanikkumbo athinte koode user count bracket il kanikkenam
 #DAYS VECHULLA REQ
 #RENT HISTORY
 #COMMENTS
@@ -111,4 +112,4 @@ class PReq(models.Model):
 #PROFILE PAGE & EDIT PROFILE
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
-#login required for all pages other than home page
+#a user should not access another user's activity or lend page
