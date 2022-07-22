@@ -116,7 +116,7 @@ def activity(request):
     for req in reqs:
         if req.status == 0:
             pend = 1
-        if req.status == 1:
+        if req.status == 1 or req.status == 3:
             acc = 1
         if req.status == 2:
             dec = 1
@@ -195,3 +195,10 @@ def profile(request):
 @login_required(login_url='/login')
 def profileedit(request):
     return render(request, 'main/profileedit.html')
+
+
+#rating Section :
+#Borrower Rating
+@login_required(login_url='/login')
+def rateborrower(request):
+    return render(request, 'main/rateborrower.html')

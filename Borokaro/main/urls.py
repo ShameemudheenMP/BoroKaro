@@ -23,6 +23,7 @@ urlpatterns = [
     path('wishlist/', wishlist, name='wishlist'),
     path('profile/', profile, name='profile'),
     path('profileedit/', profileedit, name='profileedit'),
+    path('rateborrower/', rateborrower, name='rateborrower'),
 ]
 
 if settings.DEBUG:

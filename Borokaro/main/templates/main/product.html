@@ -19,8 +19,8 @@
           <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
           <p class="semi-bold">Lender details:</p>
           <p>{{ product.user.name }}</p>
-          <p>{{ product.user.address }}<a href="/reportuser/{{ product.user.id }}" class="red-text fw-bold">REPORT
-              USER</a></p>
+          <p>{{ product.user.address }}</p>
+          <a href="/reportuser/{{ product.user.id }}" class="red-text fw-bold">REPORT USER</a>
           <div class="d-flex justify-content-start">
             <h6 class="me-2 pt-1 fw-bold">Rent for</h6>
             <!-- COUNTER BUTTON HERE -->
