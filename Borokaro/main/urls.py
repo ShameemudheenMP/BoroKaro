@@ -24,6 +24,7 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('profileedit/', profileedit, name='profileedit'),
     path('rateborrower/', rateborrower, name='rateborrower'),
+    path('ratelender/', ratelender, name='ratelender'),
 ]
 
 if settings.DEBUG:
