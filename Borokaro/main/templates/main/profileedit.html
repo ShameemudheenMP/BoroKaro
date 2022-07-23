@@ -30,20 +30,51 @@
             <div class="mb-2 d-flex justify-content-between">
                 <div style="width: 47%;">   
                     <label for="profileEditFormInput5" class="form-label fw-bold">State</label>
-                    <select class="form-select w-100 bg-transparent border border-dark" id="profileEditFormInput5">
-                        <option value="Kerala">Kerala</option>
-                        <option value="Tamilnadu">Tamilnadu</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Goa">Goa</option>
+                    <select class="form-select w-100 bg-transparent border border-dark" id="states" name="states">
+                        <option value="" class="options" disabled selected>State</option>
+                        <option value="Andra Pradesh" class="options">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh" class="options">Arunachal Pradesh</option>
+                        <option value="Assam" class="options">Assam</option>
+                        <option value="Bihar" class="options">Bihar</option>
+                        <option value="Chhattisgarh" class="options">Chhattisgarh</option>
+                        <option value="Goa" class="options">Goa</option>
+                        <option value="Gujarat" class="options">Gujarat</option>
+                        <option value="Haryana" class="options">Haryana</option>
+                        <option value="Himachal Pradesh" class="options">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir" class="options">Jammu and Kashmir</option>
+                        <option value="Jharkhand" class="options">Jharkhand</option>
+                        <option value="Karnataka" class="options">Karnataka</option>
+                        <option value="Kerala" class="options">Kerala</option>
+                        <option value="Madya Pradesh" class="options">Madya Pradesh</option>
+                        <option value="Maharashtra" class="options">Maharashtra</option>
+                        <option value="Manipur" class="options">Manipur</option>
+                        <option value="Meghalaya" class="options">Meghalaya</option>
+                        <option value="Mizoram" class="options">Mizoram</option>
+                        <option value="Nagaland" class="options">Nagaland</option>
+                        <option value="Orissa" class="options">Orissa</option>
+                        <option value="Punjab" class="options">Punjab</option>
+                        <option value="Rajasthan" class="options">Rajasthan</option>
+                        <option value="Sikkim" class="options">Sikkim</option>
+                        <option value="Tamil Nadu" class="options">Tamil Nadu</option>
+                        <option value="Telangana" class="options">Telangana</option>
+                        <option value="Tripura" class="options">Tripura</option>
+                        <option value="Uttaranchal" class="options">Uttaranchal</option>
+                        <option value="Uttar Pradesh" class="options">Uttar Pradesh</option>
+                        <option value="West Bengal" class="options">West Bengal</option>
+                        <option disabled style="background-color:rgb(154, 182, 223); color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands" class="options">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh" class="options">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli" class="options">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu" class="options">Daman and Diu</option>
+                        <option value="Delhi" class="options">Delhi</option>
+                        <option value="Lakshadweep" class="options">Lakshadweep</option>
+                        <option value="Pondicherry" class="options">Pondicherry</option>
                     </select>
                 </div>
                 <div style="width: 47%;">   
-                    <label for="profileEditFormInput6" class="form-label fw-bold">District</label>
-                    <select class="form-select w-100 bg-transparent border border-dark" id="profileEditFormInput6">
-                        <option value="Malappuram">Malappuram</option>
-                        <option value="Kollam">Kollam</option>
-                        <option value="Kottayam">Kottayam</option>
-                        <option value="Alappuzha">Alappuzha</option>
+                    <label for="districts" class="form-label fw-bold">District</label>
+                    <select class="form-select w-100 bg-transparent border border-dark" id="districts" name="districts">
+                        <option value="" class='options' disabled selected>District</option>
                     </select>
                 </div>
             </div>
@@ -59,5 +90,7 @@
         
     </div>
   </div>
-  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
