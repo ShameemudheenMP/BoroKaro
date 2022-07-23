@@ -60,7 +60,7 @@ class User(AbstractUser):
         ('MPM','Malappuram')
     ]
 
-    district = models.CharField(max_length=3,choices=STATE_CHOICES,default='TVM')
+    district = models.CharField(max_length=3,choices=DISTRICT_CHOICES,default='TVM')
     address = models.CharField(max_length=50,default='')
     
     created_at = models.DateTimeField(auto_now_add=True)

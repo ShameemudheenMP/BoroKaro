@@ -162,6 +162,11 @@ header {
     object-fit: contain; /*to fit image in the divx */
 }
 
+.card-img-activity {
+    height: 100%;
+    width : 100%;
+    object-fit: contain;
+}
 
 
 .star-rating {
@@ -333,3 +338,6 @@ header {
 
 /* star rating styles */
 
+.medium-font {
+    font-size: small;
+}
