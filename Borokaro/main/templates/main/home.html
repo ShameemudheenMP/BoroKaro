@@ -70,7 +70,7 @@
                             <h5 class="card-title prod-name fw-bold text-dark mt-1" style="font-size: 18px;">{{ product.p_name }}</h5>
                             <h6 class="fw-bold text-dark" style="font-size: 16px;">{{product.user.district}},{{product.user.state}}</h6>
                         </div>
-                        <div class="mt-2 text-dark">
+                        <div class="mt-2 text-dark d-flex align-items-center justify-content-between">
                             <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> {{ product.p_rate }} /day</h6>
                             {% if product.id in prodids%}
                                 <form method="post" action="/unwish/{{ product.id }}" enctype="multipart/form-data">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+
             {% endfor %}
         </div>
     </div>

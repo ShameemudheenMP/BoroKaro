@@ -239,7 +239,8 @@
     <!-- comments -->
     <div id="comments" class="pt-5 px-4 mx-5 pb-5">
       <!-- comment loop here -->
-      <div class="card mb-2 p-3 shadow-sm">
+      {% for comment in comments %}
+      <div class="card mb-2 p-3">
         <div class="card-body p-0">
           <div class="d-flex">
             <a href="/product/{{comment.product.id}}" class="h6">{{comment.product.p_name}}</a>
