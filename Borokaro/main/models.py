@@ -68,8 +68,8 @@ class User(AbstractUser):
         ('MPM','Malappuram')
     ]
 
-    district = models.CharField(max_length=3,choices=STATE_CHOICES,default='TVM')
-    address = models.CharField(max_length=90,default='')
+    district = models.CharField(max_length=3,choices=DISTRICT_CHOICES,default='TVM')
+    address = models.CharField(max_length=90,default='',blank=True)
     len_rate = models.IntegerField(default=0)
     bor_rate = models.IntegerField(default=0)
     
@@ -136,6 +136,7 @@ class ReportUser(models.Model):
 #REPORT USER - DONE
 #comment section and product lender details il ninnu users ne click cheythu profile view cheyyaan pattanam - done
 #profile page - done (some error in district info) & edit profile
+#only activated lenders can lend products
 #WISHLIST
 #OCR
 #rent history

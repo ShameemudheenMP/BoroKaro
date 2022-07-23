@@ -24,10 +24,10 @@ def sign_up(request):
         name=request.POST.get('name')
         email=request.POST.get('email')
         password=request.POST.get('password')
-        phoneno=request.POST.get('phone')
+        phoneno=request.POST.get('phoneno')
         state=request.POST.get('states')
         district=request.POST.get('districts')
-        print(name," ",email," ",password," ",phoneno," ",state," ",district)
+        #print(name," ",email," ",password," ",phoneno," ",state," ",district)
         try:
             user = User.objects.get(email=email)
         except ObjectDoesNotExist:
