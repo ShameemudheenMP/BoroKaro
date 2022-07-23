@@ -145,3 +145,4 @@ class ReportUser(models.Model):
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
 #a user should not access another user's activity or lend page
+#login required for all pages other than home page

@@ -152,10 +152,17 @@ header {
     text-align: center;
 }
 
-.card-img {
+.card-img-home {
     height: 200px; 
     object-fit: contain; /*to fit image in the divx */
 }
+
+.card-img-rating {
+    height: 150px; 
+    object-fit: contain; /*to fit image in the divx */
+}
+
+
 
 .star-rating {
     width: 35px;
@@ -269,8 +276,60 @@ header {
 
 .profile-details input[type="text"]:disabled {
     background: #ffffff;
-  } 
+}
 
-  .blue-text {
+.blue-text {
     color :#264ECA
 }
+
+
+/* star rating styles */
+.rate{
+
+	border-bottom-right-radius: 12px;
+	border-bottom-left-radius: 12px;
+
+}
+
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 30px;
+    font-weight: 300;
+    /* color: #FFD600; */
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+/* star rating styles */
+

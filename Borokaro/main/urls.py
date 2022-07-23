@@ -7,7 +7,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 urlpatterns = [
-    path('favicon.ico',RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),),
+    path('favicon.ico',RedirectView.as_view(url=staticfiles_storage.url("favicon.ico"))),
     path('home/', home, name='home'),
     path('', home, name='home'),
     path('signup/', sign_up, name='signup'),
@@ -29,6 +29,8 @@ urlpatterns = [
     path('profile/<int:idn>', profile, name='profile'),
     path('profileedit/', profileedit, name='profileedit'),
     path('comment/<int:idn>',comment,name='comment'),
+    path('rateborrower/', rateborrower, name='rateborrower'),
+    path('ratelender/', ratelender, name='ratelender'),
 ]
 
 if settings.DEBUG:

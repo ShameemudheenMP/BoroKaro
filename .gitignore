@@ -2,3 +2,5 @@ test.html
 BoroKaro.code-workspace
 env
 Borokaro/db.sqlite3
+Borokaro/media
+Borokaro/uploads

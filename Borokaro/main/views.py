@@ -280,3 +280,14 @@ def comment(request,idn):
     else:
         pass
     return None
+
+#rating Section :
+#Borrower Rating
+@login_required(login_url='/login')
+def rateborrower(request):
+    return render(request, 'main/rateborrower.html')
+
+#Lender Rating
+@login_required(login_url='/login')
+def ratelender(request):
+    return render(request, 'main/ratelender.html')

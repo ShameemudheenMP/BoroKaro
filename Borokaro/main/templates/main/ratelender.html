@@ -1,0 +1,74 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid d-flex flex-column mx-auto pb-4">
+    <div class="d-flex justify-content-center pt-4">
+        <h3 class="fw-bold">RATE THE LENDER</h3>
+    </div>
+    <div class="d-flex justify-content-center flex-wrap mt-4">
+        <div class="card me-4" style="width: 480px; height: 410px">
+            <div class="card-body d-flex justify-content-center align-items-center w-100 h-100">
+                <!-- product image here -->
+                <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="ProductImage" class="rounded card-img-rating w-100 h-100">
+            </div>
+        </div>
+        <div class="ms-4 d-flex flex-column justify-content-between">
+            <div class="card p-3" style="width: 570px; height: 100px">
+                <!-- product name here -->
+                <h4 class="fw-bold">DELL OptiPlex 7490 All-in-One Monitor Black Color</h4>
+            </div>
+            <div class="card p-3 d-flex flex-column justify-content-center" style="width: 570px; height: 290px">
+                <div>
+                    <p><span class="h4">Lender Name: </span><span class="h4 fw-bold pe-4" id="borrower-name">Full Name Name</span></p>
+                </div>
+                <form class="d-flex flex-column justify-content-between">
+                    <div class="d-flex mb-2">
+                        <div class="me-4">
+                            <label for="" style="font-weight: 500;">Rate Lender</label>
+                            <div class="rating"> 
+                                <input type="radio" name="lenderRating" value="5" id="lender-5">
+                                <label for="5" class="text-primary">☆</label> 
+                                <input type="radio" name="lenderRating" value="4" id="lender-4">
+                                <label for="4" class="text-primary">☆</label> 
+                                <input type="radio" name="lenderRating" value="3" id="lender-3">
+                                <label for="3" class="text-primary">☆</label> 
+                                <input type="radio" name="lenderRating" value="2" id="lender-2">
+                                <label for="2" class="text-primary">☆</label> 
+                                <input type="radio" name="lenderRating" value="1" id="lender-1">
+                                <label for="1" class="text-primary">☆</label>
+                            </div>
+                        </div>
+                        <div class="ms-4">
+                            <label for="" style="font-weight: 500;">Rate Product</label>
+                            <div class="rating"> 
+                                <input type="radio" name="productRating" value="5" id="product-5">
+                                <label for="5" class="text-primary">☆</label> 
+                                <input type="radio" name="productRating" value="4" id="product-4">
+                                <label for="4" class="text-primary">☆</label> 
+                                <input type="radio" name="productRating" value="3" id="product-3">
+                                <label for="3" class="text-primary">☆</label> 
+                                <input type="radio" name="productRating" value="2" id="product-2">
+                                <label for="2" class="text-primary">☆</label> 
+                                <input type="radio" name="productRating" value="1" id="product-1">
+                                <label for="1" class="text-primary">☆</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-75 mb-3">
+                        <textarea name="" id=""  rows="3" class="w-100 rounded form-control border-2" style="background-color: #dee6fc;"  placeholder="Add Your Comment"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success border-0 fw-bold" style="background-color: #45C917; width:158px;">SUBMIT</button>
+                    </div>
+                </form>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

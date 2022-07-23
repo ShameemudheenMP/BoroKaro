@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid d-flex flex-column mx-auto pb-4">
+    <div class="d-flex justify-content-center pt-4">
+        <h3 class="fw-bold">RATE THE BORROWER</h3>
+    </div>
+    <div class="d-flex justify-content-center flex-wrap mt-4">
+        <div class="card me-4" style="width: 480px; height: 410px">
+            <div class="card-body d-flex justify-content-center align-items-center w-100 h-100">
+                <!-- product image here -->
+                <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="ProductImage" class="rounded card-img-rating w-100 h-100">
+            </div>
+        </div>
+        <div class="ms-4 d-flex flex-column justify-content-between">
+            <div class="card p-3" style="width: 570px; height: 100px">
+                <!-- product name here -->
+                <h4 class="fw-bold">DELL OptiPlex 7490 All-in-One Monitor Black color</h4>
+            </div>
+            <div class="card p-3 d-flex flex-column justify-content-between" style="width: 570px; height: 290px">
+                <div>
+                    <p><span class="h4">Borrower Name: </span><span class="h4 fw-bold pe-4" id="borrower-name">Full Name Name</span></p>
+                    <p><span class="h4">Address: </span><span class="h4 fw-bold pe-4" >Full Address Address Address Address Address Address</span></p>
+                </div>
+                <div>
+                    <label for="" style="font-weight: 500;">Your Rating</label>
+                    <div class="rating mb-3"> 
+                        <input type="radio" name="rating" value="5" id="5">
+                        <label for="5" class="text-primary">☆</label> 
+                        <input type="radio" name="rating" value="4" id="4">
+                        <label for="4" class="text-primary">☆</label> 
+                        <input type="radio" name="rating" value="3" id="3">
+                        <label for="3" class="text-primary">☆</label> 
+                        <input type="radio" name="rating" value="2" id="2">
+                        <label for="2" class="text-primary">☆</label> 
+                        <input type="radio" name="rating" value="1" id="1">
+                        <label for="1" class="text-primary">☆</label>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success border-0 fw-bold" style="background-color: #45C917; width:158px;">SUBMIT</button>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
