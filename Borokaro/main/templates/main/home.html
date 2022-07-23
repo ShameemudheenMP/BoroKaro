@@ -51,7 +51,11 @@
             <div class="product text-decoration-none mb-5">
                 <div class="card pt-2" style="width: 21rem;">
                     <a href="/product/{{ product.id }}" class="text-center p-2">
+<<<<<<< HEAD
                         <img src="{{ product.p_image1.url }}" class="card-img-home w-100" alt="Product1">
+=======
+                        <img src="{{ product.p_image1.url }}" class="card-img-home" alt="Product1">
+>>>>>>> main
                     </a>
                     <div class="card-body d-flex flex-column">
                         <div class="topdisp">
@@ -67,11 +71,11 @@
                                 <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
                             </div>
                         </div>
-
                         <h5 class="card-title prod-name fw-bold mt-2 text-dark">{{ product.p_name }}</h5>
                         <h6 class="fw-bold text-dark">Location</h6>
                         <div class="mt-3 text-dark">
                             <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> {{ product.p_rate }}/day</h6>
+<<<<<<< HEAD
                             {% if product.id in prodids%}
                                 <form method="post" action="/unwish/{{ product.id }}" enctype="multipart/form-data">
                                 {% csrf_token %}
@@ -95,9 +99,11 @@
                                 <!-- </a> -->
                                 </form>
                             {% endif %}
+=======
+                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end heart-rating" alt="whichlisticond">
+>>>>>>> main
                         </div>
                     </div>
-
                 </div>
             </div>
             {% endfor %}

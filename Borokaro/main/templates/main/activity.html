@@ -20,7 +20,6 @@
       <input type='radio' value='4' name='actvity' id="act-menu-opt-4" onClick="changeColor(this.value)">
       <label for="act-menu-opt-4">Rent Lists</label>
     </div>
-
   </div>
   <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
     <!-- Rent requests section -->
@@ -145,7 +144,8 @@
     </div>
 
     <!-- Rating section  -->
-    <div id="ratings" class="mt-3 mx-5 px-4 pb-5">
+    <!-- Borrowed ratings -->
+    <div id="ratings" class="pt-1 mx-5 px-4 pb-5">
       <div class="d-flex mx-1 mt-5">
         <h5 class="blue-text fw-bold me-auto">BORROWED</h5>
         <div class="d-flex justify-content-between mb-2">
@@ -154,48 +154,86 @@
             <option value="NewToOldest">New To Oldest</option>
           </select>
         </div>
-        
-
-        
       </div>
-      <div class="bg-white rounded-3 p-3 py-4 mx-1">
-        <div class="row">
-          <div class="col-12 col-lg-4 d-flex align-items-center" style="width: 250px; height: 150px;">
-            <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image" class="rounded" style="width: 100%; height:100%">
-          </div>
-          <div class="col-12 col-lg-8 mt-sm-3 mt-md-0 d-flex flex-column">
-            <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
+      <!-- borrow ratings loop here -->
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+        <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
+          <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
+            class="rounded card-img-activity">
+        </div>
+        <div class="d-flex align-items-center flex-fill">
+          <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
+            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
             <div class="d-flex justify-content-start">
-              <div class="lender-rating ms-5 mt-4">
-                <h6>Lender Rating</h6>
-                <div class="d-flex">
+              <div class="lender-rating ms-5 mt-2 d-flex">
+                <h6 class="medium-font my-auto">Lender Rating : </h6>
+                <div class="d-flex medium-font ms-3">
                   <!-- loop star here -->
-                  <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p><i class="bi bi-star text-primary me-1"></i></p>
-                  <p><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
                 </div>
               </div>
-              <div class="lender-rating ms-5 mt-4">
-                <h6>Product Rating</h6>
-                <div class="d-flex">
+              <div class="lender-rating ms-5 mt-2 d-flex">
+                <h6 class="medium-font my-auto">Product Rating :</h6>
+                <div class="d-flex medium-font ms-3">
                   <!-- loop star here -->
-                  <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p><i class="bi bi-star text-primary me-1"></i></p>
-                  <p><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
                 </div>
               </div>
             </div>
             <div class="d-flex justify-content-end">
-              <p class="text-muted mb-auto">15/01/2022</p>
+              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+        <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
+          <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
+            class="rounded card-img-activity">
+        </div>
+        <div class="d-flex align-items-center flex-fill">
+          <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
+            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
+            <div class="d-flex justify-content-start">
+              <div class="lender-rating ms-5 mt-2 d-flex">
+                <h6 class="medium-font my-auto">Lender Rating : </h6>
+                <div class="d-flex medium-font ms-3">
+                  <!-- loop star here -->
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                </div>
+              </div>
+              <div class="lender-rating ms-5 mt-2 d-flex">
+                <h6 class="medium-font my-auto">Product Rating :</h6>
+                <div class="d-flex medium-font ms-3">
+                  <!-- loop star here -->
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- lent ratings -->
       <div class="d-flex mx-1 mt-5">
         <h5 class="blue-text fw-bold me-auto">LENT</h5>
         <div class="d-flex justify-content-between mb-2">
@@ -205,33 +243,111 @@
           </select>
         </div>
       </div>
-      <div class="row bg-white rounded-3 p-3 py-4 mx-1">
-        <div class="col-12 col-lg-4 d-flex align-items-center" style="width: 250px; height: 150px;">
-          <img src="{% static 'Assets/ProductImages/Product4.jpg' %}" alt="porduct-image" class="rounded" style="width: 100%; height:100%">
+
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+        <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
+          <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image"
+            class="card-img-activity rounded">
         </div>
-        <div class="col-12 col-lg-8 mt-sm-3 mt-md-0 d-flex flex-column">
-          <h5 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h5>
-          <div class="d-flex justify-content-start">
-            <div class="lender-rating ms-5 mt-4">
-              <h6>Borrower Rating</h6>
-              <div class="d-flex">
-                <!-- loop star here -->
-                <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                <p><i class="bi bi-star-fill text-primary me-1"></i></p>
-                <p><i class="bi bi-star text-primary me-1"></i></p>
-                <p><i class="bi bi-star text-primary me-1"></i></p>
+        <div class="d-flex align-items-center flex-fill">
+          <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
+            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
+            <div class="d-flex justify-content-start">
+              <div class="lender-rating ms-5 mt-2 d-flex">
+                <h6 class="medium-font my-auto">Borrower Rating : </h6>
+                <div class="d-flex medium-font ms-3">
+                  <!-- loop star here -->
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="d-flex justify-content-end">
-            <p class="text-muted mb-auto">15/01/2022</p>
+            <div class="d-flex justify-content-end">
+              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
+            </div>
           </div>
         </div>
-
-
+      </div>
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+        <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
+          <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image"
+            class="card-img-activity rounded">
+        </div>
+        <div class="d-flex align-items-center flex-fill">
+          <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
+            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
+            <div class="d-flex justify-content-start">
+              <div class="lender-rating ms-5 mt-2 d-flex">
+                <h6 class="medium-font my-auto">Borrower Rating : </h6>
+                <div class="d-flex medium-font ms-3">
+                  <!-- loop star here -->
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
+            </div>
+          </div>
+        </div>
       </div>
 
+    </div>
+
+    <!-- comments -->
+    <div id="comments" class="pt-5 px-4 mx-5 pb-5">
+      <!-- comment loop here -->
+      <div class="card mb-2 p-3">
+        <div class="card-body p-0">
+          <div class="d-flex">
+            <a href="" class="h6">Product Name</a>
+            <p class="my-auto ms-2 text-muted medium-font">12:00 PM</p>
+            <p class="my-auto ms-2 text-muted medium-font">12th July 2022</p>
+          </div>
+          <div class="comment-content pt-1">
+            <p style="font-size: 14px;" class="mb-0">
+              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card mb-2 p-3">
+        <div class="card-body p-0">
+          <div class="d-flex">
+            <a href="" class="h6">Product Name</a>
+            <p class="my-auto ms-2 text-muted medium-font">12:00 PM</p>
+            <p class="my-auto ms-2 text-muted medium-font">12th July 2022</p>
+          </div>
+          <div class="comment-content pt-1">
+            <p style="font-size: 14px;" class="mb-0">
+              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Rent Lists -->
+    <div id="rent-lists" class="pt-5 px-4 mx-5 pb-5">
+      <!-- Rent list loop here -->
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2">
+        <a href="#" class="h6 fw-bold mb-0 text-decoration-none text-dark">DELL OptiPlex 7490 All-in-One Monitor Black </a>
+        <p class="text-muted medium-font m-0"><em>15/01/2022</em></p>
+      </div>
     </div>
 
   </div>
