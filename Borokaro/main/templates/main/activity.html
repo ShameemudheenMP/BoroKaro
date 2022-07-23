@@ -18,7 +18,7 @@
     </div>
     <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-4">
       <input type='radio' value='4' name='actvity' id="act-menu-opt-4" onClick="changeColor(this.value)">
-      <label for="act-menu-opt-4">Rent Lists</label>
+      <label for="act-menu-opt-4">Rent History</label>
     </div>
   </div>
   <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
@@ -39,7 +39,7 @@
               </div>
               <div class="col-12 col-lg-2 d-flex flex-column align-items-start">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
-                <a href="#" id="" class="text-primary my-auto">{{request.borrower.name}}</a>
+                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary my-auto">{{request.borrower.name}}</a>
               </div>
               <div class="col-12 col-lg-5 d-flex align-items-center">
                 <h5 class="fw-bold mx-5">{{request.product.p_name}} </h5>
@@ -79,7 +79,7 @@
               <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
                 <div class="col-12 col-lg-2 d-flex align-items-center">
                   <!--ADD LINK TO PROFILE OF BORROWER-->
-                  <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
+                  <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
                 </div>
                 <div class="col-12 col-lg-5 d-flex align-items-center">
                   <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
@@ -124,7 +124,7 @@
             <div class="row bg-white rounded-2 p-3 mx-1">
               <div class="col-12 col-lg-2 d-flex align-items-center">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
-                <a href="#" id="" class="text-primary">{{request.borrower.name}}</a>
+                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
               </div>
 
               <div class="col-12 col-lg-6 d-flex align-items-center">
@@ -156,44 +156,6 @@
         </div>
       </div>
       <!-- borrow ratings loop here -->
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
-        <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
-          <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
-            class="rounded card-img-activity">
-        </div>
-        <div class="d-flex align-items-center flex-fill">
-          <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
-            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
-            <div class="d-flex justify-content-start">
-              <div class="lender-rating ms-5 mt-2 d-flex">
-                <h6 class="medium-font my-auto">Lender Rating : </h6>
-                <div class="d-flex medium-font ms-3">
-                  <!-- loop star here -->
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                </div>
-              </div>
-              <div class="lender-rating ms-5 mt-2 d-flex">
-                <h6 class="medium-font my-auto">Product Rating :</h6>
-                <div class="d-flex medium-font ms-3">
-                  <!-- loop star here -->
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-end">
-              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
           <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
@@ -271,83 +233,50 @@
           </div>
         </div>
       </div>
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
-        <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
-          <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image"
-            class="card-img-activity rounded">
-        </div>
-        <div class="d-flex align-items-center flex-fill">
-          <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
-            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
-            <div class="d-flex justify-content-start">
-              <div class="lender-rating ms-5 mt-2 d-flex">
-                <h6 class="medium-font my-auto">Borrower Rating : </h6>
-                <div class="d-flex medium-font ms-3">
-                  <!-- loop star here -->
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-end">
-              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
-            </div>
-          </div>
-        </div>
-      </div>
 
     </div>
 
     <!-- comments -->
     <div id="comments" class="pt-5 px-4 mx-5 pb-5">
       <!-- comment loop here -->
+      {% for comment in comments %}
       <div class="card mb-2 p-3">
         <div class="card-body p-0">
           <div class="d-flex">
-            <a href="" class="h6">Product Name</a>
-            <p class="my-auto ms-2 text-muted medium-font">12:00 PM</p>
-            <p class="my-auto ms-2 text-muted medium-font">12th July 2022</p>
+            <a href="/product/{{comment.product.id}}" class="h6">{{comment.product.p_name}}</a>
+            <p class="my-auto ms-2 text-muted medium-font">{{comment.time}}</p>
           </div>
           <div class="comment-content pt-1">
             <p style="font-size: 14px;" class="mb-0">
-              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-
+              {{comment.content}}
             </p>
           </div>
 
         </div>
       </div>
-
-      <div class="card mb-2 p-3">
-        <div class="card-body p-0">
-          <div class="d-flex">
-            <a href="" class="h6">Product Name</a>
-            <p class="my-auto ms-2 text-muted medium-font">12:00 PM</p>
-            <p class="my-auto ms-2 text-muted medium-font">12th July 2022</p>
-          </div>
-          <div class="comment-content pt-1">
-            <p style="font-size: 14px;" class="mb-0">
-              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-              bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-
-            </p>
-          </div>
-
-        </div>
-      </div>
+      {% endfor %}
     </div>
 
     <!-- Rent Lists -->
     <div id="rent-lists" class="pt-5 px-4 mx-5 pb-5">
       <!-- Rent list loop here -->
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2">
-        <a href="#" class="h6 fw-bold mb-0 text-decoration-none text-dark">DELL OptiPlex 7490 All-in-One Monitor Black </a>
-        <p class="text-muted medium-font m-0"><em>15/01/2022</em></p>
+      {% if not bacc %}
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+        <h6 class="my-auto">No rent history yet!</h6>
       </div>
+      {% else %}
+        {% for request in breqs %}
+        {% if request.status == 1 or request.status == 3 %}
+          <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2">
+            <a href="/product/{{request.product.id}}" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">{{request.product.p_name}} </a>
+            <div class="me-3 ms-3">
+            <a href="/ratelender/{{request.product.id}}" class="btn btn-primary small-btn shadow-lg">RATE PRODUCT</a>
+            </div>
+            <p class="text-muted medium-font m-0"><em>{{request.time}}</em></p>
+          </div>
+        {% endif %}
+        {% endfor %}
+      {% endif %}
     </div>
 
   </div>

@@ -355,3 +355,8 @@ header {
     font-size: small;
 }
 
+.small-btn {
+    width: 121px;
+    height: 31px;
+    font-size: 13px;
+}

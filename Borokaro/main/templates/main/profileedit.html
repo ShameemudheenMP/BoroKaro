@@ -9,50 +9,53 @@
             <img src="{% static 'Assets/ProfileIconLarge.png' %}" alt="ProfileIcon">
         </div>
 
-        <form style="width: 450px;">
+        <form method="POST" action="/profileedit/{{prof_user.id}}" style="width: 450px;">
+            {% csrf_token %}
             <div class="mb-2">
                 <label for="profileEditFormInput1" class="form-label fw-bold">Name</label>
-                <input type="text" class="form-control bg-transparent border border-dark" id="profileEditFormInput1" placeholder="" value="Joel">
+                <input name="name" type="text" class="form-control bg-transparent border border-dark" id="profileEditFormInput1" placeholder="{{prof_user.name}}" value="{{prof_user.name}}">
             </div>
             <div class="mb-2">
-                <label for="profileEditFormInput2" class="form-label fw-bold">E-Mail</label>
-                <input type="email" class="form-control bg-transparent border border-dark" id="profileEditFormInput2" placeholder="" value="joel@gmail.com">
+                <label for="profileEditFormInput2" class="form-label fw-bold">Email</label>
+                <input name="email" type="email" class="form-control bg-transparent border border-dark" id="profileEditFormInput2" placeholder="{{prof_user.email}}" value="{{prof_user.email}}">
             </div>
             <div class="mb-2">
                 <label for="profileEditFormInput3" class="form-label fw-bold">Phone No.</label>
-                <input type="tel" class="form-control bg-transparent border border-dark" id="profileEditFormInput3" placeholder="" value="+91 9487332141">
+                <input name="phoneno" type="tel" class="form-control bg-transparent border border-dark" id="profileEditFormInput3" placeholder="{{prof_user.phoneno}}" value="{{prof_user.phoneno}}">
             </div>
             <div class="mb-2">
                 <label for="profileEditFormInput4" class="form-label fw-bold">Password</label>
-                <input type="password" class="form-control bg-transparent border border-dark" id="profileEditFormInput4" placeholder="" value="password">
+                <input name="password" type="password" class="form-control bg-transparent border border-dark" id="profileEditFormInput4" placeholder="password" value="">
             </div>
             <div class="mb-2 d-flex justify-content-between">
                 <div style="width: 47%;">   
                     <label for="profileEditFormInput5" class="form-label fw-bold">State</label>
                     <select class="form-select w-100 bg-transparent border border-dark" id="profileEditFormInput5">
                         <option value="Kerala">Kerala</option>
-                        <option value="Kerala">Tamilnadu</option>
-                        <option value="Kerala">Karnataka</option>
-                        <option value="Kerala">Goa</option>
+                        <option value="Tamilnadu">Tamilnadu</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Goa">Goa</option>
                     </select>
                 </div>
                 <div style="width: 47%;">   
                     <label for="profileEditFormInput6" class="form-label fw-bold">District</label>
                     <select class="form-select w-100 bg-transparent border border-dark" id="profileEditFormInput6">
-                        <option value="Kerala">Malappuram</option>
-                        <option value="Kerala">Kollam</option>
-                        <option value="Kerala">Kottayam</option>
-                        <option value="Kerala">Alappuzha</option>
+                        <option value="Malappuram">Malappuram</option>
+                        <option value="Kollam">Kollam</option>
+                        <option value="Kottayam">Kottayam</option>
+                        <option value="Alappuzha">Alappuzha</option>
                     </select>
                 </div>
             </div>
             <div class="mb-2">
                 <label for="profileEditFormInput7" class="form-label fw-bold">Address</label>
-                <textarea  class="form-control bg-transparent border border-dark" id="profileEditFormInput7" name="profileEditAddress" rows="3">Address</textarea>
-                <a href="/actlend" class="text-dark fw-bold float-end">Activate Lender Acount</a>
+                <textarea  name="address" class="form-control bg-transparent border border-dark" id="profileEditFormInput7" name="profileEditAddress" rows="3" placeholder="{{prof_user.address}}" value="{{prof_user.address}}" maxlength="90"></textarea>
+                <button type="submit" class="btn btn-success float-start mt-2" style="width: 120px;">Submit</button>
             </div>
         </form>
-        
+        <div class="mb-2">
+            <a href="/actlend/{{prof_user.id}}" class="text-dark fw-bold float-end">Activate Lender Acount</a>
+        </div>
         
     </div>
   </div>

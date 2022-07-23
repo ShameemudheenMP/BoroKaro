@@ -17,92 +17,64 @@
             <option value="NewToOldest">New To Oldest</option>
             </select>
         </div>
-    </div>  
+    </div>
     
 
     <div class="container d-flex flex-wrap justify-content-between mt-4 pb-5">
-        <a href="/product/{{ product.id }}" class="product text-decoration-none">
+        {% if not empty %}
+        <div class="row bg-white rounded-2 p-3 mx-auto mb-2">
+            <h6 class="my-auto">You have not added any products to wishlist yet!</h6>
+        </div>
+        {% else %}
+        {% for wish in wishes %}
+        <div class="product text-decoration-none mb-5">
             <div class="card pt-2" style="width: 21rem;">
-                <div class="text-center  p-2">
-                    <img src="{% static 'Assets/ProductImages/Product1.jpg' %}" class="card-img" alt="Product1">
-                </div>
+                <a href="/product/{{ wish.product.id }}" class="text-center  p-2">
+                    <img src="{{wish.product.p_image1.url}}" class="card-img-home w-100" alt="Product1">
+                </a>
                 <div class="card-body  d-flex flex-column">
                     <div class="topdisp">
+                        {% if not wish.product.status %}
                             <h6 class="available fw-bold float-start">Available Now</h6>
-                            <!-- <h6 class="available fw-bold float-start" style="color:red">Not Available</h6> -->
+                        {% else %}
+                            <h6 class="available fw-bold float-start" style="color:red">Not Available</h6>
+                        {% endif %}
                         <div class="star-rating float-end text-center">
                             <div class="rating-value float-start ms-2">
-                                <p>4</p>
+                                <p>{{ wish.product.rating }}</p>
                             </div>
                             <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
                         </div>
                     </div>
 
-                    <h5 class="card-title prod-name fw-bold mt-2 text-dark">Vaccum Cleaner</h5>
-                    <h6 class="fw-bold text-dark">Location</h6>
+                    <h5 class="card-title prod-name fw-bold mt-2 text-dark">{{ wish.product.p_name }}</h5>
+                    <h6 class="fw-bold text-dark">{{wish.product.user.district}},{{wish.product.user.state}}</h6>
                     <div class="mt-3 text-dark">
-                        <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> 200 /day</h6>
-                        <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
+                        <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> {{ wish.product.p_rate }} /day</h6>
+                        {% if wish.product.id in prodids%}
+                                <form method="post" action="/unwish/{{ wish.product.id }}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" id="" name="wishpageb2" value="20">
+                                <button type="submit" class="float-end btn btn-link" tabindex="-1" role="button" aria-disabled="true">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                                </form>
+                        {% else %}
+                                <form method="post" action="/wishlist/{{ wish.product.id }}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" id="" name="wishpageb1" value="10">
+                                <button type="submit" class="float-end btn btn-link" tabindex="-1" role="button" aria-disabled="true">
+                                    <i class="bi bi-heart text-dark"></i>
+                                </button>
+                                </form>
+                        {% endif %}
                     </div>
                 </div>
 
             </div>
-        </a>
-        <a href="/product/{{ product.id }}" class="product text-decoration-none">
-            <div class="card pt-2" style="width: 21rem;">
-                <div class="text-center  p-2">
-                    <img src="{% static 'Assets/ProductImages/Product1.jpg' %}" class="card-img" alt="Product1">
-                </div>
-                <div class="card-body  d-flex flex-column">
-                    <div class="topdisp">
-                            <h6 class="available fw-bold float-start">Available Now</h6>
-                            <!-- <h6 class="available fw-bold float-start" style="color:red">Not Available</h6> -->
-                        <div class="star-rating float-end text-center">
-                            <div class="rating-value float-start ms-2">
-                                <p>4</p>
-                            </div>
-                            <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
-                        </div>
-                    </div>
-
-                    <h5 class="card-title prod-name fw-bold mt-2 text-dark">Vaccum Cleaner</h5>
-                    <h6 class="fw-bold text-dark">Location</h6>
-                    <div class="mt-3 text-dark">
-                        <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> 200 /day</h6>
-                        <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
-                    </div>
-                </div>
-
-            </div>
-        </a>
-        <a href="/product/{{ product.id }}" class="product text-decoration-none">
-            <div class="card pt-2" style="width: 21rem;">
-                <div class="text-center  p-2">
-                    <img src="{% static 'Assets/ProductImages/Product1.jpg' %}" class="card-img" alt="Product1">
-                </div>
-                <div class="card-body  d-flex flex-column">
-                    <div class="topdisp">
-                            <h6 class="available fw-bold float-start">Available Now</h6>
-                            <!-- <h6 class="available fw-bold float-start" style="color:red">Not Available</h6> -->
-                        <div class="star-rating float-end text-center">
-                            <div class="rating-value float-start ms-2">
-                                <p>4</p>
-                            </div>
-                            <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
-                        </div>
-                    </div>
-
-                    <h5 class="card-title prod-name fw-bold mt-2 text-dark">Vaccum Cleaner</h5>
-                    <h6 class="fw-bold text-dark">Location</h6>
-                    <div class="mt-3 text-dark">
-                        <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> 200 /day</h6>
-                        <img src="{% static 'Assets/heart-icon.png' %}" class="float-end" alt="whichlisticond">
-                    </div>
-                </div>
-
-            </div>
-        </a>
-
+        </div>
+        {% endfor %}
+        {% endif %}
     </div>
 
 </div>

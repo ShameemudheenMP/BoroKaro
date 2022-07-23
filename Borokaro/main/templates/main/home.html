@@ -41,8 +41,7 @@
     </div>
     <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
         <div class="heading ps-4 mt-4">
-            <!-- PRODUCT LIST ENN VERUTHE KODUTHATHA, PINNE ORU DIVASAM PRODUCTS NEAR YOU AAKKENAM-->
-            <h2 class="main-heading">PRODUCT LIST <img class="prod-icon" src="{% static 'Assets/product-icon.png' %}"
+            <h2 class="main-heading">PRODUCTS NEAR YOU <img class="prod-icon" src="{% static 'Assets/product-icon.png' %}"
                     alt="prod-icon"></h2>
         </div>
 
@@ -51,11 +50,7 @@
             <div class="product text-decoration-none mb-5">
                 <div class="card pt-2" style="width: 21rem;">
                     <a href="/product/{{ product.id }}" class="text-center p-2">
-<<<<<<< HEAD
                         <img src="{{ product.p_image1.url }}" class="card-img-home w-100" alt="Product1">
-=======
-                        <img src="{{ product.p_image1.url }}" class="card-img-home" alt="Product1">
->>>>>>> main
                     </a>
                     <div class="card-body d-flex flex-column">
                         <div class="topdisp">
@@ -72,10 +67,9 @@
                             </div>
                         </div>
                         <h5 class="card-title prod-name fw-bold mt-2 text-dark">{{ product.p_name }}</h5>
-                        <h6 class="fw-bold text-dark">Location</h6>
+                        <h6 class="fw-bold text-dark">{{product.user.district}},{{product.user.state}}</h6>
                         <div class="mt-3 text-dark">
-                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> {{ product.p_rate }}/day</h6>
-<<<<<<< HEAD
+                            <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> {{ product.p_rate }} /day</h6>
                             {% if product.id in prodids%}
                                 <form method="post" action="/unwish/{{ product.id }}" enctype="multipart/form-data">
                                 {% csrf_token %}
@@ -83,9 +77,6 @@
                                 <button type="submit" class="float-end btn btn-link" tabindex="-1" role="button" aria-disabled="true">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
-                                <!-- <a href="/unwish/{{ product.id }}" class="float-end bg-white"> -->
-                                <!-- <i class="bi bi-heart-fill text-danger"></i> -->
-                                <!-- </a> -->
                                 </form>
                             {% else %}
                                 <form method="post" action="/wishlist/{{ product.id }}" enctype="multipart/form-data">
@@ -94,14 +85,8 @@
                                 <button type="submit" class="float-end btn btn-link" tabindex="-1" role="button" aria-disabled="true">
                                     <i class="bi bi-heart text-dark"></i>
                                 </button>
-                                <!-- <a href="/unwish/{{ product.id }}" class="float-end bg-white"> -->
-                                <!-- <i class="bi bi-heart-fill text-danger"></i> -->
-                                <!-- </a> -->
                                 </form>
                             {% endif %}
-=======
-                            <img src="{% static 'Assets/heart-icon.png' %}" class="float-end heart-rating" alt="whichlisticond">
->>>>>>> main
                         </div>
                     </div>
                 </div>

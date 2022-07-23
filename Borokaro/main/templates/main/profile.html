@@ -47,18 +47,18 @@
                     {% endfor %}
                 </div>
             </div>
-            <!-- this is when view other's profile -->
+            <!-- this is when he/she view other profiles -->
             {% if prof_user.id != userid %}
             <div class="d-flex align-items-center">
-                <a class="btn btn-sm btn-danger" href="/reportuser/{{ product.user.id }}">REPORT USER</a>
+                <a class="btn btn-sm btn-danger" href="/reportuser/{{ prof_user.id }}">REPORT USER</a>
             </div>
             {% endif %}
             
         </div>
-        <!-- this is when view his own profile -->
+        <!-- this is when he/she view his/her own profile -->
         {% if prof_user.id == userid %}
         <div class="d-flex justify-content-center">
-            <a href="/profileedit" class="btn btn-primary" >Edit Profile</a>
+            <a href="/profileedit/{{ prof_user.id }}" class="btn btn-primary" >Edit Profile</a>
         </div>
         {% endif %}
         

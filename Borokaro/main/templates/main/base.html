@@ -33,7 +33,7 @@
             <div class="float-start pt-2 pe-3">
               <a href="/activity" class="link-light me-4"> YOUR ACTIVITY </a>
 
-              <a href="/wishlist" class="link-light me-4"> WISHLIST </a>
+              <a href="/viewwish" class="link-light me-4"> WISHLIST </a>
               <a href="/messages" class="link-light me-4"> MESSAGES </a>
               <a href="/lend" class="text-decoration-none">
                 <button class="log-reg-btn fw-bold me-4 link-primary" id="">
@@ -47,7 +47,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
                 <li>
-                  <a class="dropdown-item" href="/profile">{{user.name}}</a>
+                  <a class="dropdown-item" href="/profile/{{user.id}}">{{user.name}}</a>
                 </li>
                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
               </ul>

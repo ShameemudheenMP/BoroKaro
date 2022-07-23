@@ -93,6 +93,7 @@ class Product(models.Model):
     date =  models.DateField(auto_now=False, auto_now_add=False)
     status = models.IntegerField(default=0) #0 for available, 1 for not available
     rating = models.IntegerField(default=0)
+    rating_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
 # class ProdImage(models.Model):
@@ -102,7 +103,7 @@ class Product(models.Model):
 class PReq(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd
+    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd, 4 for product_rated
     days = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     time = models.CharField(max_length=20,default=default_start_time)
@@ -131,24 +132,42 @@ class Wishlist(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+class BorrowerRating(models.Model):
+    lender = models.ForeignKey(User, on_delete=models.CASCADE)
+    borrower_id = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    time = models.CharField(max_length=20,default=default_start_time)
+
+class LenderRating(models.Model):
+    borrower = models.ForeignKey(User, on_delete=models.CASCADE)
+    lender_id = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    time = models.CharField(max_length=20,default=default_start_time)
+
+class ProductRating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+#login required for all pages other than home page - done
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
 #product recvd nekki kazhinjaal pinne aa button kanikkaruth activity page il - DONE
 #disable borrow button (not remove) if product is not available - DONE
 #user should not be able to request the same product more than once if the existing request is in pending list - DONE
 #DAYS VECHULLA REQ - DONE
-#COMMENTS - DONE
+#COMMENTS in product page - DONE
 #REPORT COMMENTS - DONE
 #REPORT USER - DONE
 #comment section and product lender details il ninnu users ne click cheythu profile view cheyyaan pattanam - done
-#profile page - done (some error in district info) & edit profile
+#profile page - done & edit profile - done partially (state,district not fixed)
 #only activated lenders can lend products - done
 #WISHLIST - done
-#OCR
-#rent history
+#rent history - done + rent history il ninnu rate product option
+#comments in activity - done
 #RATINGS
-#SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
 #ratings kanikkumbo athinte koode user count bracket il kanikkenam
+#OCR
+#SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
 #a user should not access another user's activity or lend page
-#login required for all pages other than home page
