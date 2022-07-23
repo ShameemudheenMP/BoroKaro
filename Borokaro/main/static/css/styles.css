@@ -359,3 +359,12 @@ header {
     height: 31px;
     font-size: 13px;
 }
+
+.day-sticker {
+    width: 80px; 
+    height: 30px; 
+    background-color: #C8D5FF;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}

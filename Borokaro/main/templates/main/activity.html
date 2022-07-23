@@ -31,24 +31,27 @@
         <h6 class="my-auto">No Pending Requests</h6>
       </div>
       {% else %}
+        <!-- request loop here -->
         {% for request in requests %}
           {% if not request.status %}
-            <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
-              <div class="col-12 d-flex justify-content-start" style="width: 60px; height: 20px; background-color: #C8D5FF;">
-                <h6>{{request.days}} days</h6>
+            <div class="row bg-white rounded-2 p-2 mx-1 mb-2" style="height: 130px">
+              <div class="col-12 d-flex justify-content-start">
+                <div class="card rounded-1 day-sticker p-1">
+                    <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font"><i class="bi bi-stopwatch-fill my-auto me-2"></i>{{request.days}} days</p>
+                </div>
               </div>
               <div class="col-12 col-lg-2 d-flex flex-column align-items-start">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
-                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary my-auto">{{request.borrower.name}}</a>
+                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary my-auto" style="font-size: 14px;">{{request.borrower.name}}</a>
               </div>
               <div class="col-12 col-lg-5 d-flex align-items-center">
-                <h5 class="fw-bold mx-5">{{request.product.p_name}} </h5>
+                <a class="h6 fw-bold mx-5 text-decoration-none text-dark">{{request.product.p_name}} </a>
               </div>
               <div class="col-12 col-lg-5 d-flex flex-column mt-3">
                 <div class="d-flex justify-content-center align-items-center">
-                  <a class="btn btn-sm btn-primary me-3" href="#" role="button">CHAT</a>
-                  <a class="btn btn-sm btn-success me-3" href="/accept/{{ request.id }}" role="button">ACCEPT</a>
-                  <a class="btn btn-sm btn-danger me-3" href="/decline/{{ request.id }}" role="button">DECLINE</a>
+                  <a class="btn btn-sm btn-primary me-3 medium-font" href="#" role="button">CHAT</a>
+                  <a class="btn btn-sm btn-success me-3 medium-font" href="/accept/{{ request.id }}" role="button">ACCEPT</a>
+                  <a class="btn btn-sm btn-danger me-3 medium-font" href="/decline/{{ request.id }}" role="button">DECLINE</a>
                 </div>
                 <!-- time and date -->
                 <div class="d-flex justify-content-end mt-3" style="height: 25px;">
@@ -76,7 +79,7 @@
         {% for request in requests %}
           {% if request.status %}
             {% if request.status != 2 %}
-              <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+              <div class="row bg-white rounded-2 p-2 mx-1 mb-2" style="height: 100px">
                 <div class="col-12 col-lg-2 d-flex align-items-center">
                   <!--ADD LINK TO PROFILE OF BORROWER-->
                   <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
@@ -98,7 +101,7 @@
                   </div>
                   <!-- time and date -->
                   <div class="d-flex justify-content-end mt-3" style="height: 25px;">
-                    <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>{{request.time}}</em></p>
+                    <p class="me-2 text-secondary my-auto mb-0" style="font-size: 14px;"><em>{{request.time}}</em></p>
                   </div>
                 </div>
               </div>
@@ -121,7 +124,7 @@
       {% else %}
         {% for request in requests %}
           {% if request.status == 2 %}
-            <div class="row bg-white rounded-2 p-3 mx-1">
+            <div class="row bg-white rounded-2 p-2 mx-1" style="height: 100px">
               <div class="col-12 col-lg-2 d-flex align-items-center">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
                 <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
