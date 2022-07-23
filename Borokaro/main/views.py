@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 import datetime
 from django.urls import reverse
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
@@ -95,7 +96,7 @@ def product(request, idn):
 @login_required(login_url='/login')
 def lend(request):
     if request.user.u_type == 0:
-        return render(request, 'main/actlend.html')
+        return redirect(reverse('actlend', kwargs={"idn": request.user.id}))
     if request.method == 'POST':
         prod=Product()
         prod.p_name=request.POST.get('name')
@@ -120,10 +121,40 @@ def lend(request):
     return render(request, 'main/lend.html')
 
 @login_required(login_url='/login')
+def actlend(request,idn):
+    if request.method == 'POST':
+        prod=Product()
+        prod.p_name=request.POST.get('name')
+        prod.p_rate=request.POST.get('rate')
+        prod.p_desc=request.POST.get('desc')
+        p_date=request.POST.get('date')
+        mon = int(p_date[0:2])
+        yr = int(p_date[3:7])
+        prod.date = datetime.date(yr, mon, 1)
+        prod.user = request.user
+        if len(request.FILES) != 0:
+            prod.p_image1=request.FILES['file1']
+            if len(request.FILES) == 2:
+                prod.p_image2=request.FILES['file2']
+            if len(request.FILES) == 3:
+                prod.p_image2=request.FILES['file2']
+                prod.p_image3=request.FILES['file3']
+        prod.save()
+        return redirect('home')
+    else:
+        pass
+    return render(request, 'main/actlend.html')
+
+@login_required(login_url='/login')
 def activity(request):
     reqs=[]
+    breqs=[]#borrower inu rent history nokkaanulla reqs
     requests = PReq.objects.all()
     present_user = request.user
+    coms = Comment.objects.filter(user = present_user).order_by('-created_at')
+    com=0
+    if coms:
+        com=1
     my_products = Product.objects.filter(user = present_user)
     for pro in my_products:
         for req in requests:
@@ -131,8 +162,13 @@ def activity(request):
                 reqs.append(req)
     if reqs:
         reqs.sort(reverse=True,key=myFunc)
-    #print(reqs[0].created_at)
-    #print(type(reqs[0].created_at))
+    breq = PReq.objects.filter(borrower = present_user,status__in=['1','3'])
+    for req in breq:
+        breqs.append(req)
+    bacc=0
+    if breqs:
+        bacc=1
+        breqs.sort(reverse=True,key=myFunc)
     pend = 0
     acc = 0
     dec = 0
@@ -143,7 +179,8 @@ def activity(request):
             acc = 1
         elif req.status == 2:
             dec = 1
-    return render(request, 'main/activity.html',{'requests':reqs, 'pending':pend, 'accepted':acc, 'declined':dec})
+    return render(request, 'main/activity.html',{'requests':reqs, 
+    'breqs':breqs, 'bacc':bacc, 'pending':pend, 'accepted':acc, 'declined':dec,'comments':coms,'com':com})
 
 @login_required(login_url='/login')
 def borrow(request, idn):
@@ -271,6 +308,17 @@ def wishlist(request,idn):
                 wish.user = request.user
                 wish.save()
                 return redirect('home')
+        test3 = request.POST.get('wishpageb1')
+        if test3 == '10':
+            try:
+                wish = Wishlist.objects.get(user=request.user,product=prod)
+                return redirect('viewwish')
+            except:
+                wish = Wishlist()
+                wish.product = prod
+                wish.user = request.user
+                wish.save()
+                return redirect('viewwish')
     else:
         pass
 
@@ -286,8 +334,21 @@ def unwish(request,idn):
         if test2 == '20':
             Wishlist.objects.filter(user=request.user,product=prod).delete()
             return redirect('home')
+        test3 = request.POST.get('wishpageb2')
+        if test3 == '20':
+            Wishlist.objects.filter(user=request.user,product=prod).delete()
+            return redirect('viewwish')
     else:
         pass
+
+@login_required(login_url='/login')
+def viewwish(request):
+    wish = Wishlist.objects.filter(user=request.user)
+    prodids = list(Wishlist.objects.filter(user=request.user).values_list('product', flat=True).order_by('id'))
+    empty = 0
+    if wish:
+        empty = 1
+    return render(request, 'main/wishlist.html',{'wishes':wish,'empty':empty,'prodids':prodids})
 
 #profile view
 @login_required(login_url='/login')
@@ -314,8 +375,28 @@ def profile(request,idn):
 
 #profile edit
 @login_required(login_url='/login')
-def profileedit(request):
-    return render(request, 'main/profileedit.html')
+def profileedit(request,idn):
+    prof_user = User.objects.get(id=idn)
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        phoneno=request.POST.get('phoneno')
+        address=request.POST.get('address')
+        #state=request.POST.get('state')
+        #district=request.POST.get('district')
+        if password == '':
+            User.objects.filter(id=idn).update(name=name,email=email,phoneno=phoneno,address=address)
+        else:
+            passwordcopy=password
+            password=make_password(password,hasher='default')
+            User.objects.filter(id=idn).update(name=name,email=email,password=password,phoneno=phoneno,address=address)
+            user = authenticate(request, email=email, password=passwordcopy)
+            login(request, user)
+        return redirect(reverse('profileedit', kwargs={"idn": idn}))
+    else:
+        pass
+    return render(request, 'main/profileedit.html',{'prof_user':prof_user})
 
 #add comment in product page or via product rating page
 @login_required(login_url='/login')
@@ -335,10 +416,10 @@ def comment(request,idn):
 #rating Section :
 #Borrower Rating
 @login_required(login_url='/login')
-def rateborrower(request):
+def rateborrower(request,idn):
     return render(request, 'main/rateborrower.html')
 
 #Lender Rating
 @login_required(login_url='/login')
-def ratelender(request):
+def ratelender(request,idn):
     return render(request, 'main/ratelender.html')
