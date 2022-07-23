@@ -89,9 +89,12 @@
                     {% if request.status == 1 %}
                       <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.id }}" role="button">PRODUCT
                         RECEIVED</a>
+                    {% elif request.status == 3 or request.status == 5 %}
+                      <!-- enable rate borrower -->
+                      <a class="btn btn-sm btn-success me-3" href="/rateborrower/{{request.id}}">RATE BORROWER</a>
                     {% else %}
-                      <!-- rate borrower -->
-                      <a class="btn btn-sm btn-success me-3" href="/rateborrower">RATE BORROWER</a>
+                      <!-- disable rate borrower -->
+                      <a class="btn btn-sm btn-secondary me-3" href="">RATE BORROWER</a>
                     {% endif %}
                     <a class="btn btn-danger btn-sm me-3" href="/reportuser/{{ request.borrower.id }}" role="button">REPORT
                       USER</a>
@@ -266,14 +269,20 @@
       </div>
       {% else %}
         {% for request in breqs %}
-        {% if request.status == 1 or request.status == 3 %}
+        {% if request.status == 1 or request.status == 3 or request.status == 4 or request.status == 5 or request.status == 6%}
         <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2 shadow-sm">
             <a href="/product/{{request.product.id}}" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">{{request.product.p_name}} </a>
+            {% if request.status == 1 or request.status == 3 or request.status == 4 %}
             <div class="me-3 ms-3">
             <a href="/ratelender/{{request.product.id}}" class="btn btn-primary small-btn shadow">RATE PRODUCT</a>
             </div>
+            {% else %}
+            <div class="me-3 ms-3">
+            <a href="" class="btn btn-secondary small-btn shadow">RATE PRODUCT</a>
+            </div>
+            {% endif %}
             <p class="text-muted medium-font m-0"><em>{{request.time}}</em></p>
-          </div>
+        </div>
         {% endif %}
         {% endfor %}
       {% endif %}

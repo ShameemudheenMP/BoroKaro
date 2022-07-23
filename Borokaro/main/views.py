@@ -18,6 +18,15 @@ def myFunc(e):
 
 def home(request):
     products = Product.objects.all()
+    for product in products:
+        prod_ratings = list(ProductRating.objects.filter(product=product).values_list('val', flat=True).order_by('-created_at'))
+        rating_count = len(prod_ratings)
+        if rating_count:
+            product.rating = round(sum(prod_ratings)/rating_count)
+        else:
+            product.rating =  0
+        product.rating_count = rating_count
+        product.save()
     try:
         prodids = list(Wishlist.objects.filter(user=request.user).values_list('product', flat=True).order_by('id'))
         return render(request, 'main/home.html',{'products':products,'prodids':prodids})
@@ -162,7 +171,7 @@ def activity(request):
                 reqs.append(req)
     if reqs:
         reqs.sort(reverse=True,key=myFunc)
-    breq = PReq.objects.filter(borrower = present_user,status__in=['1','3'])
+    breq = PReq.objects.filter(borrower = present_user,status__in=['1','3','4','5','6'])
     for req in breq:
         breqs.append(req)
     bacc=0
@@ -175,7 +184,7 @@ def activity(request):
     for req in reqs:
         if req.status == 0:
             pend = 1
-        elif req.status == 1 or req.status == 3:
+        elif req.status == 1 or req.status == 3 or req.status == 5 or req.status == 6:
             acc = 1
         elif req.status == 2:
             dec = 1
@@ -354,6 +363,21 @@ def viewwish(request):
 @login_required(login_url='/login')
 def profile(request,idn):
     prof_user = User.objects.get(id=idn)
+    len_ratings = list(LenderRating.objects.filter(lender_id=idn).values_list('val', flat=True).order_by('id'))
+    count2 = len(len_ratings)
+    if count2:
+        len_rate = round(sum(len_ratings)/count2)
+    else:
+        len_rate = 0
+    prof_user.len_rate = len_rate
+    bor_ratings = list(BorrowerRating.objects.filter(borrower_id=idn).values_list('val', flat=True).order_by('id'))
+    count1 = len(bor_ratings)
+    if count1:
+        bor_rate = round(sum(bor_ratings)/count1)
+    else:
+        bor_rate = 0
+    prof_user.bor_rate = bor_rate
+    prof_user.save()
     userid = request.user.id
     l = int(prof_user.len_rate)
     b = int(prof_user.bor_rate)
@@ -371,7 +395,8 @@ def profile(request,idn):
         lex.append(str(i))
     for i in range(bx):
         box.append(str(i))
-    return render(request, 'main/profile.html',{'userid':userid,'prof_user':prof_user,'l':le,'b':bo,'lx':lex,'bx':box})
+    return render(request, 'main/profile.html',{'userid':userid,'prof_user':prof_user,'l':le,'b':bo,'lx':lex,'bx':box,
+    'count1':count1,'count2':count2})
 
 #profile edit
 @login_required(login_url='/login')
@@ -417,9 +442,57 @@ def comment(request,idn):
 #Borrower Rating
 @login_required(login_url='/login')
 def rateborrower(request,idn):
-    return render(request, 'main/rateborrower.html')
+    req = PReq.objects.get(id=idn)
+    if request.method == 'POST':
+        bor_rate = int(request.POST.get('borrowerRating'))
+        if bor_rate >=1 and bor_rate<=5:
+            bor_r = BorrowerRating()
+            bor_r.lender = request.user
+            bor_r.borrower_id = req.borrower.id
+            bor_r.val = bor_rate
+            bor_r.save()
+            if req.status == 3:
+                req.status = 4
+            elif req.status == 5:
+                req.status = 6
+            req.save()
+        return redirect('activity')
+    else:
+        return render(request, 'main/rateborrower.html', {'request':req})
 
 #Lender Rating
 @login_required(login_url='/login')
 def ratelender(request,idn):
-    return render(request, 'main/ratelender.html')
+    product = Product.objects.get(id=idn)
+    if request.method == 'POST':
+        len_rate = int(request.POST.get('lenderRating'))
+        if len_rate >=1 and len_rate <=5:
+            len_r = LenderRating()
+            len_r.borrower = request.user
+            len_r.lender_id = product.user.id
+            len_r.val = len_rate
+            len_r.save()
+            reqs = PReq.objects.filter(borrower = request.user,  product = product, status__in=['1','3','4'])
+            req = reqs.latest('created_at')
+            if req.status == 1 or req.status == 3:
+                req.status = 5
+            elif req.status == 4:
+                req.status = 6
+            req.save()
+        prod_rate = int(request.POST.get('productRating'))
+        if prod_rate >=1 and prod_rate <=5:
+            prod_r = ProductRating()
+            prod_r.product = product
+            prod_r.user = request.user
+            prod_r.val = prod_rate
+            prod_r.save()
+        comment = request.POST.get('comment')
+        if comment:
+            com = Comment()
+            com.product = Product.objects.get(id=idn)
+            com.user = request.user
+            com.content = comment
+            com.save()
+        return redirect('activity')
+    else:
+        return render(request, 'main/ratelender.html',{'product':product})

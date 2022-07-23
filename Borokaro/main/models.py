@@ -103,7 +103,8 @@ class Product(models.Model):
 class PReq(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd, 4 for product_rated
+    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd, 4 for borrower_rated_by_lender,
+    #5 for lender_rated_by_borrower, 6 for both lender and borrower rated each other
     days = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     time = models.CharField(max_length=20,default=default_start_time)
@@ -132,21 +133,26 @@ class Wishlist(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+#oru lender oru borrower ine rate cheyyaan vendi ulla table
 class BorrowerRating(models.Model):
     lender = models.ForeignKey(User, on_delete=models.CASCADE)
     borrower_id = models.IntegerField(default=0)
+    val = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     time = models.CharField(max_length=20,default=default_start_time)
 
+#oru borrower oru lender ine rate cheyyaan vendi ulla table
 class LenderRating(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     lender_id = models.IntegerField(default=0)
+    val = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     time = models.CharField(max_length=20,default=default_start_time)
 
 class ProductRating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    val = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
 #login required for all pages other than home page - done
@@ -162,10 +168,13 @@ class ProductRating(models.Model):
 #profile page - done & edit profile - done partially (state,district not fixed)
 #only activated lenders can lend products - done
 #WISHLIST - done
-#rent history - done + rent history il ninnu rate product option
+#rent history - done + rent history il ninnu rate product option - done
 #comments in activity - done
-#RATINGS
+#RATINGS - done
+#profile page visit cheyyumbo borrower_rating and lender_rating update aakkenam - done
+#home page visit cheyyumbo product inte recent ratings update aakkenam
 #ratings kanikkumbo athinte koode user count bracket il kanikkenam
+#sign up page il state and districts dynamic aakkenam + edit profile page il um
 #OCR
 #SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
 #CHAT
