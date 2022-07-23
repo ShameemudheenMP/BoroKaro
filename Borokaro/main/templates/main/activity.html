@@ -27,13 +27,13 @@
       <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
       <!-- to display no pending requests if there is no pending requests -->
       {% if not pending %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2  shadow-sm">
         <h6 class="my-auto">No Pending Requests</h6>
       </div>
       {% else %}
         {% for request in requests %}
           {% if not request.status %}
-            <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+            <div class="row bg-white rounded-2 p-3 mx-1 mb-2  shadow-sm">
               <div class="col-12 d-flex justify-content-start" style="width: 60px; height: 20px; background-color: #C8D5FF;">
                 <h6>{{request.days}} days</h6>
               </div>
@@ -69,14 +69,14 @@
       </div>
       <!-- to display no accepted requests if there is no accepted requests -->
       {% if not accepted %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2  shadow-sm">
         <h6 class="my-auto">No Accepted Requests</h6>
       </div>
       {% else %}
         {% for request in requests %}
           {% if request.status %}
             {% if request.status != 2 %}
-              <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+              <div class="row bg-white rounded-2 p-3 mx-1 mb-2  shadow-sm">
                 <div class="col-12 col-lg-2 d-flex align-items-center">
                   <!--ADD LINK TO PROFILE OF BORROWER-->
                   <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
@@ -115,13 +115,13 @@
       </div>
       <!-- to display no declined requests if there is no declined requests -->
       {% if not declined %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow-sm">
         <h6 class="my-auto">No Declined Requests</h6>
       </div>
       {% else %}
         {% for request in requests %}
           {% if request.status == 2 %}
-            <div class="row bg-white rounded-2 p-3 mx-1">
+            <div class="row bg-white rounded-2 p-3 mx-1 shadow-sm">
               <div class="col-12 col-lg-2 d-flex align-items-center">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
                 <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
@@ -156,7 +156,7 @@
         </div>
       </div>
       <!-- borrow ratings loop here -->
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
           <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
             class="rounded card-img-activity">
@@ -206,7 +206,7 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
           <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image"
             class="card-img-activity rounded">
@@ -240,7 +240,7 @@
     <div id="comments" class="pt-5 px-4 mx-5 pb-5">
       <!-- comment loop here -->
       {% for comment in comments %}
-      <div class="card mb-2 p-3">
+      <div class="card mb-2 p-3 shadow-sm">
         <div class="card-body p-0">
           <div class="d-flex">
             <a href="/product/{{comment.product.id}}" class="h6">{{comment.product.p_name}}</a>
@@ -267,10 +267,10 @@
       {% else %}
         {% for request in breqs %}
         {% if request.status == 1 or request.status == 3 %}
-          <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2">
+        <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2 shadow-sm">
             <a href="/product/{{request.product.id}}" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">{{request.product.p_name}} </a>
             <div class="me-3 ms-3">
-            <a href="/ratelender/{{request.product.id}}" class="btn btn-primary small-btn shadow-lg">RATE PRODUCT</a>
+            <a href="/ratelender/{{request.product.id}}" class="btn btn-primary small-btn shadow">RATE PRODUCT</a>
             </div>
             <p class="text-muted medium-font m-0"><em>{{request.time}}</em></p>
           </div>
