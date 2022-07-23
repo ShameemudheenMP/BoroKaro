@@ -127,8 +127,7 @@ header {
 .main-heading {
     font-family: 'Poppins';
     font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
+    /* font-weight: 700; */
     line-height: 54px;
     letter-spacing: 0.075em;
 
@@ -355,3 +354,8 @@ header {
     font-size: small;
 }
 
+.small-btn {
+    width: 121px;
+    height: 31px;
+    font-size: 13px;
+}

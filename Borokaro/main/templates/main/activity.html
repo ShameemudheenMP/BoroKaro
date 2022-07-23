@@ -27,7 +27,7 @@
       <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
       <!-- to display no pending requests if there is no pending requests -->
       {% if not pending %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow-sm">
         <h6 class="my-auto">No Pending Requests</h6>
       </div>
       {% else %}
@@ -69,7 +69,7 @@
       </div>
       <!-- to display no accepted requests if there is no accepted requests -->
       {% if not accepted %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow-sm">
         <h6 class="my-auto">No Accepted Requests</h6>
       </div>
       {% else %}
@@ -156,7 +156,7 @@
         </div>
       </div>
       <!-- borrow ratings loop here -->
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
           <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
             class="rounded card-img-activity">
@@ -194,7 +194,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
           <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
             class="rounded card-img-activity">
@@ -244,7 +244,7 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
           <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image"
             class="card-img-activity rounded">
@@ -271,7 +271,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2" style="height: 120px">
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
           <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image"
             class="card-img-activity rounded">
@@ -304,7 +304,7 @@
     <!-- comments -->
     <div id="comments" class="pt-5 px-4 mx-5 pb-5">
       <!-- comment loop here -->
-      <div class="card mb-2 p-3">
+      <div class="card mb-2 p-3 shadow-sm">
         <div class="card-body p-0">
           <div class="d-flex">
             <a href="" class="h6">Product Name</a>
@@ -322,7 +322,7 @@
         </div>
       </div>
 
-      <div class="card mb-2 p-3">
+      <div class="card mb-2 p-3 shadow-sm">
         <div class="card-body p-0">
           <div class="d-flex">
             <a href="" class="h6">Product Name</a>
@@ -344,8 +344,11 @@
     <!-- Rent Lists -->
     <div id="rent-lists" class="pt-5 px-4 mx-5 pb-5">
       <!-- Rent list loop here -->
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2">
-        <a href="#" class="h6 fw-bold mb-0 text-decoration-none text-dark">DELL OptiPlex 7490 All-in-One Monitor Black </a>
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2 shadow-sm">
+        <a href="#" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">DELL OptiPlex 7490 All-in-One Monitor Black DELL OptiPlex 7490 All-in-One Monitor Black DELL OptiPlex 7490 All-in-One Monitor Black </a>
+        <div class="me-3 ms-3">
+          <a href="#" class="btn btn-primary small-btn shadow">RATE PRODUCT</a>
+        </div>
         <p class="text-muted medium-font m-0"><em>15/01/2022</em></p>
       </div>
     </div>
