@@ -16,3 +16,7 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Product)
 admin.site.register(PReq)
+admin.site.register(Comment)
+admin.site.register(ReportComment)
+admin.site.register(ReportUser)
+admin.site.register(Wishlist)

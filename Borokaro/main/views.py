@@ -7,22 +7,31 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 import datetime
+from django.urls import reverse
 
 # Create your views here.
 
+#sort by date function
+def myFunc(e):
+    return e.created_at
+
 def home(request):
     products = Product.objects.all()
-    return render(request, 'main/home.html',{'products':products})
+    try:
+        prodids = list(Wishlist.objects.filter(user=request.user).values_list('product', flat=True).order_by('id'))
+        return render(request, 'main/home.html',{'products':products,'prodids':prodids})
+    except:
+        return render(request, 'main/home.html',{'products':products})
 
 def sign_up(request):
     if request.method == 'POST':
         name=request.POST.get('name')
         email=request.POST.get('email')
         password=request.POST.get('password')
-        phoneno=request.POST.get('phone')
+        phoneno=request.POST.get('phoneno')
         state=request.POST.get('states')
         district=request.POST.get('districts')
-        print(name," ",email," ",password," ",phoneno," ",state," ",district)
+        #print(name," ",email," ",password," ",phoneno," ",state," ",district)
         try:
             user = User.objects.get(email=email)
         except ObjectDoesNotExist:
@@ -60,6 +69,14 @@ def log_in(request):
 def product(request, idn):
     product = Product.objects.get(id=idn)
     userid = int(request.user.id)
+    comments = Comment.objects.filter(product = product).order_by('-created_at')
+    wishreq = Wishlist.objects.filter(user=request.user, product = product)
+    com = 0
+    wish = 0
+    if comments:
+        com = 1
+    if wishreq:
+        wish = 1
     try:
         reqs = PReq.objects.filter(borrower = request.user,  product = product)
         req = reqs.latest('created_at')
@@ -73,10 +90,12 @@ def product(request, idn):
     #image = ProdImage.objects.filter(product=product)
     #user = request.user
     #DYNAMICALLY LOAD PRODUCT INFO
-    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status})
+    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status,'comments':comments,'com':com,'wish':wish})
 
 @login_required(login_url='/login')
 def lend(request):
+    if request.user.u_type == 0:
+        return render(request, 'main/actlend.html')
     if request.method == 'POST':
         prod=Product()
         prod.p_name=request.POST.get('name')
@@ -110,26 +129,33 @@ def activity(request):
         for req in requests:
             if req.product == pro:
                 reqs.append(req)
+    if reqs:
+        reqs.sort(reverse=True,key=myFunc)
+    #print(reqs[0].created_at)
+    #print(type(reqs[0].created_at))
     pend = 0
     acc = 0
     dec = 0
     for req in reqs:
         if req.status == 0:
             pend = 1
-        if req.status == 1 or req.status == 3:
+        elif req.status == 1 or req.status == 3:
             acc = 1
-        if req.status == 2:
+        elif req.status == 2:
             dec = 1
-    #print(reqs)
-    return render(request, 'main/activity.html',{'requests':reqs, 'pending':pend, 'accepted':acc, 'declained':dec})
+    return render(request, 'main/activity.html',{'requests':reqs, 'pending':pend, 'accepted':acc, 'declined':dec})
 
 @login_required(login_url='/login')
 def borrow(request, idn):
+    d = 0
+    if 'days' in request.POST:
+        d = int(request.POST.get('days'))
     req = PReq()
     req.borrower = request.user
     req.product = Product.objects.get(id=idn)
+    req.days = d
     req.save()
-    return redirect('home')
+    return redirect(reverse('product', kwargs={"idn": idn}))
 
 @login_required(login_url='/login')
 def accept(request, idn):
@@ -172,30 +198,139 @@ def prodreceived(request, idn):
 
 @login_required(login_url='/login')
 def reportuser(request, idn):
-    return render(request, 'main/reportuser.html')
+    try:
+        rep = ReportUser.objects.get(r_by=request.user,r_user=idn)
+        return render(request, 'main/reportsuccess.html')
+    except:
+        return render(request, 'main/reportuser.html',{'userid':idn})
 
 @login_required(login_url='/login')
-def reportcomment(request):
-    return render(request, 'main/reportcomment.html')
+def repous(request,idn):
+    if request.method == 'POST':
+        rep = ReportUser()
+        rep.r_user = idn
+        rep.r_by = request.user
+        rep.desc = request.POST.get('description')
+        rep.save()
+        return render(request, 'main/reportsuccess.html')
+    else:
+        pass
+    return None
+
+@login_required(login_url='/login')
+def reportcomment(request,idn):
+    comment = Comment.objects.get(id=idn)
+    try:
+        rep = ReportComment.objects.get(comment=comment,user=request.user)
+        return render(request, 'main/reportsuccess.html')
+    except:
+        return render(request, 'main/reportcomment.html',{'comid':idn})
+
+@login_required(login_url='/login')
+def repoco(request,idn):
+    if request.method == 'POST':
+        comment = Comment.objects.get(id=idn)
+        rep = ReportComment()
+        rep.comment = comment
+        rep.user = request.user
+        rep.desc = request.POST.get('description')
+        rep.save()
+        return render(request, 'main/reportsuccess.html')
+    else:
+        pass
+    return None
 
 @login_required(login_url='/login')
 def reportsuccess(request):
     return render(request, 'main/reportsuccess.html')
 
 @login_required(login_url='/login')
-def wishlist(request):
-    return render(request, 'main/wishlist.html')
+def wishlist(request,idn):
+    if request.method == 'POST':
+        #avoid creating duplicate wishlist entry
+        prod = Product.objects.get(id=idn)
+        test1 = request.POST.get('productpageb1')
+        if test1 == '10':
+            try:
+                wish = Wishlist.objects.get(user=request.user,product=prod)
+                return redirect(reverse('product', kwargs={"idn": idn}))
+            except:
+                wish = Wishlist()
+                wish.product = prod
+                wish.user = request.user
+                wish.save()
+                return redirect(reverse('product', kwargs={"idn": idn}))
+        test2 = request.POST.get('homepageb1')
+        if test2 == '10':
+            try:
+                wish = Wishlist.objects.get(user=request.user,product=prod)
+                return redirect('home')
+            except:
+                wish = Wishlist()
+                wish.product = prod
+                wish.user = request.user
+                wish.save()
+                return redirect('home')
+    else:
+        pass
+
+@login_required(login_url='/login')
+def unwish(request,idn):
+    if request.method == 'POST':
+        prod = Product.objects.get(id=idn)
+        test1 = request.POST.get('productpageb2')
+        if test1 == '20':
+            Wishlist.objects.filter(user=request.user,product=prod).delete()
+            return redirect(reverse('product', kwargs={"idn": idn}))
+        test2 = request.POST.get('homepageb2')
+        if test2 == '20':
+            Wishlist.objects.filter(user=request.user,product=prod).delete()
+            return redirect('home')
+    else:
+        pass
 
 #profile view
 @login_required(login_url='/login')
-def profile(request):
-    return render(request, 'main/profile.html')
+def profile(request,idn):
+    prof_user = User.objects.get(id=idn)
+    userid = request.user.id
+    l = int(prof_user.len_rate)
+    b = int(prof_user.bor_rate)
+    lx = 5 - l
+    bx = 5 - b
+    le = []
+    bo = []
+    lex = []
+    box = []
+    for i in range(l):
+        le.append(str(i))
+    for i in range(b):
+        bo.append(str(i))
+    for i in range(lx):
+        lex.append(str(i))
+    for i in range(bx):
+        box.append(str(i))
+    return render(request, 'main/profile.html',{'userid':userid,'prof_user':prof_user,'l':le,'b':bo,'lx':lex,'bx':box})
 
 #profile edit
 @login_required(login_url='/login')
 def profileedit(request):
     return render(request, 'main/profileedit.html')
 
+#add comment in product page or via product rating page
+@login_required(login_url='/login')
+def comment(request,idn):
+    if request.method == 'POST':
+        com = Comment()
+        com.product = Product.objects.get(id=idn)
+        com.user = request.user
+        com.content = request.POST.get('comment')
+        com.save()
+        #return redirect('product/<idn>')
+        return redirect(reverse('product', kwargs={"idn": idn}))
+    else:
+        pass
+    return None
 
 #rating Section :
 #Borrower Rating

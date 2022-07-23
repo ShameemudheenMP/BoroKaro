@@ -2,9 +2,12 @@ from django.urls import path
 from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 urlpatterns = [
+    path('favicon.ico',RedirectView.as_view(url=staticfiles_storage.url("favicon.ico"))),
     path('home/', home, name='home'),
     path('', home, name='home'),
     path('signup/', sign_up, name='signup'),
@@ -18,11 +21,15 @@ urlpatterns = [
     path('filterit/',filterit,name='filterit'),
     path('prodreceived/<int:idn>',prodreceived,name='prodreceived'),
     path('reportuser/<int:idn>', reportuser, name='reportuser'),
-    path('reportcomment/', reportcomment, name='reportcomment'),
+    path('repous/<int:idn>', repous, name='repous'),
+    path('reportcomment/<int:idn>', reportcomment, name='reportcomment'),
+    path('repoco/<int:idn>', repoco, name='repoco'),
     path('reportsuccess/', reportsuccess, name='reportsuccess'),
-    path('wishlist/', wishlist, name='wishlist'),
-    path('profile/', profile, name='profile'),
+    path('wishlist/<int:idn>', wishlist, name='wishlist'),
+    path('unwish/<int:idn>', unwish, name='unwish'),
+    path('profile/<int:idn>', profile, name='profile'),
     path('profileedit/', profileedit, name='profileedit'),
+    path('comment/<int:idn>',comment,name='comment'),
     path('rateborrower/', rateborrower, name='rateborrower'),
     path('ratelender/', ratelender, name='ratelender'),
 ]
