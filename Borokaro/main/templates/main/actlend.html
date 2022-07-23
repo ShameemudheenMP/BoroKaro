@@ -1,79 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BoroKaro</title>
-  <link rel="stylesheet" href="homestyle.css">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- bootstrap icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-</head>
-
-<body class="def-background">
-
-  <div class="container-fluid p-0">
-    <header class="fixed-top">
-        <nav class="navbar navbar-dark">
-          <div class="container-fluid p-1 ps-5">
-            <a class="navbar-brand" href="#">
-              <img src="Assets/home-logo.png" alt="home-logo">
-            </a>
-            <div class="navleft">
-              <div class="float-start pt-2 pe-3">
-                <a href="messages.html" class="link-light me-4">
-                  YOUR ACTIVITY
-                </a>
-
-                <a href="messages.html" class="link-light me-4">
-                  WISHLIST
-                </a>
-                <a href="messages.html" class="link-light me-4">
-                  MESSAGES
-                </a>
-                <a href="lend.html" class="text-decoration-none">
-                  <button class="log-reg-btn fw-bold me-4 link-primary" id="">LEND</button>
-                </a>
-              </div>
-              <div class="dropdown float-end pe-5 ps-3">
-                <a href="#" class="" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="Assets/Profileicon.png" alt="Profile">
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="">
-                  <li><a class="dropdown-item" href="#">Your Profile</a></li>
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
-                </ul>
-              </div>
-            </div>
-            
-          </div>
-        </nav>
-    </header>
-
-    <div class="mt-5 pt-4 container-fluid content p-0 m-0 d-flex flex-column align-items-center">
-      <h3 class="fw-bold mb-5">ACTIVATE YOUR LENDER ACCOUNT <i class="bi bi-patch-check"></i></h3>
-      <form class="d-flex flex-column align-items-center justify-content-center">
-        <div class="d-flex justify-content-center align-items-center mb-4">
-          <input type="text" class="form-control" id="" placeholder="Enter your Address" style="width: 350px;">
-          <button type="button" class="btn btn-secondary ms-4" style="width: 150px;"><i class="bi bi-geo-alt-fill"></i> ALLOW GPS</button>
-        </div>
-        <div class="mb-4">
-          <label for="formID" class="form-label fw-bold">Upload Your Address Proof:</label>
-          <input class="form-control" type="file" id="formID" style="width: 528px;">
-        </div>
-        <button type="submit" class="btn btn-success" style="width: 120px;">Submit</button>
-      </form>
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<div class="mt-5 pt-4 container-fluid content p-0 m-0 d-flex flex-column align-items-center">
+  <h3 class="fw-bold mb-5">ACTIVATE YOUR LENDER ACCOUNT <i class="bi bi-patch-check"></i></h3>
+  <form class="d-flex flex-column align-items-center justify-content-center">
+    <div class="d-flex justify-content-center align-items-center mb-4">
+      <input type="text" class="form-control" id="" placeholder="Enter your Address" style="width: 350px;">
+      <button type="button" class="btn btn-secondary ms-4" style="width: 150px;"><i class="bi bi-geo-alt-fill"></i>
+        ALLOW GPS</button>
     </div>
-
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
-
-</html>
+    <div class="mb-4">
+      <label for="formID" class="form-label fw-bold">Upload Your Address Proof:</label>
+      <input class="form-control" type="file" id="formID" style="width: 528px;">
+    </div>
+    <button type="submit" class="btn btn-success" style="width: 120px;">Submit</button>
+  </form>
+</div>
+{% endblock %}

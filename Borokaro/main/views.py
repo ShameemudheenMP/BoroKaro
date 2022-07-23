@@ -17,7 +17,11 @@ def myFunc(e):
 
 def home(request):
     products = Product.objects.all()
-    return render(request, 'main/home.html',{'products':products})
+    try:
+        prodids = list(Wishlist.objects.filter(user=request.user).values_list('product', flat=True).order_by('id'))
+        return render(request, 'main/home.html',{'products':products,'prodids':prodids})
+    except:
+        return render(request, 'main/home.html',{'products':products})
 
 def sign_up(request):
     if request.method == 'POST':
@@ -66,9 +70,13 @@ def product(request, idn):
     product = Product.objects.get(id=idn)
     userid = int(request.user.id)
     comments = Comment.objects.filter(product = product).order_by('-created_at')
+    wishreq = Wishlist.objects.filter(user=request.user, product = product)
     com = 0
+    wish = 0
     if comments:
         com = 1
+    if wishreq:
+        wish = 1
     try:
         reqs = PReq.objects.filter(borrower = request.user,  product = product)
         req = reqs.latest('created_at')
@@ -82,10 +90,12 @@ def product(request, idn):
     #image = ProdImage.objects.filter(product=product)
     #user = request.user
     #DYNAMICALLY LOAD PRODUCT INFO
-    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status,'comments':comments,'com':com})
+    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status,'comments':comments,'com':com,'wish':wish})
 
 @login_required(login_url='/login')
 def lend(request):
+    if request.user.u_type == 0:
+        return render(request, 'main/actlend.html')
     if request.method == 'POST':
         prod=Product()
         prod.p_name=request.POST.get('name')
@@ -235,16 +245,57 @@ def reportsuccess(request):
     return render(request, 'main/reportsuccess.html')
 
 @login_required(login_url='/login')
-def wishlist(request):
-    return render(request, 'main/wishlist.html')
+def wishlist(request,idn):
+    if request.method == 'POST':
+        #avoid creating duplicate wishlist entry
+        prod = Product.objects.get(id=idn)
+        test1 = request.POST.get('productpageb1')
+        if test1 == '10':
+            try:
+                wish = Wishlist.objects.get(user=request.user,product=prod)
+                return redirect(reverse('product', kwargs={"idn": idn}))
+            except:
+                wish = Wishlist()
+                wish.product = prod
+                wish.user = request.user
+                wish.save()
+                return redirect(reverse('product', kwargs={"idn": idn}))
+        test2 = request.POST.get('homepageb1')
+        if test2 == '10':
+            try:
+                wish = Wishlist.objects.get(user=request.user,product=prod)
+                return redirect('home')
+            except:
+                wish = Wishlist()
+                wish.product = prod
+                wish.user = request.user
+                wish.save()
+                return redirect('home')
+    else:
+        pass
+
+@login_required(login_url='/login')
+def unwish(request,idn):
+    if request.method == 'POST':
+        prod = Product.objects.get(id=idn)
+        test1 = request.POST.get('productpageb2')
+        if test1 == '20':
+            Wishlist.objects.filter(user=request.user,product=prod).delete()
+            return redirect(reverse('product', kwargs={"idn": idn}))
+        test2 = request.POST.get('homepageb2')
+        if test2 == '20':
+            Wishlist.objects.filter(user=request.user,product=prod).delete()
+            return redirect('home')
+    else:
+        pass
 
 #profile view
 @login_required(login_url='/login')
 def profile(request,idn):
-    user = User.objects.get(id=idn)
+    prof_user = User.objects.get(id=idn)
     userid = request.user.id
-    l = int(user.len_rate)
-    b = int(user.bor_rate)
+    l = int(prof_user.len_rate)
+    b = int(prof_user.bor_rate)
     lx = 5 - l
     bx = 5 - b
     le = []
@@ -259,7 +310,7 @@ def profile(request,idn):
         lex.append(str(i))
     for i in range(bx):
         box.append(str(i))
-    return render(request, 'main/profile.html',{'userid':userid,'user':user,'l':le,'b':bo,'lx':lex,'bx':box})
+    return render(request, 'main/profile.html',{'userid':userid,'prof_user':prof_user,'l':le,'b':bo,'lx':lex,'bx':box})
 
 #profile edit
 @login_required(login_url='/login')

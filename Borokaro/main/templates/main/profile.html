@@ -11,15 +11,15 @@
         <div class="profile-details">
             <div class="mb-2">
                 <label for="profileFormInput1" class="form-label fw-bold">Name</label>
-                <input type="text" class="form-control" id="profileFormInput1" placeholder="" disabled="True" value="{{user.name}}">
+                <input type="text" class="form-control" id="profileFormInput1" placeholder="" disabled="True" value="{{prof_user.name}}">
             </div>
             <div class="mb-2">
                 <label for="profileFormInput2" class="form-label fw-bold">State</label>
-                <input type="text" class="form-control" id="profileFormInput2" placeholder="" disabled="True" value="{{user.state}}">
+                <input type="text" class="form-control" id="profileFormInput2" placeholder="" disabled="True" value="{{prof_user.state}}">
             </div>
             <div class="mb-2">
                 <label for="profileFormInput3" class="form-label fw-bold">District</label>
-                <input type="text" class="form-control" id="profileFormInput3" placeholder="" disabled="True" value="{{user.district}}">
+                <input type="text" class="form-control" id="profileFormInput3" placeholder="" disabled="True" value="{{prof_user.district}}">
             </div>
         </div>
         <div id="borrower-rating" class="mt-3">
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <!-- this is when view other's profile -->
-            {% if user.id != userid %}
+            {% if prof_user.id != userid %}
             <div class="d-flex align-items-center">
                 <a class="btn btn-sm btn-danger" href="/reportuser/{{ product.user.id }}">REPORT USER</a>
             </div>
@@ -56,7 +56,7 @@
             
         </div>
         <!-- this is when view his own profile -->
-        {% if user.id == userid %}
+        {% if prof_user.id == userid %}
         <div class="d-flex justify-content-center">
             <a href="/profileedit" class="btn btn-primary" >Edit Profile</a>
         </div>

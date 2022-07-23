@@ -126,6 +126,11 @@ class ReportUser(models.Model):
     desc = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
 
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
 #product recvd nekki kazhinjaal pinne aa button kanikkaruth activity page il - DONE
 #disable borrow button (not remove) if product is not available - DONE
@@ -136,8 +141,8 @@ class ReportUser(models.Model):
 #REPORT USER - DONE
 #comment section and product lender details il ninnu users ne click cheythu profile view cheyyaan pattanam - done
 #profile page - done (some error in district info) & edit profile
-#only activated lenders can lend products
-#WISHLIST
+#only activated lenders can lend products - done
+#WISHLIST - done
 #OCR
 #rent history
 #RATINGS
