@@ -53,7 +53,7 @@ class User(AbstractUser):
     u_type = models.IntegerField(default=0)
     name = models.CharField(max_length=26)
     email = models.EmailField(unique=True)
-    phoneno = models.CharField(max_length=11)
+    phoneno = models.CharField(max_length=11, blank=True)
     STATE_CHOICES = [
         ('KL','Kerala'),
         ('TN','Tamilnadu'),
