@@ -143,6 +143,11 @@ header {
     color: #00C087;
 }
 
+.heart-rating a{
+    pointer-events: none;
+    cursor: default;
+}
+
 #filter-button {
     background-color: #264ECA;
 }
@@ -263,6 +268,14 @@ header {
     display: none;
 }
 
+#comments {
+    display: none;
+}
+
+#rent-lists {
+    display: none;
+}
+
 #comments-sec {
     width: 100%;
     height: 100px;
@@ -341,3 +354,4 @@ header {
 .medium-font {
     font-size: small;
 }
+
