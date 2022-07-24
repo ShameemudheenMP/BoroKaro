@@ -34,7 +34,7 @@ urlpatterns = [
     path('comment/<int:idn>',comment,name='comment'),
     path('rateborrower/<int:idn>', rateborrower, name='rateborrower'),
     path('ratelender/<int:idn>', ratelender, name='ratelender'),
-]
+] 
 
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

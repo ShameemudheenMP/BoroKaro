@@ -14,8 +14,11 @@ from django.contrib.auth.hashers import make_password
 from datetime import timedelta
 import pytz
 from django.template.defaulttags import register
+import requests
+import os
 
 # Create your views here.
+# K82143549488957 - API key
 
 #sort by date function
 def myFunc(e):
@@ -142,28 +145,33 @@ def lend(request):
 
 @login_required(login_url='/login')
 def actlend(request,idn):
+    user = User.objects.get(id=idn)
     if request.method == 'POST':
-        prod=Product()
-        prod.p_name=request.POST.get('name')
-        prod.p_rate=request.POST.get('rate')
-        prod.p_desc=request.POST.get('desc')
-        p_date=request.POST.get('date')
-        mon = int(p_date[0:2])
-        yr = int(p_date[3:7])
-        prod.date = datetime.date(yr, mon, 1)
-        prod.user = request.user
+        verif=Verif()
+        addr=request.POST.get('address')
         if len(request.FILES) != 0:
-            prod.p_image1=request.FILES['file1']
-            if len(request.FILES) == 2:
-                prod.p_image2=request.FILES['file2']
-            if len(request.FILES) == 3:
-                prod.p_image2=request.FILES['file2']
-                prod.p_image3=request.FILES['file3']
-        prod.save()
-        return redirect('home')
+            verif.user = user
+            verif.image = request.FILES['proofimg']
+            #verif.save()
+            okay = 0
+            # filename = verif.image.url
+            # print(os.getcwd())
+            # print(type(os.getcwd()))
+            # print(filename)
+            payload = {'isOverlayRequired': False, 'apikey': 'K82143549488957','language': 'eng',}
+            # with open(filename, 'rb') as f:
+            #     r = requests.post('https://api.ocr.space/parse/image',files={filename: f}, data=payload,)
+            # jsonresp = r.content.decode()
+            # print(jsonresp)
+        # verif.save()
+        # user.address = addr
+        # user.u_type = 1
+        # user.save()
+        #return redirect('home')
+        return render(request, 'main/actlend.html',{'user':user})
     else:
         pass
-    return render(request, 'main/actlend.html')
+    return render(request, 'main/actlend.html',{'user':user})
 
 @login_required(login_url='/login')
 def activity(request):

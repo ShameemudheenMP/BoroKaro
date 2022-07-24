@@ -147,6 +147,12 @@ class ProductRating(models.Model):
     created_at = models.DateTimeField(default=now)
     time = models.CharField(max_length=20,default=default_start_time)
 
+class Verif(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to =product_image_upload_handler,blank=True)
+    created_at = models.DateTimeField(default=now)
+    time = models.CharField(max_length=20,default=default_start_time)
+
 #login required for all pages other than home page - done
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
 #product recvd nekki kazhinjaal pinne aa button kanikkaruth activity page il - DONE
@@ -170,6 +176,7 @@ class ProductRating(models.Model):
 #product page il rating count kanikkenam - done
 #sign up page il state and districts dynamic aakkenam + edit profile page il um - done
 #ratings in activity - done
+#search product - done
 #OCR
 #SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
 #CHAT
