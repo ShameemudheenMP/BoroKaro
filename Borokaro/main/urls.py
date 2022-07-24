@@ -34,6 +34,8 @@ urlpatterns = [
     path('comment/<int:idn>',comment,name='comment'),
     path('rateborrower/<int:idn>', rateborrower, name='rateborrower'),
     path('ratelender/<int:idn>', ratelender, name='ratelender'),
+    path('productlist/', productlist, name='productlist'),
+    path('searchProduct/', searchProduct, name='searchProduct'),
 ]
 
 if settings.DEBUG:

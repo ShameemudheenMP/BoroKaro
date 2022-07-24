@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load mathfilters %}
 {% block content %}
 <div class="row container-fluid content p-0 m-0">
   <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 body-left pt-sm-5 pt-md-2 pt-lg-0 d-flex flex-column"
@@ -127,7 +128,7 @@
       {% else %}
         {% for request in requests %}
           {% if request.status == 2 %}
-            <div class="row bg-white rounded-2 p-2 mx-1 shadow" style="height: 80px">
+            <div class="row bg-white rounded-2 p-2 mx-1 shadow mb-2" style="height: 80px">
               <div class="col-12 col-lg-2 d-flex align-items-center">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
                 <a href="/profile/{{request.borrower.id}}" id="" class="text-primary my-auto user-name-request">{{request.borrower.name}}</a>

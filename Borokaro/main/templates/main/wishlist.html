@@ -2,54 +2,57 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid content p-0 m-0 wishlist-body">
-    <div class="container-fluid d-flex justify-content-around mt-5 pt-5 mt-lg-4 pt-md-4 pt-lg-0" id="wishlist-heading">
+    <div class="container-fluid d-flex justify-content-around mt-5 pt-5 mt-lg-4 pt-md-4 pt-lg-1" id="wishlist-heading">
         <!-- the first div is to only arrang the thing -->
-        <div class="order-select" style="visibility: hidden;">
+        <!-- <div class="order-select" style="visibility: hidden;">
             <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
             <select name="" id="acc-req-filter" class="mb-2">
             <option value="NewToOldest">New To Oldest</option>
             </select>
-        </div>
-        <h2 class="fw-bold">MY WISHLIST</h2>
-        <div class="order-select">
-            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
-            <select name="" id="acc-req-filter" class="mb-2">
-            <option value="NewToOldest">New To Oldest</option>
+        </div> --> 
+        <h2 class="fw-bold mx-auto">MY WISHLIST</h2>
+        <!-- <div class="d-flex justify-content-between mb-2">
+            <label for="wish-filter" class="me-2 my-auto fw-bold">Order by</label>
+            <select name="" id="wish-filter" class="form-select" style="width: 200px;">
+              <option value="NewToOldest">New To Oldest</option>
             </select>
-        </div>
+          </div> -->
     </div>
     
 
-    <div class="container d-flex flex-wrap justify-content-between mt-4 pb-5">
+    <div class="d-flex flex-wrap ps-4 pt-4">
         {% if not empty %}
         <div class="row bg-white rounded-2 p-3 mx-auto mb-2">
             <h6 class="my-auto">You have not added any products to wishlist yet!</h6>
         </div>
         {% else %}
         {% for wish in wishes %}
-        <div class="product text-decoration-none mb-5">
-            <div class="card pt-2" style="width: 21rem;">
-                <a href="/product/{{ wish.product.id }}" class="text-center  p-2">
-                    <img src="{{wish.product.p_image1.url}}" class="card-img-home w-100" alt="Product1">
+        <div class="p-2">
+        <div class="product text-decoration-none mb-2">
+            <div class="card pt-2 d-flex flex-column shadow" style="width: 15rem; height: 350px; border-radius: 0.5rem">
+                <a href="/product/{{ wish.product.id }}" class="text-center  p-2" style="width: 15em; height: 150px;">
+                    <img src="{{wish.product.p_image1.url}}" class="card-img-home w-100 h-100 rounded" alt="ProductImage" style="object-fit: contain ;">
                 </a>
-                <div class="card-body  d-flex flex-column">
-                    <div class="topdisp">
-                        {% if not wish.product.status %}
-                            <h6 class="available fw-bold float-start">Available Now</h6>
-                        {% else %}
-                            <h6 class="available fw-bold float-start" style="color:red">Not Available</h6>
-                        {% endif %}
-                        <div class="star-rating float-end text-center">
-                            <div class="rating-value float-start ms-2">
-                                <p>{{ wish.product.rating }}</p>
+                <div class="card-body d-flex justify-content-between flex-column">
+                    <div class="d-flex justify-content-between flex-column">
+                        <div class="topdisp">
+                            {% if not wish.product.status %}
+                                <h6 class="available fw-bold float-start" style="font-size: 13px;">Available Now</h6>
+                            {% else %}
+                                <h6 class="available fw-bold float-start" style="color:red; font-size: 13px;">Not Available</h6>
+                            {% endif %}
+                            <div class="star-rating float-end text-center">
+                                <div class="rating-value float-start ms-2">
+                                    <p>{{ wish.product.rating }}</p>
+                                </div>
+                                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
                             </div>
-                            <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
                         </div>
-                    </div>
 
-                    <h5 class="card-title prod-name fw-bold mt-2 text-dark">{{ wish.product.p_name }}</h5>
-                    <h6 class="fw-bold text-dark">{{wish.product.user.district}},{{wish.product.user.state}}</h6>
-                    <div class="mt-3 text-dark">
+                        <h5 class="card-title prod-name fw-bold text-dark mt-1" style="font-size: 18px;">{{ wish.product.p_name }}</h5>
+                        <h6 class="fw-bold text-dark" style="font-size: 16px;">{{wish.product.user.district}},{{wish.product.user.state}}</h6>
+                    </div>
+                    <div class="mt-2 text-dark">
                         <h6 class="fw-bold float-start"><i class="fa fa-rupee"></i> {{ wish.product.p_rate }} /day</h6>
                         {% if wish.product.id in prodids%}
                                 <form method="post" action="/unwish/{{ wish.product.id }}" enctype="multipart/form-data">
@@ -73,9 +76,10 @@
 
             </div>
         </div>
+        </div>
         {% endfor %}
         {% endif %}
     </div>
 
 </div>
-{% endblock %}
+{% endblock %} 

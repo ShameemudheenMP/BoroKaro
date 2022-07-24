@@ -5,15 +5,18 @@
     <div class="col-xl-2 col-xxl-3 col-md-3 col-sm-4 col-12 body-left shadow">
         <div class="search-form pt-3 ps-1">
             <form action="">
-                <div class="input d-flex align-items-center">
+                <!-- <div class="input d-flex align-items-center mb-3">
                     <div class="inputicon flex-grow-1 bd-highlight">
                         <img src="{% static 'Assets/search-icon.png' %}" alt="search-icon">
                     </div>
                     <div class="inputbox d-flex align-items-center">
-                        <input type="text" id="search" name="search" class="textinputs ms-1"
-                            placeholder="Search for Product"><br><br>
+                        <input type="search" id="search" name="search" class="textinputs ms-1"
+                            placeholder="Search Product"><br><br>
                     </div>
-                </div>
+                    
+                </div> -->
+                
+                
                 <select class="border-dark form-select form-select-sm mt-3 text-secondary myselect" aria-label="">
                     <option selected>Range</option>
                     <option value="1">5 km</option>
@@ -40,8 +43,17 @@
         </div>
     </div>
     <div class="col-xl-10 col-xxl-9 col-md-9 col-sm-8 col-xs-12 body-right">
+        <form action="/searchProduct/" method="POST" class="ps-4 pe-4  pt-2">
+            {% csrf_token %}
+            <div class="input-group mb-3 pt-4">
+                <input name="searched_prod" required type="search" class="form-control border-0" id="searchProduct" placeholder="Search for products">              
+                <div class="input-group-append rounded-end shadow" style="background-color: #bbcafd;">
+                  <button class="btn" type="submit" id="search-button-home"  style="font-size: 14px;"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </form>
         <div class="heading mt-4 ps-4 ms-2">
-            <h4 class="main-heading fw-bold">PRODUCTS NEAR YOU<i class="bi bi-bag-fill"></i></h4>
+            <h4 class="main-heading fw-bold">PRODUCTS NEAR YOU<i class="bi bi-bag-fill ms-1"></i></h4>
         </div>
 
         <div class="d-flex flex-wrap ps-4">
@@ -98,4 +110,6 @@
         </div>
     </div>
 </div>
+
+    
 {% endblock %}

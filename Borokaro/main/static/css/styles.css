@@ -92,6 +92,29 @@ header {
 }
 
 
+.btn{
+    box-shadow: none !important;
+}
+
+.form-control {
+    box-shadow: none !important;
+}
+
+.form-select {
+    box-shadow: none !important;
+}
+
+#search-button-home:active {
+    background-color: #b1bcdf;
+}
+
+#search-button-home:hover {
+    background-color: #b1bcdf;
+}
+
+
+
+
 .inputbox {
     float:left;
     width: 97%;
@@ -373,3 +396,25 @@ header {
 .user-name-request, .date-request {
     font-size: 14px;
 }
+
+#searchProduct {
+    font-size: 14px; 
+    background-color: #E8EDFF; 
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+/* Auto complete */
+.ui-menu {
+    border-radius: 0px 0px 4px 4px !important;
+    font-size: 14px !important;
+}
+.ui-widget-content li :hover {
+    background-color: #264ECA !important;
+    border-radius: 4px !important;
+}
+
+.ui-widget-content li.selected {
+    background-color: #030407 !important;
+    border-radius: 1px !important;
+}
+

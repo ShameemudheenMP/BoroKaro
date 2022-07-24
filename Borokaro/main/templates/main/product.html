@@ -46,7 +46,7 @@
                               </button> -->
                 <!-- <h6 id="days" class="me-2 pt-1 fw-bold">0</h6> -->
                 <input type="text" class="form-control bg-light border border-info mx-2 text-center" name="days"
-                  id="days" placeholder="1" style="width: 50px;" maxlength="2">
+                  id="days" style="width: 50px;" maxlength="2" value="1">
                 <!-- <button class="me-2 rounded-circle bg-transparent" onclick="increase()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                   class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -150,23 +150,23 @@
       </div>
       <!-- Comments loop here -->
       {% if not com %}
-      <div class="card comment-card" id="" name="" style="width: 100%;">
+      <div class="card comment-card shadow" id="" name="" style="width: 100%;">
         <div class="card-body">
           <h6 class="my-auto">No comments posted yet!</h6>
         </div>
       </div>
       {% else %}
       {% for comment in comments %}
-      <div class="card comment-card shadow" id="" name="" style="width: 100%;">
+      <div class="card comment-card shadow mb-1" id="" name="" style="width: 100%;">
         <div class="card-body">
           <!-- name of the user here -->
           <h6 class="card-title fw-bold mb-3" id="chat-user-name" name=""><a href="/profile/{{ comment.user.id }}">{{comment.user.name }}</a></h6>
           <!-- <h6 class="card-title fw-bold mb-3" id="chat-user-name" name="">{{comment.user.name}}</h6> -->
           <!-- comment is here -->
           <p class="card-text" name="">{{comment.content}}</p>
-          <div class="comment-card-footer d-flex justify-content-between">
+          <div class="comment-card-footer d-flex justify-content-between align-items-end">
             <!-- date is here -->
-            <p class="text-muted" name="">{{comment.time}}</p>
+            <p class="text-muted mb-0 medium-font" name="">{{comment.time}}</p>
             {% if comment.user.id != userid %}
             <a type="button" class="btn btn-sm btn-danger" href="/reportcomment/{{ comment.id }}">Report Comment</a>
             {% endif %}

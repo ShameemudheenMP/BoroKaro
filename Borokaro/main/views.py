@@ -1,14 +1,16 @@
 
+from math import fabs
 import re
 from django.shortcuts import redirect, render
 from .models import *
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import datetime
 from django.urls import reverse
 from django.contrib.auth.hashers import make_password
+from django. db. models import Q
 
 # Create your views here.
 
@@ -423,3 +425,26 @@ def rateborrower(request,idn):
 @login_required(login_url='/login')
 def ratelender(request,idn):
     return render(request, 'main/ratelender.html')
+
+
+def productlist(request):
+    products = Product.objects.filter().values_list('p_name', flat=True)
+    productList = list(set(list(products)))
+    return JsonResponse(productList, safe=False)
+    
+def searchProduct(request):
+    if request.method == 'POST':
+        searchedProduct = request.POST.get('searched_prod')
+        # products = Product.objects.filter(p_name__contains = searchedProduct)
+        # print(searchedProduct)
+        # return render(request, 'main/home.html',{'products':products})
+        products = Product.objects.all()
+        if searchedProduct:
+            products = products.filter(Q(p_name__icontains = searchedProduct))
+            print(products)
+            return render(request, 'main/home.html',{'products':products})
+        else:
+            pass
+    else:
+        pass
+    return None
