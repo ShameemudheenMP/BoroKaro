@@ -1,5 +1,6 @@
 
 import re
+from winreg import HKEY_LOCAL_MACHINE
 from django.shortcuts import redirect, render
 from .models import *
 from django.contrib.auth import login,logout,authenticate
@@ -9,6 +10,8 @@ from django.http import HttpResponse
 import datetime
 from django.urls import reverse
 from django.contrib.auth.hashers import make_password
+from datetime import timedelta
+import pytz
 
 # Create your views here.
 
@@ -18,10 +21,23 @@ def myFunc(e):
 
 def home(request):
     products = Product.objects.all()
+    tz = pytz.timezone('Asia/Kolkata') # dont use this timezone since datetime.now returns UTC time and products are rated at UTC time
+    #initial lookup period is 14 days or 2 weeks
     for product in products:
-        prod_ratings = list(ProductRating.objects.filter(product=product).values_list('val', flat=True).order_by('-created_at'))
-        rating_count = len(prod_ratings)
-        if rating_count:
+        rating_count = 0
+        prod_ratings=[]
+        #first check if this product has at least one rating, if not directly set its rating value to 0
+        rating_present = len(list(ProductRating.objects.filter(product=product).values_list('val', flat=True).order_by('created_at')))
+        if rating_present:
+            #check if product ratings exist within current lookup period and if not, increment threshold by 2 weeks inside a while loop
+            threshold = 14
+            compare_date = datetime.now(tz) - timedelta(days=threshold)
+            while( ProductRating.objects.filter(created_at__gt=compare_date,product=product).count() <= 0):
+                threshold = threshold + 14
+                compare_date = datetime.now(tz) - timedelta(days=threshold)
+            #use the obtained optimal threshold to filter required ratings and calculate average of those ratings
+            prod_ratings = list(ProductRating.objects.filter(created_at__gt=compare_date,product=product).values_list('val', flat=True).order_by('created_at'))
+            rating_count = len(prod_ratings)
             product.rating = round(sum(prod_ratings)/rating_count)
         else:
             product.rating =  0
@@ -41,7 +57,6 @@ def sign_up(request):
         phoneno=request.POST.get('phoneno')
         state=request.POST.get('states')
         district=request.POST.get('districts')
-        #print(name," ",email," ",password," ",phoneno," ",state," ",district)
         try:
             user = User.objects.get(email=email)
         except ObjectDoesNotExist:
@@ -408,14 +423,14 @@ def profileedit(request,idn):
         password=request.POST.get('password')
         phoneno=request.POST.get('phoneno')
         address=request.POST.get('address')
-        #state=request.POST.get('state')
-        #district=request.POST.get('district')
+        state=request.POST.get('states')
+        district=request.POST.get('districts')
         if password == '':
-            User.objects.filter(id=idn).update(name=name,email=email,phoneno=phoneno,address=address)
+            User.objects.filter(id=idn).update(name=name,email=email,phoneno=phoneno,address=address,state=state,district=district)
         else:
             passwordcopy=password
             password=make_password(password,hasher='default')
-            User.objects.filter(id=idn).update(name=name,email=email,password=password,phoneno=phoneno,address=address)
+            User.objects.filter(id=idn).update(name=name,email=email,password=password,phoneno=phoneno,address=address,state=state,district=district)
             user = authenticate(request, email=email, password=passwordcopy)
             login(request, user)
         return redirect(reverse('profileedit', kwargs={"idn": idn}))
@@ -443,12 +458,14 @@ def comment(request,idn):
 @login_required(login_url='/login')
 def rateborrower(request,idn):
     req = PReq.objects.get(id=idn)
+    product = Product.objects.get(id=req.product.id)
     if request.method == 'POST':
         bor_rate = int(request.POST.get('borrowerRating'))
         if bor_rate >=1 and bor_rate<=5:
             bor_r = BorrowerRating()
             bor_r.lender = request.user
             bor_r.borrower_id = req.borrower.id
+            bor_r.product = product
             bor_r.val = bor_rate
             bor_r.save()
             if req.status == 3:

@@ -5,6 +5,7 @@ from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from datetime import datetime
+from django.utils.timezone import now
 
 def default_start_time():
     now = datetime.now()
@@ -48,27 +49,13 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     """User model."""
-    #u_id = models.AutoField("User ID", primary_key=True)
     username = None
     u_type = models.IntegerField(default=0)
     name = models.CharField(max_length=26)
     email = models.EmailField(unique=True)
     phoneno = models.CharField(max_length=11)
-    STATE_CHOICES = [
-        ('KL','Kerala'),
-        ('TN','Tamilnadu'),
-        ('KA','Karnataka')
-    ]
-    state = models.CharField(max_length=2,choices=STATE_CHOICES,default='KL')
-
-    DISTRICT_CHOICES = [
-        ('TVM','Thiruvananthapuram'),
-        ('KLM','Kollam'),
-        ('KTM','Kottayam'),
-        ('MPM','Malappuram')
-    ]
-
-    district = models.CharField(max_length=3,choices=DISTRICT_CHOICES,default='TVM')
+    state = models.CharField(max_length=28)
+    district = models.CharField(max_length=28)
     address = models.CharField(max_length=90,default='',blank=True)
     len_rate = models.IntegerField(default=0)
     bor_rate = models.IntegerField(default=0)
@@ -137,8 +124,9 @@ class Wishlist(models.Model):
 class BorrowerRating(models.Model):
     lender = models.ForeignKey(User, on_delete=models.CASCADE)
     borrower_id = models.IntegerField(default=0)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     val = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=now)
     time = models.CharField(max_length=20,default=default_start_time)
 
 #oru borrower oru lender ine rate cheyyaan vendi ulla table
@@ -146,14 +134,14 @@ class LenderRating(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     lender_id = models.IntegerField(default=0)
     val = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=now)
     time = models.CharField(max_length=20,default=default_start_time)
 
 class ProductRating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     val = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=now)
 
 #login required for all pages other than home page - done
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
@@ -170,13 +158,17 @@ class ProductRating(models.Model):
 #WISHLIST - done
 #rent history - done + rent history il ninnu rate product option - done
 #comments in activity - done
-#RATINGS - done
+#rate borrower, product, lender - done
 #profile page visit cheyyumbo borrower_rating and lender_rating update aakkenam - done
-#home page visit cheyyumbo product inte recent ratings update aakkenam
-#ratings kanikkumbo athinte koode user count bracket il kanikkenam
-#sign up page il state and districts dynamic aakkenam + edit profile page il um
+#ratings kanikkumbo athinte koode user count bracket il kanikkenam - done
+#home page visit cheyyumbo product inte recent ratings update aakkenam - done
+#rent requests in activity page - request inte number of days okke proper align cheyyanam - done
+#product page il rating count kanikkenam - done
+#sign up page il state and districts dynamic aakkenam + edit profile page il um - done
+#ratings in activity - how to merge contents of productrating and lenderrating model for display?
 #OCR
 #SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
+#activity page il sorting options working aakkenam
 #a user should not access another user's activity or lend page

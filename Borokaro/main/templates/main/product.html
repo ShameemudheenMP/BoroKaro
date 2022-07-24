@@ -7,14 +7,16 @@
       <div class="card" style="width: 28rem; height: 500px;">
         <div class="card-body">
           <h5 class="card-title fw-bold">{{ product.p_name }}</h5>
-          <h6 class="card-subtitle mb-2 float-start red-text fw-bold" id="product-price">₹{{ product.p_rate }}/day</h6>
-          <div class="star-rating float-end text-center">
-            <div class="rating-value float-start ms-2">
-              <p>{{ product.rating }}</p>
+          <div class="d-flex mt-3">
+            <h6 class="card-subtitle mb-2 float-start red-text fw-bold me-auto" id="product-price">₹{{ product.p_rate }}/day</h6>
+            <p class="pe-1" style="font-size: 12px;">({{product.rating_count}})</p>
+            <div class="star-rating text-center">
+              <div class="rating-value float-start ms-2">
+                <p>{{ product.rating }}</p>
+              </div>
+              <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
             </div>
-            <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
           </div>
-          <br>
           <hr>
           <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
           <p class="semi-bold">Lender details:</p>
@@ -43,7 +45,7 @@
                                 </svg>
                               </button> -->
                     <!-- <h6 id="days" class="me-2 pt-1 fw-bold">0</h6> -->
-                    <input type="text" class="form-control bg-light border border-info mx-2 text-center" name="days" id="days" placeholder="1"
+                    <input type="text" class="form-control bg-light border border-info mx-2 text-center" name="days" id="days" value="1" placeholder=""
                     style="width: 50px;" maxlength="2">
                     <!-- <button class="me-2 rounded-circle bg-transparent" onclick="increase()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -54,8 +56,7 @@
                               </button> -->
                     <h6 class="fw-bold my-auto">days</h6>
                     </div>
-                    <button type="submit" class="card-link btn btn-green btn-lg mt-3" tabindex="-1" aria-disabled="true" id="wishlist-btn">BORROW
-                    NOW</button>
+                    <button type="submit" class="card-link btn btn-green btn-lg mt-3" tabindex="-1" aria-disabled="true" id="wishlist-btn">BORROWNOW</button>
                 </form>
               {% endif %}
             {% else %}
