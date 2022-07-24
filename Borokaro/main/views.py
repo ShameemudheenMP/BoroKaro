@@ -1,4 +1,5 @@
 
+from math import prod
 import re
 from winreg import HKEY_LOCAL_MACHINE
 from django.shortcuts import redirect, render
@@ -12,6 +13,7 @@ from django.urls import reverse
 from django.contrib.auth.hashers import make_password
 from datetime import timedelta
 import pytz
+from django.template.defaulttags import register
 
 # Create your views here.
 
@@ -19,24 +21,28 @@ import pytz
 def myFunc(e):
     return e.created_at
 
+@register.filter
+def get_range(value):
+    return range(value)
+
 def home(request):
     products = Product.objects.all()
-    tz = pytz.timezone('Asia/Kolkata') # dont use this timezone since datetime.now returns UTC time and products are rated at UTC time
+    tz = pytz.timezone('Asia/Kolkata')
     #initial lookup period is 14 days or 2 weeks
     for product in products:
         rating_count = 0
         prod_ratings=[]
         #first check if this product has at least one rating, if not directly set its rating value to 0
-        rating_present = len(list(ProductRating.objects.filter(product=product).values_list('val', flat=True).order_by('created_at')))
+        rating_present = len(list(ProductRating.objects.filter(product=product).values_list('prod_rate', flat=True).order_by('created_at')))
         if rating_present:
             #check if product ratings exist within current lookup period and if not, increment threshold by 2 weeks inside a while loop
             threshold = 14
-            compare_date = datetime.now(tz) - timedelta(days=threshold)
+            compare_date = datetime.datetime.now(tz) - timedelta(days=threshold)
             while( ProductRating.objects.filter(created_at__gt=compare_date,product=product).count() <= 0):
                 threshold = threshold + 14
-                compare_date = datetime.now(tz) - timedelta(days=threshold)
+                compare_date = datetime.datetime.now(tz) - timedelta(days=threshold)
             #use the obtained optimal threshold to filter required ratings and calculate average of those ratings
-            prod_ratings = list(ProductRating.objects.filter(created_at__gt=compare_date,product=product).values_list('val', flat=True).order_by('created_at'))
+            prod_ratings = list(ProductRating.objects.filter(created_at__gt=compare_date,product=product).values_list('prod_rate', flat=True).order_by('created_at'))
             rating_count = len(prod_ratings)
             product.rating = round(sum(prod_ratings)/rating_count)
         else:
@@ -79,15 +85,12 @@ def log_in(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            # print("Helllooooooo")
             #USED TO REDIRECT TO A SPECIFIC URL AFTER LOGIN
             if next_url:
                 return redirect(next_url)
             return redirect('home')
         else:
             pass
-    # else:
-    #     return HttpResponse("Wrong credds bud!")
     return render(request, 'registration/login.html')
 
 @login_required(login_url='/login')
@@ -108,13 +111,6 @@ def product(request, idn):
         status = int(req.status)
     except ObjectDoesNotExist:
         status = 1
-    # img1 = product.p_image1
-    # img2 = product.p_image2
-    # img3 = product.p_image3
-    # image = [img1,img2,img3]
-    #image = ProdImage.objects.filter(product=product)
-    #user = request.user
-    #DYNAMICALLY LOAD PRODUCT INFO
     return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status,'comments':comments,'com':com,'wish':wish})
 
 @login_required(login_url='/login')
@@ -176,9 +172,17 @@ def activity(request):
     requests = PReq.objects.all()
     present_user = request.user
     coms = Comment.objects.filter(user = present_user).order_by('-created_at')
+    prod_rate = ProductRating.objects.filter( borrower = present_user).order_by('-created_at')
+    bor_rate = BorrowerRating.objects.filter( lender = present_user ).order_by('-created_at')
     com=0
+    prod=0
+    bor=0
     if coms:
-        com=1
+        com = 1
+    if prod_rate:
+        prod = 1
+    if bor_rate:
+        bor = 1
     my_products = Product.objects.filter(user = present_user)
     for pro in my_products:
         for req in requests:
@@ -204,7 +208,8 @@ def activity(request):
         elif req.status == 2:
             dec = 1
     return render(request, 'main/activity.html',{'requests':reqs, 
-    'breqs':breqs, 'bacc':bacc, 'pending':pend, 'accepted':acc, 'declined':dec,'comments':coms,'com':com})
+    'breqs':breqs, 'bacc':bacc, 'pending':pend, 'accepted':acc, 'declined':dec,'comments':coms,'com':com,
+    'borrowed_list':prod_rate,'lent_list':bor_rate,'len':prod,'bor':bor,'n':0})
 
 @login_required(login_url='/login')
 def borrow(request, idn):
@@ -378,7 +383,7 @@ def viewwish(request):
 @login_required(login_url='/login')
 def profile(request,idn):
     prof_user = User.objects.get(id=idn)
-    len_ratings = list(LenderRating.objects.filter(lender_id=idn).values_list('val', flat=True).order_by('id'))
+    len_ratings = list(ProductRating.objects.filter(lender_id=idn).values_list('len_rate', flat=True).order_by('id'))
     count2 = len(len_ratings)
     if count2:
         len_rate = round(sum(len_ratings)/count2)
@@ -447,7 +452,6 @@ def comment(request,idn):
         com.user = request.user
         com.content = request.POST.get('comment')
         com.save()
-        #return redirect('product/<idn>')
         return redirect(reverse('product', kwargs={"idn": idn}))
     else:
         pass
@@ -480,29 +484,24 @@ def rateborrower(request,idn):
 #Lender Rating
 @login_required(login_url='/login')
 def ratelender(request,idn):
-    product = Product.objects.get(id=idn)
+    req = PReq.objects.get(id=idn)
+    product = req.product
+    prod_r = ProductRating()
     if request.method == 'POST':
         len_rate = int(request.POST.get('lenderRating'))
-        if len_rate >=1 and len_rate <=5:
-            len_r = LenderRating()
-            len_r.borrower = request.user
-            len_r.lender_id = product.user.id
-            len_r.val = len_rate
-            len_r.save()
-            reqs = PReq.objects.filter(borrower = request.user,  product = product, status__in=['1','3','4'])
-            req = reqs.latest('created_at')
+        prod_rate = int(request.POST.get('productRating'))
+        if len_rate >=1 and len_rate <=5 and prod_rate >=1 and prod_rate <=5:
+            prod_r.product = product
+            prod_r.borrower = request.user
+            prod_r.lender_id = product.user.id
+            prod_r.len_rate = len_rate
+            prod_r.prod_rate = prod_rate
+            prod_r.save()
             if req.status == 1 or req.status == 3:
                 req.status = 5
             elif req.status == 4:
                 req.status = 6
             req.save()
-        prod_rate = int(request.POST.get('productRating'))
-        if prod_rate >=1 and prod_rate <=5:
-            prod_r = ProductRating()
-            prod_r.product = product
-            prod_r.user = request.user
-            prod_r.val = prod_rate
-            prod_r.save()
         comment = request.POST.get('comment')
         if comment:
             com = Comment()
@@ -512,4 +511,4 @@ def ratelender(request,idn):
             com.save()
         return redirect('activity')
     else:
-        return render(request, 'main/ratelender.html',{'product':product})
+        return render(request, 'main/ratelender.html',{'request':req})

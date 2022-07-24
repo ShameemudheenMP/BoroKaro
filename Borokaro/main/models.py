@@ -130,18 +130,15 @@ class BorrowerRating(models.Model):
     time = models.CharField(max_length=20,default=default_start_time)
 
 #oru borrower oru lender ine rate cheyyaan vendi ulla table
-class LenderRating(models.Model):
-    borrower = models.ForeignKey(User, on_delete=models.CASCADE)
-    lender_id = models.IntegerField(default=0)
-    val = models.IntegerField(default=0)
-    created_at = models.DateTimeField(default=now)
-    time = models.CharField(max_length=20,default=default_start_time)
 
 class ProductRating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    val = models.IntegerField(default=0)
+    borrower = models.ForeignKey(User, on_delete=models.CASCADE)
+    lender_id = models.IntegerField(default=0)
+    len_rate = models.IntegerField(default=0)
+    prod_rate = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=now)
+    time = models.CharField(max_length=20,default=default_start_time)
 
 #login required for all pages other than home page - done
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
@@ -165,7 +162,7 @@ class ProductRating(models.Model):
 #rent requests in activity page - request inte number of days okke proper align cheyyanam - done
 #product page il rating count kanikkenam - done
 #sign up page il state and districts dynamic aakkenam + edit profile page il um - done
-#ratings in activity - how to merge contents of productrating and lenderrating model for display?
+#ratings in activity - done
 #OCR
 #SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
 #CHAT
