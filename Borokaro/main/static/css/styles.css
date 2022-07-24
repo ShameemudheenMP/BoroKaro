@@ -368,3 +368,8 @@ header {
     display: flex;
     justify-content: center;
 }
+
+
+.user-name-request, .date-request {
+    font-size: 14px;
+}
