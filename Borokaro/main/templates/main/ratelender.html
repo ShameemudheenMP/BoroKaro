@@ -10,23 +10,24 @@
         <div class="card me-4" style="width: 480px; height: 410px">
             <div class="card-body d-flex justify-content-center align-items-center w-100 h-100">
                 <!-- product image here -->
-                <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="ProductImage" class="rounded card-img-rating w-100 h-100">
+                <img src="{{request.product.p_image1.url}}" alt="ProductImage" class="rounded card-img-rating w-100 h-100">
             </div>
         </div>
         <div class="ms-4 d-flex flex-column justify-content-between">
             <div class="card p-3" style="width: 570px; height: 100px">
                 <!-- product name here -->
-                <h4 class="fw-bold">DELL OptiPlex 7490 All-in-One Monitor Black Color</h4>
+                <h4 class="fw-bold">{{request.product.p_name}}</h4>
             </div>
             <div class="card p-3 d-flex flex-column justify-content-center" style="width: 570px; height: 290px">
                 <div>
-                    <p><span class="h4">Lender Name: </span><span class="h4 fw-bold pe-4" id="borrower-name">Full Name Name</span></p>
+                    <p><span class="h4">Lender Name: </span><span class="h4 fw-bold pe-4" id="borrower-name">{{request.product.user.name}}</span></p>
                 </div>
-                <form class="d-flex flex-column justify-content-between">
+                <form method="POST" action="/ratelender/{{request.id}}"class="d-flex flex-column justify-content-between">
+                    {% csrf_token %}
                     <div class="d-flex mb-2">
                         <div class="me-4">
                             <label for="" style="font-weight: 500;">Rate Lender</label>
-                            <div class="rating"> 
+                            <div class="rating">
                                 <input type="radio" name="lenderRating" value="5" id="lender-5">
                                 <label for="lender-5" class="text-primary">☆</label> 
                                 <input type="radio" name="lenderRating" value="4" id="lender-4">
@@ -56,7 +57,7 @@
                         </div>
                     </div>
                     <div class="w-75 mb-3">
-                        <textarea name="" id=""  rows="3" class="w-100 rounded form-control border-2" style="background-color: #dee6fc;"  placeholder="Add Your Comment"></textarea>
+                        <textarea name="comment" id="" rows="3" class="w-100 rounded form-control border-2" style="background-color: #dee6fc;"  placeholder="Add a comment on product & lender. (Optional)"></textarea>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-success border-0 fw-bold" style="background-color: #45C917; width:158px;">SUBMIT</button>

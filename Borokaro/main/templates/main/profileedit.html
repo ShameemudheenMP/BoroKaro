@@ -31,7 +31,7 @@
                 <div style="width: 47%;">   
                     <label for="profileEditFormInput5" class="form-label fw-bold">State</label>
                     <select class="form-select w-100 bg-transparent border border-dark" id="states" name="states">
-                        <option value="" class="options" disabled selected>State</option>
+                        <option value="{{prof_user.state}}" class="options" disabled selected>{{prof_user.state}}</option>
                         <option value="Andra Pradesh" class="options">Andra Pradesh</option>
                         <option value="Arunachal Pradesh" class="options">Arunachal Pradesh</option>
                         <option value="Assam" class="options">Assam</option>
@@ -74,7 +74,7 @@
                 <div style="width: 47%;">   
                     <label for="districts" class="form-label fw-bold">District</label>
                     <select class="form-select w-100 bg-transparent border border-dark" id="districts" name="districts">
-                        <option value="" class='options' disabled selected>District</option>
+                        <option value="{{prof_user.district}}" class='options' disabled selected>{{prof_user.district}}</option>
                     </select>
                 </div>
             </div>
@@ -87,7 +87,6 @@
         <div class="mb-2">
             <a href="/actlend/{{prof_user.id}}" class="text-dark fw-bold float-end">Activate Lender Acount</a>
         </div>
-        
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
