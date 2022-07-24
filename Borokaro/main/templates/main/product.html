@@ -94,16 +94,16 @@
       <div class="card justify-content-center ps-3 pe-3 shadow" style="width: 35rem; height: 500px; border-radius: 0.5rem">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
           <div class="carousel-inner" style="height: 400px;">
-            <div class="carousel-item active justify-content-center" data-bs-interval="5000">
+            <div class="carousel-item active justify-content-center w-100 h-100" data-bs-interval="5000">
               <img src="{{ product.p_image1.url }}" class="d-block w-100 h-100 card-imgs" alt="Image1">
             </div>
             {% if product.p_image2.url != NULL %}
-            <div class="carousel-item justify-content-center" data-bs-interval="5000">
+            <div class="carousel-item justify-content-center w-100 h-100" data-bs-interval="5000">
               <img src="{{ product.p_image2.url }}" class="d-block w-100 h-100 card-imgs" alt="Image2">
             </div>
             {% endif %}
             {% if product.p_image3.url != NULL %}
-            <div class="carousel-item justify-content-center" data-bs-interval="5000">
+            <div class="carousel-item justify-content-center w-100 h-100" data-bs-interval="5000">
               <img src="{{ product.p_image3.url }}" class="d-block w-100 h-100 card-imgs" alt="Image3">
             </div>
             {% endif %}
