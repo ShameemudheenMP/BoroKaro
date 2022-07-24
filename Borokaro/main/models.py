@@ -1,3 +1,5 @@
+import pathlib
+import uuid
 from calendar import month
 from enum import auto
 from operator import mod
@@ -69,14 +71,19 @@ class User(AbstractUser):
     def __str__(self):
         return "%d" % (self.id)
 
+def product_image_upload_handler(instance, filename):
+    fpath = pathlib.Path(filename)
+    new_fname = str(uuid.uuid1())
+    return f"uploads/{new_fname}{fpath.suffix}"
+
 class Product(models.Model):
     p_name = models.CharField(max_length=50)
     p_rate = models.IntegerField(default=0)
     p_desc = models.CharField(max_length=90)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    p_image1 = models.ImageField(upload_to = 'uploads/',blank=True)
-    p_image2 = models.ImageField(upload_to = 'uploads/',blank=True)
-    p_image3 = models.ImageField(upload_to = 'uploads/',blank=True)
+    p_image1 = models.ImageField(upload_to = product_image_upload_handler,blank=True)
+    p_image2 = models.ImageField(upload_to = product_image_upload_handler,blank=True)
+    p_image3 = models.ImageField(upload_to = product_image_upload_handler,blank=True)
     date =  models.DateField(auto_now=False, auto_now_add=False)
     status = models.IntegerField(default=0) #0 for available, 1 for not available
     rating = models.IntegerField(default=0)
