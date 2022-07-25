@@ -15,7 +15,7 @@
             <img src="{% static 'Assets/signup-log.png' %}" alt="login-logo.png"  class="logo">
         </div>
         <div class="form_details">
-            <form method="post" action="/signup/">
+            <form method="post" action="/signup/" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form_details-top">
                     <div class="left-form-details">
@@ -51,7 +51,7 @@
                                 <img src="{% static 'Assets/phone-icon.png' %}" alt="phone-icon">
                             </div>
                             <div class="inputbox">
-                                <input type="tel" name="phoneno" class="textinputs" placeholder="PHONE NO:"><br><br>
+                                <input type="tel" name="phoneno" class="textinputs" placeholder="PHONE NO:" maxlength="11"><br><br>
                             </div>
                         </div><br>
                         <div class="input">

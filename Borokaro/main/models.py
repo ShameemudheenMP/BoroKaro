@@ -149,7 +149,7 @@ class ProductRating(models.Model):
 
 class Verif(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to =product_image_upload_handler,blank=True)
+    image = models.FileField(upload_to =product_image_upload_handler,blank=True)
     created_at = models.DateTimeField(default=now)
     time = models.CharField(max_length=20,default=default_start_time)
 
@@ -177,8 +177,8 @@ class Verif(models.Model):
 #sign up page il state and districts dynamic aakkenam + edit profile page il um - done
 #ratings in activity - done
 #search product - done
-#OCR
-#SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
+#OCR - done
+#search filter - done
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
 #activity page il sorting options working aakkenam

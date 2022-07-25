@@ -2,25 +2,25 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid content p-0 m-0 wishlist-body">
-    <div class="container-fluid d-flex justify-content-around mt-5 pt-5 mt-lg-4 pt-md-4 pt-lg-0" id="wishlist-heading">
+    <div class="container-fluid d-flex justify-content-around mt-5 pt-5 mt-lg-4 pt-md-4 pt-lg-1" id="wishlist-heading">
         <!-- the first div is to only arrang the thing -->
-        <div class="order-select" style="visibility: hidden;">
+        <!-- <div class="order-select" style="visibility: hidden;">
             <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
             <select name="" id="acc-req-filter" class="mb-2">
             <option value="NewToOldest">New To Oldest</option>
             </select>
-        </div>
-        <h2 class="fw-bold">MY WISHLIST</h2>
-        <div class="order-select">
-            <label for="acc-req-filter" class="me-2 mb-2">Order by</label>
-            <select name="" id="acc-req-filter" class="mb-2">
-            <option value="NewToOldest">New To Oldest</option>
+        </div> --> 
+        <h2 class="fw-bold mx-auto">MY WISHLIST</h2>
+        <!-- <div class="d-flex justify-content-between mb-2">
+            <label for="wish-filter" class="me-2 my-auto fw-bold">Order by</label>
+            <select name="" id="wish-filter" class="form-select" style="width: 200px;">
+              <option value="NewToOldest">New To Oldest</option>
             </select>
-        </div>
+          </div> -->
     </div>
     
 
-    <div class="d-flex flex-wrap ps-4">
+    <div class="d-flex flex-wrap ps-4 pt-4">
         {% if not empty %}
         <div class="row bg-white rounded-2 p-3 mx-auto mb-2">
             <h6 class="my-auto">You have not added any products to wishlist yet!</h6>

@@ -9,7 +9,7 @@
             <img src="{% static 'Assets/ProfileIconLarge.png' %}" alt="ProfileIcon">
         </div>
 
-        <form method="POST" action="/profileedit/{{prof_user.id}}" style="width: 450px;">
+        <form method="POST" action="/profileedit/{{prof_user.id}}" style="width: 450px;" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-2">
                 <label for="profileEditFormInput1" class="form-label fw-bold">Name</label>

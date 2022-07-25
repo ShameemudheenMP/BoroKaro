@@ -3,8 +3,7 @@
 {% load mathfilters %}
 {% block content %}
 <div class="row container-fluid content p-0 m-0">
-  <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 body-left pt-sm-5 pt-md-2 pt-lg-0 d-flex flex-column"
-    id="act-body-left" style="--bs-gutter-x: none;">
+  <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 body-left pt-sm-5 pt-md-2 pt-lg-0 d-flex flex-column" id="act-body-left" style="--bs-gutter-x: none;">
     <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-1">
       <input type='radio' value='1' name='actvity' id="act-menu-opt-1" onClick="changeColor(this.value)">
       <label for="act-menu-opt-1">Rent Requests</label>
@@ -314,18 +313,24 @@
       {% else %}
         {% for request in breqs %}
         {% if request.status == 1 or request.status == 3 or request.status == 4 or request.status == 5 or request.status == 6%}
-        <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2 shadow">
-            <a href="/product/{{request.product.id}}" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">{{request.product.p_name}} </a>
+        <div class="row bg-white rounded-3 p-3 d-flex align-items-center mb-2">
+          <div class="col-8">
+            <a href="/product/{{request.product.id}}" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">{{request.product.p_name}}</a>
+          </div>
+          <div class="col-4 d-flex justify-content-between pe-0">
             {% if request.status == 1 or request.status == 3 or request.status == 4 %}
-            <div class="me-3 ms-3">
-            <a href="/ratelender/{{request.id}}" class="btn btn-primary small-btn shadow">RATE PRODUCT</a>
+            <div class="me-3 ms-3 d-flex justify-content-between">
+              <a href="/ratelender/{{request.product.id}}" class="btn btn-primary small-btn shadow-lg">RATE PRODUCT</a>
             </div>
             {% else %}
-            <div class="me-3 ms-3">
-            <a href="" class="btn btn-secondary small-btn shadow">RATE PRODUCT</a>
+            <div class="me-3 ms-3 d-flex justify-content-between">
+            <a href="" class="btn btn-secondary small-btn shadow-lg">RATE PRODUCT</a>
             </div>
             {% endif %}
-            <p class="text-muted medium-font m-0"><em>{{request.time}}</em></p>
+            <div class="d-flex flex-column justify-content-end">
+              <p class="text-muted medium-font m-0"><em>{{request.time}}</em></p>
+            </div>
+          </div>
         </div>
         {% endif %}
         {% endfor %}

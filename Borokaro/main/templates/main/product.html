@@ -93,16 +93,16 @@
       <div class="card justify-content-center ps-3 pe-3" style="width: 35rem; height: 500px;">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
           <div class="carousel-inner" style="height: 400px;">
-            <div class="carousel-item active justify-content-center" data-bs-interval="5000">
+            <div class="carousel-item active justify-content-center w-100 h-100" data-bs-interval="5000">
               <img src="{{ product.p_image1.url }}" class="d-block w-100 h-100 card-imgs" alt="Image1">
             </div>
             {% if product.p_image2.url != NULL %}
-            <div class="carousel-item justify-content-center" data-bs-interval="5000">
+            <div class="carousel-item justify-content-center w-100 h-100" data-bs-interval="5000">
               <img src="{{ product.p_image2.url }}" class="d-block w-100 h-100 card-imgs" alt="Image2">
             </div>
             {% endif %}
             {% if product.p_image3.url != NULL %}
-            <div class="carousel-item justify-content-center" data-bs-interval="5000">
+            <div class="carousel-item justify-content-center w-100 h-100" data-bs-interval="5000">
               <img src="{{ product.p_image3.url }}" class="d-block w-100 h-100 card-imgs" alt="Image3">
             </div>
             {% endif %}
@@ -154,16 +154,16 @@
       </div>
       {% else %}
         {% for comment in comments %}
-        <div class="card comment-card" id="" name="" style="width: 100%;">
+        <div class="card comment-card shadow mb-1" id="" name="" style="width: 100%;">
           <div class="card-body">
             <!-- name of the user here -->
             <h6 class="card-title fw-bold mb-3" id="chat-user-name" name=""><a href="/profile/{{ comment.user.id }}">{{ comment.user.name }}</a></h6>
             <!-- <h6 class="card-title fw-bold mb-3" id="chat-user-name" name="">{{comment.user.name}}</h6> -->
             <!-- comment is here -->
             <p class="card-text" name="">{{comment.content}}</p>
-            <div class="comment-card-footer d-flex justify-content-between">
+            <div class="comment-card-footer d-flex justify-content-between align-items-end">
               <!-- date is here -->
-              <p class="text-muted" name="">{{comment.time}}</p>
+              <p class="text-muted mb-0 medium-font" name="">{{comment.time}}</p>
               {% if comment.user.id != userid %}
               <a type="button" class="btn btn-sm btn-danger" href="/reportcomment/{{ comment.id }}">Report Comment</a>
               {% endif %}
