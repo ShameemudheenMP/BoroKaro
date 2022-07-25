@@ -177,9 +177,10 @@ class Verif(models.Model):
 #sign up page il state and districts dynamic aakkenam + edit profile page il um - done
 #ratings in activity - done
 #search product - done
-#OCR - done
-#search filter - done
+#OCR (via OCR space API call)- done
+#search filter (partially done, need to add geolocation feature for range filter) - done
+#correct filter button shape in home page
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
-#activity page il sorting options working aakkenam
+#activity page il sorting options add aakkenam
 #a user should not access another user's activity or lend page

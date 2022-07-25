@@ -212,7 +212,7 @@ def actlend(request,idn):
             #     bestmatch = match2
             # print(bestmatch)
             print(match)
-            verif.delete()
+            #verif.delete()
             if match >= threshold:
                 user.address = addr
                 user.u_type = 1
