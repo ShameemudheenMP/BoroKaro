@@ -1,4 +1,3 @@
-
 from math import fabs
 from math import prod
 import re
@@ -18,6 +17,8 @@ import pytz
 from django.template.defaulttags import register
 import requests
 import os
+import json
+import jellyfish
 
 # Create your views here.
 # K82143549488957 - API key
@@ -145,6 +146,19 @@ def lend(request):
         pass
     return render(request, 'main/lend.html')
 
+def ocr_space_file(filename, overlay=False, api_key='K82143549488957', language='eng'):
+    payload = {'isOverlayRequired': overlay,
+               'apikey': api_key,
+               'language': language,
+               'detectOrientation' : True,
+               }
+    with open(filename, 'rb') as f:
+        r = requests.post('https://api.ocr.space/parse/image',
+                          files={filename: f},
+                          data=payload,
+                          )
+    return r.content.decode()
+
 @login_required(login_url='/login')
 def actlend(request,idn):
     user = User.objects.get(id=idn)
@@ -152,24 +166,62 @@ def actlend(request,idn):
         verif=Verif()
         addr=request.POST.get('address')
         if len(request.FILES) != 0:
+            threshold = 0.5
             verif.user = user
             verif.image = request.FILES['proofimg']
-            #verif.save()
-            okay = 0
-            # filename = verif.image.url
-            # print(os.getcwd())
-            # print(type(os.getcwd()))
-            # print(filename)
-            payload = {'isOverlayRequired': False, 'apikey': 'K82143549488957','language': 'eng',}
-            # with open(filename, 'rb') as f:
-            #     r = requests.post('https://api.ocr.space/parse/image',files={filename: f}, data=payload,)
-            # jsonresp = r.content.decode()
-            # print(jsonresp)
-        # verif.save()
-        # user.address = addr
-        # user.u_type = 1
-        # user.save()
-        #return redirect('home')
+            verif.save()
+            img_name = os.path.splitext(verif.image.name)[0]
+            img_extension = os.path.splitext(verif.image.name)[1]
+            part2 = img_name + img_extension
+            ################################
+
+            #SET LOCAL PATH HERE
+            # E:\Academics\S6\MiniProject\BoroKaro\Borokaro\media\uploads
+            filename = os.path.join('E:/Academics/S6/MiniProject/BoroKaro/Borokaro/media/', part2)
+
+            ################################
+            result = ocr_space_file(filename)
+            result = json.loads(result)
+            parsed_results = result.get("ParsedResults")[0]
+            text_detected = parsed_results.get("ParsedText")
+            print(text_detected)
+            addrsp = addr.replace(" ","").lower()
+            textsp = text_detected.replace(" ","").lower()
+            start = textsp.find('address')
+            skip = len('address')
+            if start == -1:
+                start = textsp.find('addrss')
+                skip = len('addrss')
+            elif start == - 1:
+                start = textsp.find('addrs')
+                skip = len('addrs')
+            elif start == - 1:
+                start = textsp.find('addr')
+                skip = len('addr')
+            else:
+                start = 0
+                skip = 0
+            # match1 = jellyfish.jaro_distance(addrsp,textsp[-20:len(text_detected):1])
+            # match2 = jellyfish.jaro_distance(addrsp,textsp[0:21:1])
+            match = jellyfish.jaro_distance(textsp[start+skip : start+skip+len(addrsp)+15 : 1], addrsp)
+            # bestmatch = 0
+            # if (addrsp in textsp):
+            #     bestmatch = 1
+            # elif(match1>match2):
+            #     bestmatch = match1
+            # else:
+            #     bestmatch = match2
+            # print(bestmatch)
+            print(match)
+            #verif.delete()
+            if match >= threshold:
+                user.address = addr
+                user.u_type = 1
+                user.save()
+                return redirect('home')
+            else:
+                verif.delete()
+                return render(request, 'main/actlend.html',{'user':user})
         return render(request, 'main/actlend.html',{'user':user})
     else:
         pass
@@ -257,8 +309,22 @@ def decline(request, idn):
 
 @login_required(login_url='/login')
 def filterit(request):
-    products = Product.objects.all().order_by('p_rate','rating')
-    return render(request, 'main/home.html',{'products':products})
+    products = Product.objects.all()
+    if request.method == 'POST':
+        price_desc = int(request.POST.get('price')) #1 for ascending, 2 for descending order
+        rating_desc = int(request.POST.get('rating'))
+        if (price_desc == 1 and rating_desc == 1):
+            products = Product.objects.all().order_by('p_rate','rating','p_name')
+        elif (price_desc == 1 and rating_desc == 2):
+            products = Product.objects.all().order_by('p_rate','-rating','p_name')
+        elif (price_desc == 2 and rating_desc == 1):
+            products = Product.objects.all().order_by('-p_rate','rating','p_name')
+        elif (price_desc == 2 and rating_desc == 2):
+            products = Product.objects.all().order_by('-p_rate','-rating','p_name')
+        return render(request,'main/home.html',{'products':products})
+    else:
+        pass
+    return render(request,'main/home.html',{'products':products})
 
 @login_required(login_url='/login')
 def prodreceived(request, idn):
@@ -523,12 +589,11 @@ def ratelender(request,idn):
     else:
         return render(request, 'main/ratelender.html',{'request':req})
 
-
 def productlist(request):
     products = Product.objects.filter().values_list('p_name', flat=True)
     productList = list(set(list(products)))
     return JsonResponse(productList, safe=False)
-    
+
 def searchProduct(request):
     if request.method == 'POST':
         searchedProduct = request.POST.get('searched_prod')
@@ -538,11 +603,10 @@ def searchProduct(request):
         products = Product.objects.all()
         if searchedProduct:
             products = products.filter(Q(p_name__icontains = searchedProduct))
-            print(products)
+            #print(products)
             return render(request, 'main/home.html',{'products':products})
         else:
             pass
     else:
         pass
     return None
-    

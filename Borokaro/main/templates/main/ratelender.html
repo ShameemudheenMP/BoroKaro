@@ -22,7 +22,7 @@
                 <div>
                     <p><span class="h4">Lender Name: </span><span class="h4 fw-bold pe-4" id="borrower-name">{{request.product.user.name}}</span></p>
                 </div>
-                <form method="POST" action="/ratelender/{{request.id}}"class="d-flex flex-column justify-content-between">
+                <form method="POST" action="/ratelender/{{request.id}}"class="d-flex flex-column justify-content-between" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="d-flex mb-2">
                         <div class="me-4">

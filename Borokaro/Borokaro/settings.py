@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'crispy_forms',
     'crispy_bootstrap5',
-    'mathfilters',
-    'django_filters'
+    'mathfilters'
 ]
 
 MIDDLEWARE = [

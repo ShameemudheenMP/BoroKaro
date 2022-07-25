@@ -22,7 +22,7 @@
                 <div>
                     <p><span class="h4">Borrower Name: </span><span class="h4 fw-bold pe-4" id="borrower-name">{{request.borrower.name}}</span></p>
                 </div>
-                <form method="POST" action="/rateborrower/{{request.id}}">
+                <form method="POST" action="/rateborrower/{{request.id}}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div>
                     <label for="" style="font-weight: 500;">Your rating for borrower</label>
