@@ -52,7 +52,7 @@
               </div>
               <div class="col-12 col-lg-5 d-flex flex-column mt-3 pt-2">
                 <div class="d-flex justify-content-center align-items-center">
-                  <a class="btn btn-sm btn-primary me-3 medium-font" href="#" role="button">CHAT</a>
+                  <!-- <a class="btn btn-sm btn-primary me-3 medium-font" href="#" role="button">CHAT</a> -->
                   <a class="btn btn-sm btn-success me-3 medium-font" href="/accept/{{ request.id }}" role="button">ACCEPT</a>
                   <a class="btn btn-sm btn-danger me-3 medium-font" href="/decline/{{ request.id }}" role="button">DECLINE</a>
                 </div>
@@ -320,9 +320,9 @@
           <div class="col-4 d-flex justify-content-between pe-0">
             {% if request.status == 1 or request.status == 3 or request.status == 4 %}
             <div class="me-3 ms-3 d-flex justify-content-between">
-              <a href="/ratelender/{{request.product.id}}" class="btn btn-primary small-btn shadow-lg">RATE PRODUCT</a>
+              <a href="/ratelender/{{request.id}}" class="btn btn-primary small-btn shadow-lg">RATE PRODUCT</a>
             </div>
-            {% else %}
+            {% elif request.status == 5 or request.status == 6 %}
             <div class="me-3 ms-3 d-flex justify-content-between">
             <a href="" class="btn btn-secondary small-btn shadow-lg">RATE PRODUCT</a>
             </div>

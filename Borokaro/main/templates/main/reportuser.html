@@ -4,7 +4,7 @@
 
   <div class="d-flex flex-column align-items-center mt-5 pt-5">
     <div class="card">
-      <form method="POST" action="/repous/{{userid}}">
+      <form method="POST" action="/repous/{{userid}}" enctype="multipart/form-data">
         {% csrf_token %}
       <div class="card-body">
         <textarea name="description" class="form-control" id="" rows="3" placeholder="Enter reason for report" style="width: 800px;"></textarea>
