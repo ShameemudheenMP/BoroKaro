@@ -166,7 +166,7 @@ def actlend(request,idn):
         verif=Verif()
         addr=request.POST.get('address')
         if len(request.FILES) != 0:
-            threshold = 0.5
+            threshold = 0.68
             verif.user = user
             verif.image = request.FILES['proofimg']
             verif.save()
@@ -270,7 +270,7 @@ def activity(request):
             dec = 1
     return render(request, 'main/activity.html',{'requests':reqs, 
     'breqs':breqs, 'bacc':bacc, 'pending':pend, 'accepted':acc, 'declined':dec,'comments':coms,'com':com,
-    'borrowed_list':prod_rate,'lent_list':bor_rate,'len':prod,'bor':bor,'n':0})
+    'borrowed_list':prod_rate,'lent_list':bor_rate,'len':prod,'bor':bor})
 
 @login_required(login_url='/login')
 def borrow(request, idn):
@@ -312,14 +312,14 @@ def filterit(request):
     if request.method == 'POST':
         price_desc = int(request.POST.get('price')) #1 for ascending, 2 for descending order
         rating_desc = int(request.POST.get('rating'))
-        if (price_desc == 1 and rating_desc == 1):
-            products = Product.objects.all().order_by('p_rate','rating','p_name')
-        elif (price_desc == 1 and rating_desc == 2):
-            products = Product.objects.all().order_by('p_rate','-rating','p_name')
-        elif (price_desc == 2 and rating_desc == 1):
-            products = Product.objects.all().order_by('-p_rate','rating','p_name')
-        elif (price_desc == 2 and rating_desc == 2):
-            products = Product.objects.all().order_by('-p_rate','-rating','p_name')
+        if (price_desc == 1):
+            products = Product.objects.all().order_by('p_rate','p_name')
+        elif (rating_desc == 1):
+            products = Product.objects.all().order_by('rating','p_name')
+        elif (price_desc == 2):
+            products = Product.objects.all().order_by('-p_rate','p_name')
+        elif (rating_desc == 2):
+            products = Product.objects.all().order_by('-rating','p_name')
         return render(request,'main/home.html',{'products':products})
     else:
         pass
@@ -580,7 +580,7 @@ def ratelender(request,idn):
         comment = request.POST.get('comment')
         if comment:
             com = Comment()
-            com.product = Product.objects.get(id=idn)
+            com.product = Product.objects.get(id=product.id)
             com.user = request.user
             com.content = comment
             com.save()
