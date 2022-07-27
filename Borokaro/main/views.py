@@ -166,11 +166,7 @@ def actlend(request,idn):
         verif=Verif()
         addr=request.POST.get('address')
         if len(request.FILES) != 0:
-<<<<<<< HEAD
-            threshold = 0.5
-=======
             threshold = 0.68
->>>>>>> 96131029eb56d1631b68a3a92469f06490f8b51e
             verif.user = user
             verif.image = request.FILES['proofimg']
             verif.save()
@@ -180,12 +176,8 @@ def actlend(request,idn):
             ################################
 
             #SET LOCAL PATH HERE
-<<<<<<< HEAD
             # E:\Academics\S6\MiniProject\BoroKaro\Borokaro\media\uploads
             filename = os.path.join('E:/Academics/S6/MiniProject/BoroKaro/Borokaro/media/', part2)
-=======
-            filename = os.path.join('D:/Django Projects/S6_Mini_Project/BoroKaro/Borokaro/media/', part2)
->>>>>>> 96131029eb56d1631b68a3a92469f06490f8b51e
 
             ################################
             result = ocr_space_file(filename)
@@ -321,16 +313,6 @@ def filterit(request):
     if request.method == 'POST':
         price_desc = int(request.POST.get('price')) #1 for ascending, 2 for descending order
         rating_desc = int(request.POST.get('rating'))
-<<<<<<< HEAD
-        if (price_desc == 1 and rating_desc == 1):
-            products = Product.objects.all().order_by('p_rate','rating','p_name')
-        elif (price_desc == 1 and rating_desc == 2):
-            products = Product.objects.all().order_by('p_rate','-rating','p_name')
-        elif (price_desc == 2 and rating_desc == 1):
-            products = Product.objects.all().order_by('-p_rate','rating','p_name')
-        elif (price_desc == 2 and rating_desc == 2):
-            products = Product.objects.all().order_by('-p_rate','-rating','p_name')
-=======
         if (price_desc == 1):
             products = Product.objects.all().order_by('p_rate','p_name')
         elif (rating_desc == 1):
@@ -339,7 +321,6 @@ def filterit(request):
             products = Product.objects.all().order_by('-p_rate','p_name')
         elif (rating_desc == 2):
             products = Product.objects.all().order_by('-rating','p_name')
->>>>>>> 96131029eb56d1631b68a3a92469f06490f8b51e
         return render(request,'main/home.html',{'products':products})
     else:
         pass
