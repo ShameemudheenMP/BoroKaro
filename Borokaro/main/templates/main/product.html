@@ -211,7 +211,13 @@
       <div class="card comment-card shadow mb-1" id="" name="" style="width: 100%;">
         <div class="card-body">
           <!-- name of the user here -->
-          <h6 class="card-title fw-bold mb-3" id="chat-user-name" name=""><a href="/profile/{{ comment.user.id }}">{{comment.user.name }}</a></h6>
+          <div class="d-flex">
+            <h6 class="card-title fw-bold mb-3" id="chat-user-name" name=""><a href="/profile/{{ comment.user.id }}">{{comment.user.name }}</a></h6>
+            {% if comment.user.id == userid %}
+            <a href="#" class="ms-auto"><i class="bi bi-trash-fill text-dark"></i></a>
+            {% endif %}
+          </div>
+          
           <!-- <h6 class="card-title fw-bold mb-3" id="chat-user-name" name="">{{comment.user.name}}</h6> -->
           <!-- comment is here -->
           <p class="card-text" name="" style="white-space: break-spaces"">{{comment.content}}</p>
@@ -220,8 +226,6 @@
             <p class="text-muted mb-0 medium-font" name="">{{comment.time}}</p>
             {% if comment.user.id != userid %}
             <a type="button" class="btn btn-sm btn-danger" href="/reportcomment/{{ comment.id }}">Report Comment</a>
-            {% else %}
-            <a href="#" class="btn btn-sm btn-dark">Delete Comment</a>
             {% endif %}
           </div>
         </div>
