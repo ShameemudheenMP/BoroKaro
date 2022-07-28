@@ -4,94 +4,119 @@
 <div class="container-fluid ms-0 m-5 m-lg-0 pt-5 pt-md-4" id="product-view-body">
   <div class="d-flex justify-content-evenly flex-wrap prod-details mt-5 mt-md-0">
     <div class="prod-desc mb-5">
-      <div class="card" style="width: 28rem; height: 550px;">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">{{ product.p_name }}</h5>
-          <div class="d-flex mt-3">
-            <h6 class="card-subtitle mb-2 float-start red-text fw-bold me-auto" id="product-price">₹{{ product.p_rate }}/day</h6>
-            <p class="pe-1" style="font-size: 12px;">({{product.rating_count}})</p>
-            <div class="star-rating text-center">
-              <div class="rating-value float-start ms-2">
-                <p>{{ product.rating }}</p>
+      <div class="card shadow" style="width: 28rem; height: 510px;">
+        <div class="card-body d-flex flex-column">
+          <div class="mb-auto">
+            <h5 class="card-title fw-bold">{{ product.p_name }}</h5>
+            <div class="d-flex mt-3">
+              <h6 class="card-subtitle mb-2 float-start red-text fw-bold me-auto" id="product-price">₹{{ product.p_rate
+                }}/day</h6>
+              <p class="pe-1" style="font-size: 12px;">({{product.rating_count}})</p>
+              <div class="star-rating text-center">
+                <div class="rating-value float-start ms-2">
+                  <p>{{ product.rating }}</p>
+                </div>
+                <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
               </div>
-              <img src="{% static 'Assets/star.png' %}" alt="star" class="float-start mt-1 ms-1">
             </div>
+            <hr class="m-0">
+            <p class="card-text mt-3" id="prod-details">{{ product.p_desc }}</p>
+            <h6 class="semi-bold">Lender details:</h6>
+            <div class="d-flex pb-2">
+              <div style="width:80%">
+                <a href="/profile/{{ product.user.id }}" class="mx-auto">{{ product.user.name }}</a>
+              </div>
+              <div style="width:20%">
+                <a href="/reportuser/{{ product.user.id }}"
+                  class="btn btn-sm btn-danger medium-font float-end">REPORT</a>
+              </div>
+            </div>
+            <p class="mb-1">{{ product.user.address }}address address address address address address address address
+              address</p>
+            <p><i class="bi bi-telephone-fill"></i> +91 {{ product.user.phoneno }}</p>
           </div>
-          <hr>
-          <p class="card-text" id="prod-details">{{ product.p_desc }}</p>
-          <p class="semi-bold">Lender details:</p>
-          <p><a href="/profile/{{ product.user.id }}">{{ product.user.name }}</a></p>
-          <p>{{ product.user.address }}</p>
-          <p>{{ product.user.phoneno }}</p>
-          {% if product.user.id != userid %}
-          <p><a href="/reportuser/{{ product.user.id }}" class="red-text fw-bold">REPORT USER</a></p>
-          {% endif %}
-          {% if not product.user.id == userid %}
-          <div class="d-flex justify-content-center">
-            {% if product.status == 0 %}
+          <div>
+            {% if product.user.id != userid %}
+            {% endif %}
+            {% if not product.user.id == userid %}
+            <div class="d-flex justify-content-center">
+              {% if product.status == 0 %}
               {% if status == 0 %}
-                <a href="#" class="card-link btn btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
-                  aria-disabled="true">BORROW NOW</a>
+              <a href="#" class="card-link btn btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
+                aria-disabled="true">BORROW NOW</a>
               {% else %}
-                <form method="post" action="borrow/{{ product.id }}" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <div class="d-flex">
-                  <h6 class="fw-bold my-auto">Rent for</h6>
-                    <!-- COUNTER BUTTON HERE -->
-                    <!-- <button class="me-2 rounded-circle bg-transparent" onclick="decrease()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                  class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                  <path fill-rule="evenodd"
-                                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-                                </svg>
-                              </button> -->
-                    <!-- <h6 id="days" class="me-2 pt-1 fw-bold">0</h6> -->
-                    <input type="text" class="form-control bg-light border border-info mx-2 text-center" name="days" id="days" value="1" placeholder=""
-                    style="width: 50px;" maxlength="2">
-                    <!-- <button class="me-2 rounded-circle bg-transparent" onclick="increase()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                  class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                  <path fill-rule="evenodd"
-                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                                </svg>
-                              </button> -->
-                    <h6 class="fw-bold my-auto">days</h6>
-                    </div>
-                    <button type="submit" class="card-link btn btn-green btn-lg mt-3" tabindex="-1" aria-disabled="true" id="wishlist-btn">BORROWNOW</button>
-                </form>
+              <form method="post" action="borrow/{{ product.id }}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- <div class="d-flex"> -->
+                <!-- <h6 class="fw-bold my-auto">Rent for</h6> -->
+                <!-- COUNTER BUTTON HERE -->
+                <!-- <button class="me-2 rounded-circle bg-transparent" onclick="decrease()">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                                  </svg>
+                                </button> -->
+                <!-- <h6 id="days" class="me-2 pt-1 fw-bold">0</h6> -->
+                <!-- <input type="text" class="form-control bg-light border border-info mx-2 text-center" name="days" id="days" value="1" placeholder="" -->
+                <!-- style="width: 50px;" maxlength="2"> -->
+                <!-- <button class="me-2 rounded-circle bg-transparent" onclick="increase()">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                  </svg>
+                                </button> -->
+                <!-- <h6 class="fw-bold my-auto">days</h6> -->
+                <!-- </div> -->
+                
+                <!-- date picker -->
+                <div class=" d-flex">
+                  <label for="">From</label>
+                  <input type="date" class="me-2 form-control" placeholder="dd-mm-yyyy" style="width: 150px;">
+                  <label for="">To</label>
+                  <input type="date" class="ms-2 form-control" placeholder="dd-mm-yyyy" style="width: 150px;">
+                </div>
+
+                <div class="w-100 text-center">
+                  <button type="submit" class="card-link btn btn-green btn-lg mt-3" tabindex="-1" aria-disabled="true"
+                  id="wishlist-btn">BORROWNOW</button>
+                </div>
+
+                
+              </form>
               {% endif %}
-            {% else %}
+              {% else %}
               <a href="#" class="card-link btn btn-secondary btn-lg disabled" tabindex="-1" role="button"
                 aria-disabled="true">BORROW NOW</a>
-            {% endif %}
-          </div>
+              {% endif %}
+            </div>
             {% if not wish %}
             <form method="post" action="/wishlist/{{ product.id }}" enctype="multipart/form-data">
               {% csrf_token %}
-            <div class="d-flex justify-content-center mt-4">
-              <input type="hidden" id="" name="productpageb1" value="10">
-              <button type="submit" class="card-link btn btn-sm btn-outline-danger btn-lg" tabindex="-1" role="button"
-                aria-disabled="true">ADD TO WISHLIST</button>
-            </div>
+              <div class="d-flex justify-content-center mt-4">
+                <input type="hidden" id="" name="productpageb1" value="10">
+                <button type="submit" class="card-link btn btn-sm btn-outline-danger btn-lg" tabindex="-1" role="button"
+                  aria-disabled="true">ADD TO WISHLIST</button>
+              </div>
             </form>
             {% else %}
             <form method="post" action="/unwish/{{ product.id }}" enctype="multipart/form-data">
               {% csrf_token %}
-            <div class="d-flex justify-content-center mt-4">
-              <input type="hidden" id="" name="productpageb2" value="20">
-              <button type="submit" class="card-link btn btn-sm btn-outline-danger btn-lg" tabindex="-1" role="button"
-                aria-disabled="true">REMOVE FROM WISHLIST</button>
-            </div>
+              <div class="d-flex justify-content-center mt-4">
+                <input type="hidden" id="" name="productpageb2" value="20">
+                <button type="submit" class="card-link btn btn-sm btn-outline-danger btn-lg" tabindex="-1" role="button"
+                  aria-disabled="true">REMOVE FROM WISHLIST</button>
+              </div>
             </form>
             {% endif %}
-          {% endif %}
-
-
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
     <div class="prod-img">
-      <div class="card justify-content-center ps-3 pe-3" style="width: 35rem; height: 550px;">
+      <div class="card justify-content-center ps-3 pe-3 shadow" style="width: 35rem; height: 510px;">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
           <div class="carousel-inner" style="height: 400px;">
             <div class="carousel-item active justify-content-center w-100 h-100" data-bs-interval="5000">
@@ -130,52 +155,81 @@
         </div>
       </div> -->
   </div>
+
+  <!-- Bookings -->
+  <div class="d-flex justify-content-center  pb-4 pt-4">
+    <div style="width: 84%">
+      <h5 class="fw-bold">Bookings</h5>
+      <div class="card shadow" style="width: 100%">
+        <div class="card-body">
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- comments -->
   <div class="d-flex justify-content-center  pb-4">
     <div style="width: 84%;">
       <h5 class="fw-bold">Comments</h5>
       <!-- This is the space to add comment for user -->
-      <div class="card comment-card mb-3" id="" name="" style="width: 100%;">
+      <div class="card comment-card mb-3 shadow" id="" name="" style="width: 100%;">
         <div class="card-body">
           <form method="post" action="/comment/{{ product.id }}" enctype="multipart/form-data">
-          {% csrf_token %}
-          <div>
-            <textarea name="comment" class="form-control" id="" rows="3" placeholder="Type Your Comment here..."
-              style="width: 100%;"></textarea>
-          </div>
-          <div class="float-end mt-3">
-            <button type="submit" class="btn btn-primary">Add Comment</button>
-          </div>
+            {% csrf_token %}
+            <div>
+              <textarea name="comment" class="form-control" id="" rows="3" placeholder="Type Your Comment here..."
+                style="width: 100%;"></textarea>
+            </div>
+            <div class="float-end mt-3">
+              <button type="submit" class="btn btn-primary">Add Comment</button>
+            </div>
           </form>
         </div>
       </div>
       <!-- Comments loop here -->
       {% if not com %}
-      <div class="card comment-card" id="" name="" style="width: 100%;">
-        <h6 class="my-auto">No comments posted yet!</h6>
+      <div class="card comment-card" id="" name="" style="height: 50px; width: 100%;">
+        <h6 class="ps-2 my-auto">No comments posted yet!</h6>
       </div>
       {% else %}
-        {% for comment in comments %}
-        <div class="card comment-card shadow mb-1" id="" name="" style="width: 100%;">
-          <div class="card-body">
-            <!-- name of the user here -->
-            <h6 class="card-title fw-bold mb-3" id="chat-user-name" name=""><a href="/profile/{{ comment.user.id }}">{{ comment.user.name }}</a></h6>
-            <!-- <h6 class="card-title fw-bold mb-3" id="chat-user-name" name="">{{comment.user.name}}</h6> -->
-            <!-- comment is here -->
-            <p class="card-text" name="">{{comment.content}}</p>
-            <div class="comment-card-footer d-flex justify-content-between align-items-end">
-              <!-- date is here -->
-              <p class="text-muted mb-0 medium-font" name="">{{comment.time}}</p>
-              {% if comment.user.id != userid %}
-              <a type="button" class="btn btn-sm btn-danger" href="/reportcomment/{{ comment.id }}">Report Comment</a>
-              {% endif %}
-            </div>
+      {% for comment in comments %}
+      <div class="card comment-card shadow mb-1" id="" name="" style="width: 100%;">
+        <div class="card-body">
+          <!-- name of the user here -->
+          <h6 class="card-title fw-bold mb-3" id="chat-user-name" name=""><a href="/profile/{{ comment.user.id }}">{{
+              comment.user.name }}</a></h6>
+          <!-- <h6 class="card-title fw-bold mb-3" id="chat-user-name" name="">{{comment.user.name}}</h6> -->
+          <!-- comment is here -->
+          <p class="card-text" name="">{{comment.content}}</p>
+          <div class="comment-card-footer d-flex justify-content-between align-items-end">
+            <!-- date is here -->
+            <p class="text-muted mb-0 medium-font" name="">{{comment.time}}</p>
+            {% if comment.user.id != userid %}
+            <a type="button" class="btn btn-sm btn-danger" href="/reportcomment/{{ comment.id }}">Report Comment</a>
+            {% endif %}
           </div>
         </div>
-        {% endfor %}
+      </div>
+      {% endfor %}
       {% endif %}
     </div>
 
   </div>
 </div>
-</div>
+
+<script>
+  $(document).ready(function(){
+    $('.input-daterange').datepicker({
+        format: 'dd-mm-yyyy',
+        todayHighlight: true,
+        startDate: '0d'
+    });
+    
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+
 {% endblock %}

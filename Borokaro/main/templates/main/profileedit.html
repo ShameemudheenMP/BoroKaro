@@ -13,7 +13,7 @@
             {% csrf_token %}
             <div class="mb-2">
                 <label for="profileEditFormInput1" class="form-label fw-bold">Name</label>
-                <input name="name" type="text" class="form-control bg-transparent border border-dark" id="profileEditFormInput1" placeholder="{{prof_user.name}}" value="{{prof_user.name}}">
+                <input name="name" type="text" class="form-control bg-transparent border border-dark" id="profileEditFormInput1" placeholder="{{prof_user.name}}" value="{{prof_user.name}}" maxlength="30">
             </div>
             <div class="mb-2">
                 <label for="profileEditFormInput2" class="form-label fw-bold">Email</label>
@@ -21,7 +21,7 @@
             </div>
             <div class="mb-2">
                 <label for="profileEditFormInput3" class="form-label fw-bold">Phone No.</label>
-                <input name="phoneno" type="tel" class="form-control bg-transparent border border-dark" id="profileEditFormInput3" placeholder="{{prof_user.phoneno}}" value="{{prof_user.phoneno}}">
+                <input name="phoneno" type="tel" class="form-control bg-transparent border border-dark" id="profileEditFormInput3" placeholder="{{prof_user.phoneno}}" value="{{prof_user.phoneno}}" maxlength="11">
             </div>
             <div class="mb-2">
                 <label for="profileEditFormInput4" class="form-label fw-bold">Password</label>
