@@ -291,14 +291,11 @@
           <div class="d-flex">
             <a href="/product/{{comment.product.id}}" class="h6">{{comment.product.p_name}}</a>
             <p class="my-auto ms-2 text-muted medium-font">{{comment.time}}</p>
+            <a href="#" class="ms-auto"><i class="bi bi-trash-fill text-danger float-end"></i></a>
           </div>
-          <div class="comment-content pt-1">
-            <p style="font-size: 14px;" class="mb-0">
-              {{comment.content}}
-            </p>
-            
+          <div class="comment-content pt-1 row">
+            <p style="font-size: 14px; white-space: break-spaces;" class="mb-0">{{comment.content}}</p>
           </div>
-
         </div>
       </div>
       {% endfor %}
