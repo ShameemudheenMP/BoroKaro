@@ -419,3 +419,19 @@ header {
 }
 
 
+.date-input {
+    height: 30px;
+    width: 135px;
+    font-size: small;
+}
+
+.booked-date {
+    width: 350px;
+    height: 35px;
+    background-color: #C8D5FF;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
