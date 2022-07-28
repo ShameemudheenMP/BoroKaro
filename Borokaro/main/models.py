@@ -179,11 +179,7 @@ class Verif(models.Model):
 #search product - done
 #OCR (via OCR space API call)- done
 #search filter (partially done, need to add geolocation feature for range filter) - done
-<<<<<<< HEAD
-#correct filter button shape in home page
-=======
 #correct filter button shape in home page - done
->>>>>>> 96131029eb56d1631b68a3a92469f06490f8b51e
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
 #activity page il sorting options add aakkenam
