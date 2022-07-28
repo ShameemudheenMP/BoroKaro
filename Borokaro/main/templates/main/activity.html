@@ -291,7 +291,29 @@
           <div class="d-flex">
             <a href="/product/{{comment.product.id}}" class="h6">{{comment.product.p_name}}</a>
             <p class="my-auto ms-2 text-muted medium-font">{{comment.time}}</p>
-            <a href="#" class="ms-auto"><i class="bi bi-trash-fill text-dark float-end"></i></a>
+            <!-- this link will open a pop up -->
+            <a href="#" class="ms-auto" data-bs-toggle="modal" data-bs-target="#commentDeleteConfirm" style="font-size: 18px;"><i class="bi bi-trash-fill text-dark float-end"></i></a>
+
+            <!-- pop up div -->
+            <div class="modal fade" id="commentDeleteConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure to delete your comment
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <!-- put link here -->
+                    <a href="" class="btn btn-danger btn-sm">Confirm</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
           <div class="comment-content pt-1 row">
             <p style="font-size: 14px; white-space: break-spaces;" class="mb-0">{{comment.content}}</p>

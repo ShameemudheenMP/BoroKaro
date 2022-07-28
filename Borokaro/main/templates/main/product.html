@@ -26,8 +26,9 @@
                 <a href="/profile/{{ product.user.id }}" class="mx-auto">{{ product.user.name }}</a>
               </div>
               <div style="width:20%">
-                <a href="/reportuser/{{ product.user.id }}"
-                  class="btn btn-sm btn-danger medium-font float-end">REPORT</a>
+                {% if product.user.id != userid %}
+                  <a href="/reportuser/{{ product.user.id }}" class="btn btn-sm btn-danger medium-font float-end"><i class="bi bi-exclamation-octagon me-1"></i>REPORT</a>
+                {% endif %}
               </div>
             </div>
             <p class="mb-1">{{ product.user.address }}</p>
@@ -36,7 +37,27 @@
           <div>
             {% if product.user.id == userid %}
             <div class="d-flex justify-content-center pb-5">
-              <a href="" class="btn btn-danger btn">DELETE PRODUCT</a>
+              <!-- do not put link here, this is button to pop up menu for confirmation -->
+              <button class="btn btn-danger btn" data-bs-toggle="modal" data-bs-target="#confirmDelete">DELETE PRODUCT</button>
+            </div>
+            <!-- pop up for delete confirmation -->
+            <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeletelLabel">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure to delete your product
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <!-- put path link here -->
+                    <a href="#" type="button" class="btn btn-danger btn-sm">Confirm</a>
+                  </div>
+                </div>
+              </div>
             </div>
             {% endif %}
             {% if not product.user.id == userid %}
@@ -94,9 +115,9 @@
       </div>
     </div>
     <div class="prod-img">
-      <div class="card justify-content-center ps-3 pe-3 shadow" style="width: 35rem; height: 510px;">
+      <div class="card justify-content-center shadow" style="width: 35rem; height: 510px;">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%">
-          <div class="carousel-inner" style="height: 400px;">
+          <div class="carousel-inner px-4" style="height: 400px;">
             <div class="carousel-item active justify-content-center w-100 h-100" data-bs-interval="5000">
               <img src="{{ product.p_image1.url }}" class="d-block w-100 h-100 card-imgs" alt="Image1">
             </div>
@@ -114,13 +135,11 @@
           {% if product.p_image2.url != NULL %}
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
             data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <i class="bi bi-chevron-left text-dark" style="font-size: 23px;"></i>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
             data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <i class="bi bi-chevron-right text-dark" style="font-size: 23px;"></i>
           </button>
           {% endif %}
         </div>
@@ -135,53 +154,57 @@
   </div>
 
   <!-- Bookings -->
-  <div class="d-flex justify-content-center  pb-4 pt-4 pt-lg-0">
-    <div style="width: 84%">
-      <h5 class="fw-bold">Bookings</h5>
-      <!-- bookings loop here -->
-      <div class="card shadow mb-1" style="width: 100%">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-4 d-flex align-items-center">
-              <a href="#">Username</a>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="d-flex booked-date">
-                <p class="mb-0 me-2"><b>5</b> Days, </p>
-                <p class="mb-0">From <b>22-04-2022</b> To <b>25-05-2022</b></p>
+  {% if product.user.id == user.id %}
+    <div class="d-flex justify-content-center  pb-4 pt-4 pt-lg-0">
+      <div style="width: 84%">
+        <h5 class="fw-bold">Bookings</h5>
+        <!-- bookings loop here -->
+        <div class="card shadow mb-1" style="width: 100%">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4 d-flex align-items-center">
+                <a href="#">Username</a>
               </div>
-            </div>
-            <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-secondary d-flex align-items-center">
-                <small><i>06:40 PM 27/07/2022</i></small>
-            </div>
+              <div class="col-12 col-md-6">
+                <div class="d-flex booked-date">
+                  <p class="mb-0 me-2"><b>5</b> Days, </p>
+                  <p class="mb-0">From <b>22-04-2022</b> To <b>25-05-2022</b></p>
+                </div>
+              </div>
+              <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-secondary d-flex align-items-center">
+                  <small><i>06:40 PM 27/07/2022</i></small>
+              </div>
 
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="card shadow mb-1" style="width: 100%">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-4  d-flex align-items-center">
-              <a href="#">Username</a>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="d-flex booked-date">
-                <p class="mb-0 me-2"><b>5</b> Days, </p>
-                <p class="mb-0">From <b>22-04-2022</b> To <b>25-05-2022</b></p>
+        <div class="card shadow mb-1" style="width: 100%">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4  d-flex align-items-center">
+                <a href="#">Username</a>
               </div>
-            </div>
-            <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-secondary d-flex align-items-center">
-                <small><i>06:40 PM 27/07/2022</i></small>
-            </div>
+              <div class="col-12 col-md-6">
+                <div class="d-flex booked-date">
+                  <p class="mb-0 me-2"><b>5</b> Days, </p>
+                  <p class="mb-0">From <b>22-04-2022</b> To <b>25-05-2022</b></p>
+                </div>
+              </div>
+              <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-secondary d-flex align-items-center">
+                  <small><i>06:40 PM 27/07/2022</i></small>
+              </div>
 
+            </div>
           </div>
         </div>
+        
       </div>
-      
     </div>
+  {% endif %}
 
-  </div>
+
+
   <!-- comments -->
   <div class="d-flex justify-content-center  pb-4">
     <div style="width: 84%;">
@@ -203,8 +226,10 @@
       </div>
       <!-- Comments loop here -->
       {% if not com %}
-      <div class="card comment-card" id="" name="" style="height: 50px; width: 100%;">
-        <h6 class="ps-2 my-auto">No comments posted yet!</h6>
+      <div class="card comment-card shadow" id="" name="" style="height: 50px; width: 100%;">
+        <div class="card-body">
+          <h6 class="ps-2 my-auto">No comments posted yet!</h6>
+        </div>
       </div>
       {% else %}
       {% for comment in comments %}
@@ -214,7 +239,29 @@
           <div class="d-flex">
             <h6 class="card-title fw-bold mb-3" id="chat-user-name" name=""><a href="/profile/{{ comment.user.id }}">{{comment.user.name }}</a></h6>
             {% if comment.user.id == userid %}
-            <a href="#" class="ms-auto"><i class="bi bi-trash-fill text-dark"></i></a>
+            <!-- do not put link here, this is button to pop up menu for confirmation -->
+            <a href="#" class="ms-auto"  data-bs-toggle="modal" data-bs-target="#commentDeleteConfirm" style="font-size: 18px;"><i class="bi bi-trash-fill text-dark"></i></a>
+            
+            <!-- pop up div -->
+            <div class="modal fade" id="commentDeleteConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure to delete your comment
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <!-- put link here -->
+                    <a href="" class="btn btn-danger btn-sm">Confirm</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {% endif %}
           </div>
           
@@ -225,7 +272,7 @@
             <!-- date is here -->
             <p class="text-muted mb-0 medium-font" name="">{{comment.time}}</p>
             {% if comment.user.id != userid %}
-            <a type="button" class="btn btn-sm btn-danger" href="/reportcomment/{{ comment.id }}">Report Comment</a>
+            <a type="button" class="btn btn-sm btn-danger" href="/reportcomment/{{ comment.id }}"><i class="bi bi-exclamation-octagon me-1"></i>Report</a>
             {% endif %}
           </div>
         </div>

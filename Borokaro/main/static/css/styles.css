@@ -92,7 +92,7 @@ header {
 }
 
 
-.btn{
+.btn, .btn-close{
     box-shadow: none !important;
 }
 
@@ -399,7 +399,7 @@ header {
 
 #searchProduct {
     font-size: 14px; 
-    background-color: #E8EDFF; 
+    /* background-color: #E8EDFF;  */
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
@@ -409,7 +409,7 @@ header {
     font-size: 14px !important;
 }
 .ui-widget-content li :hover {
-    background-color: #264ECA !important;
+    /* background-color: #264ECA !important; */
     border-radius: 4px !important;
 }
 
@@ -418,6 +418,25 @@ header {
     border-radius: 1px !important;
 }
 
+.carousel-control-prev, .carousel-control-next {
+    width: 23px;
+    height: 80px;
+    background-color: #e7e4e4;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.carousel-control-prev {
+    border-radius: 0px 3px 3px 0px;
+}
+
+.carousel-control-next {
+    border-radius: 3px 0px 0px 3px;
+}
+
+/* .carousel-control-prev :active, .carousel-control-next :active{
+    background-color: #000000 !important;
+} */
 
 .date-input {
     height: 30px;

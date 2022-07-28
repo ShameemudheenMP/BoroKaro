@@ -50,7 +50,7 @@
             <!-- this is when he/she view other profiles -->
             {% if prof_user.id != userid %}
             <div class="d-flex align-items-center">
-                <a class="btn btn-sm btn-danger" href="/reportuser/{{ prof_user.id }}">REPORT USER</a>
+                <a class="btn btn-sm btn-danger" href="/reportuser/{{ prof_user.id }}"><i class="bi bi-exclamation-octagon me-1"></i>REPORT</a>
             </div>
             {% endif %}
             
