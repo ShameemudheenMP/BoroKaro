@@ -180,6 +180,8 @@ class Verif(models.Model):
 #OCR (via OCR space API call)- done
 #search filter (partially done, need to add geolocation feature for range filter) - done
 #correct filter button shape in home page - done
+#add booking feature
+#fix logic in ocr - check if address entered is present in ocr extracted text
 #CHAT
 #OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
 #activity page il sorting options add aakkenam
