@@ -105,19 +105,24 @@ def product(request, idn):
     userid = int(request.user.id)
     comments = Comment.objects.filter(product = product).order_by('-created_at')
     wishreq = Wishlist.objects.filter(user=request.user, product = product)
+    bookings = PReq.objects.filter(product = product, status = 7).order_by('-created_at')
     com = 0
     wish = 0
+    booked = 0
     if comments:
         com = 1
     if wishreq:
         wish = 1
+    if bookings:
+        booked = 1
     try:
         reqs = PReq.objects.filter(borrower = request.user,  product = product)
         req = reqs.latest('created_at')
         status = int(req.status)
     except ObjectDoesNotExist:
         status = 1
-    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status,'comments':comments,'com':com,'wish':wish})
+    return render(request, 'main/product.html',{'product':product,'userid':userid, 'status':status,'comments':comments,
+    'com':com,'wish':wish,'booked':booked,'bookings':bookings})
 
 @login_required(login_url='/login')
 def lend(request):
@@ -265,7 +270,7 @@ def activity(request):
     for req in reqs:
         if req.status == 0:
             pend = 1
-        elif req.status == 1 or req.status == 3 or req.status == 5 or req.status == 6:
+        elif req.status == 1 or req.status == 3 or req.status == 5 or req.status == 6 or req.status == 7:
             acc = 1
         elif req.status == 2:
             dec = 1
@@ -275,18 +280,39 @@ def activity(request):
 
 @login_required(login_url='/login')
 def borrow(request, idn):
-    d = 0
-    if 'days' in request.POST:
-        d = int(request.POST.get('days'))
+    if 'from-date' in request.POST:
+        from_date_string = request.POST.get('from-date')
+    if 'to-date' in request.POST:
+        to_date_string = request.POST.get('to-date')
+    if from_date_string[5] == '0':
+        from_date_string = from_date_string[0:5:]+from_date_string[6::]
+    if to_date_string[5] == '0':
+        to_date_string = to_date_string[0:5:]+to_date_string[6::]
+    from_date = datetime.datetime.strptime(from_date_string, "%Y-%m-%d").date()
+    to_date = datetime.datetime.strptime(to_date_string, "%Y-%m-%d").date()
+    fromstring = datetime.datetime.strptime(from_date_string, "%Y-%m-%d").strftime('%d/%m/%Y')
+    tostring = datetime.datetime.strptime(to_date_string, "%Y-%m-%d").strftime('%d/%m/%Y')
     req = PReq()
     req.borrower = request.user
     req.product = Product.objects.get(id=idn)
-    req.days = d
+    req.from_date = from_date
+    req.to_date = to_date
+    req.fromstring = fromstring
+    req.tostring = tostring
+    delta = to_date - from_date
+    req.days = delta.days
     req.save()
     return redirect(reverse('product', kwargs={"idn": idn}))
 
 @login_required(login_url='/login')
 def accept(request, idn):
+    req = PReq.objects.get(id=idn)
+    req.status = 7
+    req.save()
+    return redirect('activity')
+
+@login_required(login_url='/login')
+def prodgiven(request, idn):
     req = PReq.objects.get(id=idn)
     req.status = 1
     idn = req.product.id
@@ -529,6 +555,30 @@ def comment(request,idn):
         com.content = request.POST.get('comment')
         com.save()
         return redirect(reverse('product', kwargs={"idn": idn}))
+    else:
+        pass
+    return None
+
+#delete comment from product view page
+@login_required(login_url='/login')
+def deletecomment(request,idn):
+    if request.method == 'POST':
+        Comment.objects.filter(id=idn).delete()
+        if 'productid' in request.POST:
+            productid = int(request.POST.get('productid'))
+            return redirect(reverse('product', kwargs={"idn": productid}))
+        elif 'activitypage' in request.POST:
+            return redirect('activity')
+    else:
+        pass
+    return None
+
+#delete product from DB
+@login_required(login_url='/login')
+def deleteproduct(request,idn):
+    if request.method == 'POST':
+        Product.objects.filter(id=idn).delete()
+        return redirect('home')
     else:
         pass
     return None

@@ -38,8 +38,9 @@
             <div class="w-100 p-1 pb-0">
               <div class="ps-0">
                 <div class="card rounded-1 day-sticker p-1 d-flex flex-row justify-content-start">
-                    <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 80px;"><i class="bi bi-stopwatch-fill my-auto me-2"></i>{{request.days}} days,</p>
-                    <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 250px;">From 22-04-2022 To 25-05-2022</p>                   
+                    <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 300px;"><i class="bi bi-stopwatch-fill my-auto me-2"></i>
+                      {{request.days}} days - From {{request.fromstring}} To {{request.tostring}}</p>
+                    <!-- <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 250px;">From {{request.fromstring}} To {{request.tostring}}</p> -->
                 </div>
               </div>
             </div>
@@ -85,6 +86,15 @@
           {% if request.status %}
             {% if request.status != 2 %}
               <div class="row bg-white rounded-2 p-2 mx-1 mb-2 shadow" style="height: 100px">
+                <div class="w-100 p-1 pb-0">
+                  <div class="ps-0">
+                    <div class="card rounded-1 day-sticker p-1 d-flex flex-row justify-content-start">
+                        <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 300px;"><i class="bi bi-stopwatch-fill my-auto me-2"></i>
+                        {{request.days}} days - From {{request.fromstring}} To {{request.tostring}}</p>
+                        <!-- <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 250px;">From {{request.fromstring}} To {{request.tostring}}</p> -->
+                    </div>
+                  </div>
+                </div>
                 <div class="col-12 col-lg-2 d-flex align-items-center">
                   <!--ADD LINK TO PROFILE OF BORROWER-->
                   <a href="/profile/{{request.borrower.id}}" id="" class="text-primary user-name-request">{{request.borrower.name}}</a>
@@ -94,7 +104,10 @@
                 </div>
                 <div class="col-12 col-lg-5 d-flex flex-column mt-3">
                   <div class="d-flex justify-content-center align-items-center">
-                    {% if request.status == 1 %}
+                    {% if request.status == 7 %}
+                      <a class="btn btn-success btn-sm me-3 medium-font" href="/prodgiven/{{ request.id }}" role="button">PRODUCT
+                        GIVEN</a>
+                    {% elif request.status == 1 %}
                       <a class="btn btn-primary btn-sm me-3 medium-font" href="/prodreceived/{{ request.id }}" role="button">PRODUCT
                         RECEIVED</a>
                     {% elif request.status == 3 or request.status == 5 %}
@@ -182,7 +195,7 @@
             <a href="/product/{{ele.product.id}}"><h6 class="fw-bold mx-5">{{ele.product.p_name}}</h6></a>
             <div class="d-flex justify-content-start">
               <div class="lender-rating ms-5 mt-2 d-flex">
-                <h6 class="medium-font my-auto">Lender Rating : </h6>
+                <h6 class="medium-font my-auto">Your rating for <a href="/profile/{{ele.lender_id}}">lender</a>: </h6>
                 <div class="d-flex medium-font ms-3">
                     <!-- loop star here -->
                     {% with ''|center:ele.len_rate as range %}
@@ -250,7 +263,7 @@
             <a href="/product/{{ele.product.id}}"><h6 class="fw-bold mx-5">{{ele.product.p_name}}</h6></a>
             <div class="d-flex justify-content-start">
               <div class="lender-rating ms-5 mt-2 d-flex">
-                <h6 class="medium-font my-auto">Borrower Rating : </h6>
+                <h6 class="medium-font my-auto">Your rating for <a href="/profile/{{ele.borrower_id}}">borrower</a>: </h6>
                 <div class="d-flex medium-font ms-3">
                   <!-- loop star here -->
                     {% with ''|center:ele.val as range %}
@@ -303,12 +316,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    Are you sure to delete your comment
+                    Are you sure you want to delete your comment?
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
                     <!-- put link here -->
-                    <a href="" class="btn btn-danger btn-sm">Confirm</a>
+                    <form method="post" action="/deletecomment/{{ comment.id }}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="hidden" id="" name="activitypage" value="1">
+                      <button type="submit" class="btn btn-danger btn-sm">Confirm</button>
+                    </form>
                   </div>
                 </div>
               </div>

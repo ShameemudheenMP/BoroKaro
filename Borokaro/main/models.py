@@ -97,9 +97,14 @@ class Product(models.Model):
 class PReq(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd, 4 for borrower_rated_by_lender,
-    #5 for lender_rated_by_borrower, 6 for both lender and borrower rated each other
+    status = models.IntegerField(default=0)
+    #0 for pending, 1 for accepted booking, 2 for declined, 3 for prod_rcvd, 4 for borrower_rated_by_lender,
+    #5 for lender_rated_by_borrower, 6 for both lender and borrower rated each other, 7 for product given
     days = models.IntegerField(default=0)
+    from_date = models.DateField(null=True)
+    to_date = models.DateField(null=True)
+    fromstring = models.CharField(max_length=12,null=True)
+    tostring = models.CharField(max_length=12,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     time = models.CharField(max_length=20,default=default_start_time)
 
@@ -180,9 +185,9 @@ class Verif(models.Model):
 #OCR (via OCR space API call)- done
 #search filter (partially done, need to add geolocation feature for range filter) - done
 #correct filter button shape in home page - done
-#add booking feature
+#add booking feature - done
+#OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT - done
 #fix logic in ocr - check if address entered is present in ocr extracted text
 #CHAT
-#OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
 #activity page il sorting options add aakkenam
 #a user should not access another user's activity or lend page
