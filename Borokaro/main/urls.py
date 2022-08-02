@@ -17,9 +17,11 @@ urlpatterns = [
     path('actlend/<int:idn>',actlend,name='actlend'),
     path('activity/',activity,name='activity'),
     path('product/borrow/<int:idn>',borrow,name='borrow'),
+    path('deleteproduct/<int:idn>',deleteproduct,name='deleteproduct'),
     path('accept/<int:idn>',accept,name='acceptreq'),
     path('decline/<int:idn>',decline,name='declinereq'),
     path('filterit/',filterit,name='filterit'),
+    path('prodgiven/<int:idn>',prodgiven,name='prodgiven'),
     path('prodreceived/<int:idn>',prodreceived,name='prodreceived'),
     path('reportuser/<int:idn>', reportuser, name='reportuser'),
     path('repous/<int:idn>', repous, name='repous'),
@@ -32,8 +34,11 @@ urlpatterns = [
     path('profile/<int:idn>', profile, name='profile'),
     path('profileedit/<int:idn>', profileedit, name='profileedit'),
     path('comment/<int:idn>',comment,name='comment'),
+    path('deletecomment/<int:idn>',deletecomment,name='deletecomment'),
     path('rateborrower/<int:idn>', rateborrower, name='rateborrower'),
     path('ratelender/<int:idn>', ratelender, name='ratelender'),
+    path('productlist/', productlist, name='productlist'),
+    path('searchProduct/', searchProduct, name='searchProduct'),
 ]
 
 if settings.DEBUG:

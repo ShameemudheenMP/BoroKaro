@@ -3,15 +3,15 @@
 {% block content %}
 <div class="mt-5 pt-4 container-fluid content p-0 m-0 d-flex flex-column align-items-center">
   <h3 class="fw-bold mb-5">ACTIVATE YOUR LENDER ACCOUNT <i class="bi bi-patch-check"></i></h3>
-  <form class="d-flex flex-column align-items-center justify-content-center">
+  <form method="POST" action="/actlend/{{user.id}}"class="d-flex flex-column align-items-center justify-content-center" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="d-flex justify-content-center align-items-center mb-4">
-      <input type="text" class="form-control" id="" placeholder="Enter your Address" style="width: 350px;">
-      <button type="button" class="btn btn-secondary ms-4" style="width: 150px;"><i class="bi bi-geo-alt-fill"></i>
-        ALLOW GPS</button>
+      <input name="address" type="text" class="form-control" id="" placeholder="Enter your Address" style="width: 350px;">
+      <button type="button" class="btn btn-secondary ms-4" style="width: 150px;"><i class="bi bi-geo-alt-fill"></i>ALLOW GPS</button>
     </div>
     <div class="mb-4">
       <label for="formID" class="form-label fw-bold">Upload Your Address Proof:</label>
-      <input class="form-control" type="file" id="formID" style="width: 528px;">
+      <input class="form-control" name="proofimg" type="file" id="formID" style="width: 528px;">
     </div>
     <button type="submit" class="btn btn-success" style="width: 120px;">Submit</button>
   </form>

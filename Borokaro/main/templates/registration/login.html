@@ -8,6 +8,8 @@
     <title>BoroKaro</title>
     <link rel="stylesheet" href="{% static 'css/loginstyles.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
     <div class="login-form">
@@ -21,7 +23,7 @@
                         <img src="{% static 'Assets/email-icon.png' %}" alt="email-icon">
                     </div>
                     <div class="inputbox">
-                        <input type="text" id="email" name="email" class="textinputs" placeholder="EMAIL"><br><br>
+                        <input type="email" id="email" name="email" class="textinputs" placeholder="EMAIL"><br><br>
                     </div>
                 </div><br>
                 <div class="input">
@@ -29,7 +31,7 @@
                         <img src="{% static 'Assets/lock-icon.png' %}" alt="lock-icon">
                     </div>
                     <div class="inputbox">
-                        <input type="password" id="email" name="password" class="textinputs" placeholder="PASSWORD"><br><br>
+                        <input type="password" id="password" name="password" class="textinputs" placeholder="PASSWORD"><br><br>
                     </div>
                 </div><br>
                 <!-- USED TO ALLOW REDIRECTS AFTER LOGIN -->
@@ -38,7 +40,7 @@
                 <!-- <input type="password" id="password" name="password" class="textinputs" placeholder="  &#xf023   PASSWORD"><br><br><br> -->
                 <input type="submit" value="LOGIN" class="submitbutton"><br>
                 <div class="bottom">
-                    <a href="http://" class="forgot">Forgot Password?</a><br><br>
+                    <!-- <a href="http://" class="forgot">Forgot Password?</a><br><br> -->
                     <div><p>Not yet registered?<a href="/signup" style="margin-left:5px ;">SIGN UP</a> </p> </div>
                 </div>
             </form>
@@ -52,5 +54,7 @@
             window.location = "index.html"
         })
     </script> -->
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

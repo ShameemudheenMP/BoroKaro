@@ -1,9 +1,9 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load mathfilters %}
 {% block content %}
 <div class="row container-fluid content p-0 m-0">
-  <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 body-left pt-sm-5 pt-md-2 pt-lg-0 d-flex flex-column"
-    id="act-body-left" style="--bs-gutter-x: none;">
+  <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 body-left pt-sm-5 pt-md-2 pt-lg-0 d-flex flex-column" id="act-body-left" style="--bs-gutter-x: none;">
     <div class="act-nav-option d-flex justify-content-center align-items-center pe-3" id="act-menu-div-1">
       <input type='radio' value='1' name='actvity' id="act-menu-opt-1" onClick="changeColor(this.value)">
       <label for="act-menu-opt-1">Rent Requests</label>
@@ -24,31 +24,39 @@
   <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 body-right">
     <!-- Rent requests section -->
     <div id="rent-requests" class="pt-5 mx-5 px-4 pb-5">
-      <h5 class="blue-text fw-bold mx-1">PENDING REQUESTS</h5>
+      <h5 class="blue-text fw-bold mx-1 mb-3">PENDING REQUESTS</h5>
       <!-- to display no pending requests if there is no pending requests -->
       {% if not pending %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow-sm">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow">
         <h6 class="my-auto">No Pending Requests</h6>
       </div>
       {% else %}
+      <!-- request loop here -->
         {% for request in requests %}
           {% if not request.status %}
-            <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
-              <div class="col-12 d-flex justify-content-start" style="width: 60px; height: 20px; background-color: #C8D5FF;">
-                <h6>{{request.days}} days</h6>
+          <div class="row bg-white rounded-2 p-0 mx-1 mb-2 shadow">
+            <div class="w-100 p-1 pb-0">
+              <div class="ps-0">
+                <div class="card rounded-1 day-sticker p-1 d-flex flex-row justify-content-start">
+                    <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 350px;"><i class="bi bi-stopwatch-fill my-auto me-2"></i>
+                      {{request.days}} days - From {{request.fromstring}} To {{request.tostring}}</p>
+                    <!-- <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 250px;">From {{request.fromstring}} To {{request.tostring}}</p> -->
+                </div>
               </div>
+            </div>
+            <div class="row pe-0" style="height: 100px">
               <div class="col-12 col-lg-2 d-flex flex-column align-items-start">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
-                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary my-auto">{{request.borrower.name}}</a>
+                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary my-auto user-name-request">{{request.borrower.name}}</a>
               </div>
               <div class="col-12 col-lg-5 d-flex align-items-center">
-                <h5 class="fw-bold mx-5">{{request.product.p_name}} </h5>
+                <a href="/product/{{ request.product.id }}" class="h5 fw-bold mx-5 text-decoration-none text-dark">{{request.product.p_name}} </a>
               </div>
-              <div class="col-12 col-lg-5 d-flex flex-column mt-3">
+              <div class="col-12 col-lg-5 d-flex flex-column mt-3 pt-2">
                 <div class="d-flex justify-content-center align-items-center">
-                  <a class="btn btn-sm btn-primary me-3" href="#" role="button">CHAT</a>
-                  <a class="btn btn-sm btn-success me-3" href="/accept/{{ request.id }}" role="button">ACCEPT</a>
-                  <a class="btn btn-sm btn-danger me-3" href="/decline/{{ request.id }}" role="button">DECLINE</a>
+                  <!-- <a class="btn btn-sm btn-primary me-3 medium-font" href="#" role="button">CHAT</a> -->
+                  <a class="btn btn-sm btn-success me-3 medium-font" href="/accept/{{ request.id }}" role="button">ACCEPT</a>
+                  <a class="btn btn-sm btn-danger me-3 medium-font" href="/decline/{{ request.id }}" role="button">DECLINE</a>
                 </div>
                 <!-- time and date -->
                 <div class="d-flex justify-content-end mt-3" style="height: 25px;">
@@ -56,49 +64,64 @@
                 </div>
               </div>
             </div>
+          </div>
           {% endif %}
         {% endfor %}
       {% endif %}
 
-      <div class="d-flex mx-1 mt-4">
+      <div class="d-flex mx-1 mt-5">
         <h5 class="blue-text fw-bold me-auto">ACCEPTED REQUESTS</h5>
-        <label for="acc-req-filter" class="me-2 my-auto fw-bold">Order by</label>
+        <!-- <label for="acc-req-filter" class="me-2 my-auto fw-bold">Order by</label>
         <select name="" id="acc-req-filter" class="form-select mb-2" style="width: 200px;">
           <option value="NewToOldest">New To Oldest</option>
-        </select>
+        </select> -->
       </div>
       <!-- to display no accepted requests if there is no accepted requests -->
       {% if not accepted %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow-sm">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow">
         <h6 class="my-auto">No Accepted Requests</h6>
       </div>
       {% else %}
         {% for request in requests %}
           {% if request.status %}
             {% if request.status != 2 %}
-              <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+              <div class="row bg-white rounded-2 p-2 mx-1 mb-2 shadow">
+                <div class="w-100 p-1 pb-0">
+                  <div class="ps-0">
+                    <div class="card rounded-1 day-sticker p-1 d-flex flex-row justify-content-start">
+                        <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 300px;"><i class="bi bi-stopwatch-fill my-auto me-2"></i>
+                        {{request.days}} days - From {{request.fromstring}} To {{request.tostring}}</p>
+                        <!-- <p class="h6 fw-bold mb-0 text-black text-wrap m-0 medium-font" style="width: 250px;">From {{request.fromstring}} To {{request.tostring}}</p> -->
+                    </div>
+                  </div>
+                </div>
                 <div class="col-12 col-lg-2 d-flex align-items-center">
                   <!--ADD LINK TO PROFILE OF BORROWER-->
-                  <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
+                  <a href="/profile/{{request.borrower.id}}" id="" class="text-primary user-name-request">{{request.borrower.name}}</a>
                 </div>
                 <div class="col-12 col-lg-5 d-flex align-items-center">
-                  <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
+                  <a href="/product/{{ request.product.id }}" class="h5 fw-bold mx-5 text-dark text-decoration-none">{{request.product.p_name}}</a>
                 </div>
                 <div class="col-12 col-lg-5 d-flex flex-column mt-3">
                   <div class="d-flex justify-content-center align-items-center">
-                    {% if request.status == 1 %}
-                      <a class="btn btn-primary btn-sm me-3" href="/prodreceived/{{ request.id }}" role="button">PRODUCT
+                    {% if request.status == 7 %}
+                      <a class="btn btn-success btn-sm me-3 medium-font" href="/prodgiven/{{ request.id }}" role="button">PRODUCT
+                        GIVEN</a>
+                    {% elif request.status == 1 %}
+                      <a class="btn btn-primary btn-sm me-3 medium-font" href="/prodreceived/{{ request.id }}" role="button">PRODUCT
                         RECEIVED</a>
+                    {% elif request.status == 3 or request.status == 5 %}
+                      <!-- enable rate borrower -->
+                      <a class="btn btn-sm btn-success me-3 medium-font" href="/rateborrower/{{request.id}}">RATE BORROWER</a>
                     {% else %}
-                      <!-- rate borrower -->
-                      <a class="btn btn-sm btn-success me-3" href="/rateborrower">RATE BORROWER</a>
+                      <!-- disable rate borrower -->
+                      <a class="btn btn-sm btn-secondary me-3" href="">RATE BORROWER</a>
                     {% endif %}
-                    <a class="btn btn-danger btn-sm me-3" href="/reportuser/{{ request.borrower.id }}" role="button">REPORT
-                      USER</a>
+                    <a class="btn btn-danger btn-sm me-3 medium-font" href="/reportuser/{{ request.borrower.id }}" role="button">REPORT USER</a>
                   </div>
                   <!-- time and date -->
                   <div class="d-flex justify-content-end mt-3" style="height: 25px;">
-                    <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>{{request.time}}</em></p>
+                    <p class="me-2 text-secondary my-auto mb-0 user-name-request"><em>{{request.time}}</em></p>
                   </div>
                 </div>
               </div>
@@ -106,35 +129,35 @@
           {% endif %}
         {% endfor %}
       {% endif %}
-      <div class="d-flex mx-1 mt-4">
+      <div class="d-flex mx-1 mt-5">
         <h5 class="blue-text fw-bold me-auto">DECLINED REQUESTS</h5>
-        <label for="acc-req-filter" class="me-2 my-auto fw-bold">Order by</label>
+        <!-- <label for="acc-req-filter" class="me-2 my-auto fw-bold">Order by</label>
         <select name="" id="dec-req-filter" class="form-select mb-2" style="width: 200px;">
           <option value="NewToOldest">New To Oldest</option>
-        </select>
+        </select> -->
       </div>
       <!-- to display no declined requests if there is no declined requests -->
       {% if not declined %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow">
         <h6 class="my-auto">No Declined Requests</h6>
       </div>
       {% else %}
         {% for request in requests %}
           {% if request.status == 2 %}
-            <div class="row bg-white rounded-2 p-3 mx-1">
+            <div class="row bg-white rounded-2 p-2 mx-1 shadow mb-2" style="height: 80px">
               <div class="col-12 col-lg-2 d-flex align-items-center">
                 <!--ADD LINK TO PROFILE OF BORROWER-->
-                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary">{{request.borrower.name}}</a>
+                <a href="/profile/{{request.borrower.id}}" id="" class="text-primary my-auto user-name-request">{{request.borrower.name}}</a>
               </div>
 
               <div class="col-12 col-lg-6 d-flex align-items-center">
-                <h5 class="fw-bold mx-5">{{request.product.p_name}}</h5>
+                <a href="/product/{{ request.product.id }}" class="fw-bold mx-5 my-auto text-dark text-decoration-none">{{request.product.p_name}}</a>
               </div>
 
-              <div class="col-12 col-lg-4 d-flex flex-column mt-3">
+              <div class="col-12 col-lg-4 d-flex justify-content-end flex-column">
                 <!-- time and date -->
-                <div class="d-flex justify-content-end mt-3" style="height: 25px;">
-                  <p class="me-2 text-secondary my-auto" style="font-size: 14px;"><em>{{request.time}}</em></p>
+                <div class="d-flex justify-content-end" style="height: 25px;">
+                  <p class="me-2 text-secondary my-auto user-name-request"><em>{{request.time}}</em></p>
                 </div>
               </div>
             </div>
@@ -148,132 +171,205 @@
     <div id="ratings" class="pt-1 mx-5 px-4 pb-5">
       <div class="d-flex mx-1 mt-5">
         <h5 class="blue-text fw-bold me-auto">BORROWED</h5>
-        <div class="d-flex justify-content-between mb-2">
+        <!-- <div class="d-flex justify-content-between mb-2">
           <label for="borrowed-filter" class="me-2 my-auto fw-bold">Order by</label>
           <select name="" id="borrowed-filter" class="form-select" style="width: 200px;">
             <option value="NewToOldest">New To Oldest</option>
           </select>
-        </div>
+        </div> -->
       </div>
       <!-- borrow ratings loop here -->
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
+      {% if not len %}
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow">
+        <h6 class="my-auto">You have not rated any lenders/products yet!</h6>
+      </div>
+      {% else %}
+      {% for ele in borrowed_list %}
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
-          <img src="{% static 'Assets/ProductImages/Product8-1.jpg' %}" alt="porduct-image"
+          <img src="{{ele.product.p_image1.url}}" alt="porduct-image"
             class="rounded card-img-activity">
         </div>
         <div class="d-flex align-items-center flex-fill">
           <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
-            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
+            <a href="/product/{{ele.product.id}}"><h6 class="fw-bold mx-5">{{ele.product.p_name}}</h6></a>
             <div class="d-flex justify-content-start">
               <div class="lender-rating ms-5 mt-2 d-flex">
-                <h6 class="medium-font my-auto">Lender Rating : </h6>
+                <h6 class="medium-font my-auto">Your rating for <a href="/profile/{{ele.lender_id}}">lender</a>: </h6>
                 <div class="d-flex medium-font ms-3">
-                  <!-- loop star here -->
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                    <!-- loop star here -->
+                    {% with ''|center:ele.len_rate as range %}
+                      {% for _ in range %}
+                        <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                      {% endfor %}
+                    {% endwith %}
+                    {% with 5|sub:ele.len_rate as n %}
+                      {% for i in n|get_range %}
+                        <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                      {% endfor %}
+                    {% endwith %}
                 </div>
               </div>
               <div class="lender-rating ms-5 mt-2 d-flex">
                 <h6 class="medium-font my-auto">Product Rating :</h6>
                 <div class="d-flex medium-font ms-3">
                   <!-- loop star here -->
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                    {% with ''|center:ele.prod_rate as range %}
+                      {% for _ in range %}
+                        <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                      {% endfor %}
+                    {% endwith %}
+                    {% with 5|sub:ele.prod_rate as n %}
+                      {% for i in n|get_range %}
+                        <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                      {% endfor %}
+                    {% endwith %}
                 </div>
               </div>
             </div>
             <div class="d-flex justify-content-end">
-              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
+              <p class="text-muted mb-auto medium-font"><em>{{ele.time}}</em></p>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
+      {% endif %}
 
       <!-- lent ratings -->
       <div class="d-flex mx-1 mt-5">
         <h5 class="blue-text fw-bold me-auto">LENT</h5>
-        <div class="d-flex justify-content-between mb-2">
+        <!-- <div class="d-flex justify-content-between mb-2">
           <label for="lend-filter" class="me-2 my-auto fw-bold">Order by</label>
           <select name="" id="lend-filter" class="form-select" style="width: 200px;">
             <option value="NewToOldest">New To Oldest</option>
           </select>
-        </div>
+        </div> -->
       </div>
-
-      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow-sm" style="height: 120px">
+      <!-- lent ratings loop here -->
+      {% if not bor %}
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow">
+        <h6 class="my-auto">You have not rated any borrowers yet!</h6>
+      </div>
+      {% else %}
+      {% for ele in lent_list %}
+      <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-start mb-2 shadow" style="height: 120px">
         <div class="d-flex align-items-center" style="width: 120px; height: 90px;">
-          <img src="{% static 'Assets/ProductImages/Product3-1.jpg' %}" alt="porduct-image"
+          <img src="{{ele.product.p_image1.url}}" alt="porduct-image"
             class="card-img-activity rounded">
         </div>
         <div class="d-flex align-items-center flex-fill">
           <div class="mt-sm-3 mt-md-0 d-flex flex-column flex-fill">
-            <h6 class="fw-bold mx-5">DELL OptiPlex 7490 All-in-One Monitor Black </h6>
+            <a href="/product/{{ele.product.id}}"><h6 class="fw-bold mx-5">{{ele.product.p_name}}</h6></a>
             <div class="d-flex justify-content-start">
               <div class="lender-rating ms-5 mt-2 d-flex">
-                <h6 class="medium-font my-auto">Borrower Rating : </h6>
+                <h6 class="medium-font my-auto">Your rating for <a href="/profile/{{ele.borrower_id}}">borrower</a>: </h6>
                 <div class="d-flex medium-font ms-3">
                   <!-- loop star here -->
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
-                  <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                    {% with ''|center:ele.val as range %}
+                      {% for _ in range %}
+                        <p class="my-auto"><i class="bi bi-star-fill text-primary me-1"></i></p>
+                      {% endfor %}
+                    {% endwith %}
+                    {% with 5|sub:ele.val as n %}
+                      {% for i in n|get_range %}
+                        <p class="my-auto"><i class="bi bi-star text-primary me-1"></i></p>
+                      {% endfor %}
+                    {% endwith %}
                 </div>
               </div>
             </div>
             <div class="d-flex justify-content-end">
-              <p class="text-muted mb-auto medium-font"><em>15/01/2022</em></p>
+              <p class="text-muted mb-auto medium-font"><em>{{ele.time}}</em></p>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
+      {% endif %}
 
     </div>
 
     <!-- comments -->
     <div id="comments" class="pt-5 px-4 mx-5 pb-5">
       <!-- comment loop here -->
+      {% if not com %}
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow">
+        <h6 class="my-auto">You have not made any comments yet!</h6>
+      </div>
+      {% else %}
       {% for comment in comments %}
-      <div class="card mb-2 p-3">
+      <div class="card mb-2 p-3 shadow">
         <div class="card-body p-0">
           <div class="d-flex">
             <a href="/product/{{comment.product.id}}" class="h6">{{comment.product.p_name}}</a>
             <p class="my-auto ms-2 text-muted medium-font">{{comment.time}}</p>
-          </div>
-          <div class="comment-content pt-1">
-            <p style="font-size: 14px;" class="mb-0">
-              {{comment.content}}
-            </p>
-          </div>
+            <!-- this link will open a pop up -->
+            <a href="#" class="ms-auto" data-bs-toggle="modal" data-bs-target="#commentDeleteConfirm" style="font-size: 18px;"><i class="bi bi-trash-fill text-dark float-end"></i></a>
 
+            <!-- pop up div -->
+            <div class="modal fade" id="commentDeleteConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete your comment?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    <!-- put link here -->
+                    <form method="post" action="/deletecomment/{{ comment.id }}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="hidden" id="" name="activitypage" value="1">
+                      <button type="submit" class="btn btn-danger btn-sm">Confirm</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="comment-content pt-1 row">
+            <p style="font-size: 14px; white-space: break-spaces;" class="mb-0">{{comment.content}}</p>
+          </div>
         </div>
       </div>
       {% endfor %}
+      {% endif %}
     </div>
 
     <!-- Rent Lists -->
     <div id="rent-lists" class="pt-5 px-4 mx-5 pb-5">
       <!-- Rent list loop here -->
       {% if not bacc %}
-      <div class="row bg-white rounded-2 p-3 mx-1 mb-2">
+      <div class="row bg-white rounded-2 p-3 mx-1 mb-2 shadow">
         <h6 class="my-auto">No rent history yet!</h6>
       </div>
       {% else %}
         {% for request in breqs %}
-        {% if request.status == 1 or request.status == 3 %}
-          <div class="bg-white rounded-3 p-3 d-flex align-items-center justify-content-between mb-2">
-            <a href="/product/{{request.product.id}}" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">{{request.product.p_name}} </a>
-            <div class="me-3 ms-3">
-            <a href="/ratelender/{{request.product.id}}" class="btn btn-primary small-btn shadow-lg">RATE PRODUCT</a>
-            </div>
-            <p class="text-muted medium-font m-0"><em>{{request.time}}</em></p>
+        {% if request.status == 1 or request.status == 3 or request.status == 4 or request.status == 5 or request.status == 6 %}
+        <div class="row bg-white rounded-3 p-3 d-flex align-items-center mb-2">
+          <div class="col-8">
+            <a href="/product/{{request.product.id}}" class="h6 fw-bold mb-0 text-decoration-none text-dark flex-grow-1">{{request.product.p_name}}</a>
           </div>
+          <div class="col-4 d-flex justify-content-between pe-0">
+            {% if request.status == 1 or request.status == 3 or request.status == 4 %}
+            <div class="me-3 ms-3 d-flex justify-content-between">
+              <a href="/ratelender/{{request.id}}" class="btn btn-primary small-btn shadow-lg">RATE PRODUCT</a>
+            </div>
+            {% elif request.status == 5 or request.status == 6 %}
+            <div class="me-3 ms-3 d-flex justify-content-between">
+            <a href="" class="btn btn-secondary small-btn shadow-lg disabled">RATE PRODUCT</a>
+            </div>
+            {% endif %}
+            <div class="d-flex flex-column justify-content-end">
+              <p class="text-muted medium-font m-0"><em>{{request.time}}</em></p>
+            </div>
+          </div>
+        </div>
         {% endif %}
         {% endfor %}
       {% endif %}
@@ -281,4 +377,11 @@
 
   </div>
 </div>
+<!-- scroll to top button -->
+<button type="button" class="btn btn-primary btn-floating btn-lg rounded-circle shadow" id="btn-back-to-top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<script src="{% static 'js/scrollup.js' %}"></script>
+<script src="{% static 'js/activitiyselect.js' %}"></script>
 {% endblock %}

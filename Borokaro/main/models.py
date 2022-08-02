@@ -1,3 +1,5 @@
+import pathlib
+import uuid
 from calendar import month
 from enum import auto
 from operator import mod
@@ -5,6 +7,7 @@ from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from datetime import datetime
+from django.utils.timezone import now
 
 def default_start_time():
     now = datetime.now()
@@ -48,27 +51,13 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     """User model."""
-    #u_id = models.AutoField("User ID", primary_key=True)
     username = None
     u_type = models.IntegerField(default=0)
     name = models.CharField(max_length=26)
     email = models.EmailField(unique=True)
-    phoneno = models.CharField(max_length=11, blank=True)
-    STATE_CHOICES = [
-        ('KL','Kerala'),
-        ('TN','Tamilnadu'),
-        ('KA','Karnataka')
-    ]
-    state = models.CharField(max_length=2,choices=STATE_CHOICES,default='KL')
-
-    DISTRICT_CHOICES = [
-        ('TVM','Thiruvananthapuram'),
-        ('KLM','Kollam'),
-        ('KTM','Kottayam'),
-        ('MPM','Malappuram')
-    ]
-
-    district = models.CharField(max_length=3,choices=DISTRICT_CHOICES,default='TVM')
+    phoneno = models.CharField(max_length=11)
+    state = models.CharField(max_length=28)
+    district = models.CharField(max_length=28)
     address = models.CharField(max_length=90,default='',blank=True)
     len_rate = models.IntegerField(default=0)
     bor_rate = models.IntegerField(default=0)
@@ -82,14 +71,19 @@ class User(AbstractUser):
     def __str__(self):
         return "%d" % (self.id)
 
+def product_image_upload_handler(instance, filename):
+    fpath = pathlib.Path(filename)
+    new_fname = str(uuid.uuid1())
+    return f"uploads/{new_fname}{fpath.suffix}"
+
 class Product(models.Model):
     p_name = models.CharField(max_length=50)
     p_rate = models.IntegerField(default=0)
     p_desc = models.CharField(max_length=90)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    p_image1 = models.ImageField(upload_to = 'uploads/',blank=True)
-    p_image2 = models.ImageField(upload_to = 'uploads/',blank=True)
-    p_image3 = models.ImageField(upload_to = 'uploads/',blank=True)
+    p_image1 = models.ImageField(upload_to = product_image_upload_handler,blank=True)
+    p_image2 = models.ImageField(upload_to = product_image_upload_handler,blank=True)
+    p_image3 = models.ImageField(upload_to = product_image_upload_handler,blank=True)
     date =  models.DateField(auto_now=False, auto_now_add=False)
     status = models.IntegerField(default=0) #0 for available, 1 for not available
     rating = models.IntegerField(default=0)
@@ -103,8 +97,14 @@ class Product(models.Model):
 class PReq(models.Model):
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.IntegerField(default=0) #0 for pending, 1 for accepted, 2 for declined, 3 for prod_rcvd, 4 for product_rated
+    status = models.IntegerField(default=0)
+    #0 for pending, 1 for accepted booking, 2 for declined, 3 for prod_rcvd, 4 for borrower_rated_by_lender,
+    #5 for lender_rated_by_borrower, 6 for both lender and borrower rated each other, 7 for product given
     days = models.IntegerField(default=0)
+    from_date = models.DateField(null=True)
+    to_date = models.DateField(null=True)
+    fromstring = models.CharField(max_length=12,null=True)
+    tostring = models.CharField(max_length=12,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     time = models.CharField(max_length=20,default=default_start_time)
 
@@ -132,22 +132,31 @@ class Wishlist(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+#oru lender oru borrower ine rate cheyyaan vendi ulla table
 class BorrowerRating(models.Model):
     lender = models.ForeignKey(User, on_delete=models.CASCADE)
     borrower_id = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    val = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=now)
     time = models.CharField(max_length=20,default=default_start_time)
 
-class LenderRating(models.Model):
-    borrower = models.ForeignKey(User, on_delete=models.CASCADE)
-    lender_id = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    time = models.CharField(max_length=20,default=default_start_time)
+#oru borrower oru lender ine rate cheyyaan vendi ulla table
 
 class ProductRating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    borrower = models.ForeignKey(User, on_delete=models.CASCADE)
+    lender_id = models.IntegerField(default=0)
+    len_rate = models.IntegerField(default=0)
+    prod_rate = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=now)
+    time = models.CharField(max_length=20,default=default_start_time)
+
+class Verif(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    image = models.FileField(upload_to =product_image_upload_handler,blank=True)
+    created_at = models.DateTimeField(default=now)
+    time = models.CharField(max_length=20,default=default_start_time)
 
 #login required for all pages other than home page - done
 #USER SHOULD NOT REQUEST HIS OWN PRODUCT - DONE
@@ -162,12 +171,23 @@ class ProductRating(models.Model):
 #profile page - done & edit profile - done partially (state,district not fixed)
 #only activated lenders can lend products - done
 #WISHLIST - done
-#rent history - done + rent history il ninnu rate product option
+#rent history - done + rent history il ninnu rate product option - done
 #comments in activity - done
-#RATINGS
-#ratings kanikkumbo athinte koode user count bracket il kanikkenam
-#OCR
-#SEARCH FILTER, REQUEST FILTER, RENT HISTORY FILTER
+#rate borrower, product, lender - done
+#profile page visit cheyyumbo borrower_rating and lender_rating update aakkenam - done
+#ratings kanikkumbo athinte koode user count bracket il kanikkenam - done
+#home page visit cheyyumbo product inte recent ratings update aakkenam - done
+#rent requests in activity page - request inte number of days okke proper align cheyyanam - done
+#product page il rating count kanikkenam - done
+#sign up page il state and districts dynamic aakkenam + edit profile page il um - done
+#ratings in activity - done
+#search product - done
+#OCR (via OCR space API call)- done
+#search filter (partially done, need to add geolocation feature for range filter) - done
+#correct filter button shape in home page - done
+#add booking feature - done
+#OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT - done
+#fix logic in ocr - check if address entered is present in ocr extracted text
 #CHAT
-#OWNER CAN DELETE A PRODUCT AND USER CAN REMOVE HIS COMMENT
+#activity page il sorting options add aakkenam
 #a user should not access another user's activity or lend page
