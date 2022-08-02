@@ -4,6 +4,7 @@ import re
 from winreg import HKEY_LOCAL_MACHINE
 from django.shortcuts import redirect, render
 from .models import *
+from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
@@ -76,8 +77,8 @@ def sign_up(request):
             user = User.objects.create_user(name=name,email=email,password=password,phoneno=phoneno,state=state,district=district)
             login(request,user)
             return redirect('/home')
-        return HttpResponse("User already exists!!")
-
+        messages.error(request, 'Error - User already exists!')
+        return redirect('signup')
     else:
         pass
     return render(request, 'registration/signup.html')
@@ -96,7 +97,8 @@ def log_in(request):
                 return redirect(next_url)
             return redirect('home')
         else:
-            pass
+            messages.error(request, 'Invalid email or password!')
+            return redirect('login')
     return render(request, 'registration/login.html')
 
 @login_required(login_url='/login')
@@ -181,8 +183,8 @@ def actlend(request,idn):
             ################################
 
             #SET LOCAL PATH HERE
-            # E:\Academics\S6\MiniProject\BoroKaro\Borokaro\media\uploads
-            filename = os.path.join('E:/Academics/S6/MiniProject/BoroKaro/Borokaro/media/', part2)
+            # D:\Django Projects\S6_Mini_Project\BoroKaro\Borokaro\media\uploads
+            filename = os.path.join('D:/Django Projects/S6_Mini_Project/BoroKaro/Borokaro/media/', part2)
 
             ################################
             result = ocr_space_file(filename)
@@ -208,7 +210,9 @@ def actlend(request,idn):
                 skip = 0
             # match1 = jellyfish.jaro_distance(addrsp,textsp[-20:len(text_detected):1])
             # match2 = jellyfish.jaro_distance(addrsp,textsp[0:21:1])
-            match = jellyfish.jaro_distance(textsp[start+skip : start+skip+len(addrsp)+15 : 1], addrsp)
+            print(textsp[start+skip+16 : start+skip+16+len(addrsp) : 1])
+            print(addrsp)
+            match = jellyfish.jaro_distance(textsp[start+skip+16 : start+skip+16+len(addrsp)+15 : 1], addrsp)
             # bestmatch = 0
             # if (addrsp in textsp):
             #     bestmatch = 1
@@ -223,9 +227,11 @@ def actlend(request,idn):
                 user.address = addr
                 user.u_type = 1
                 user.save()
-                return redirect('home')
+                messages.success(request, 'Lender verification successful!')
+                return redirect('lend')
             else:
                 verif.delete()
+                messages.error(request, 'Verification failed! Please try again.')
                 return render(request, 'main/actlend.html',{'user':user})
         return render(request, 'main/actlend.html',{'user':user})
     else:
