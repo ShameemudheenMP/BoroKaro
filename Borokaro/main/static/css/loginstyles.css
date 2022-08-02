@@ -174,3 +174,15 @@ input:-webkit-autofill{
     background-color: #2148c1;
 }
 
+.error-alert {
+    position: fixed !important;
+    top: 2px !important;
+    margin-left: 35px !important;
+    /* margin-right: auto; */
+    width: 300px !important;
+    height: 50px !important;
+}
+
+#signup-error {
+    margin-left: 0 !important;
+}
