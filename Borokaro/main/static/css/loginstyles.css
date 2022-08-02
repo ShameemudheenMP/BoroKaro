@@ -5,7 +5,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     /* background-color: black; */
-    font-family: 'Montserrat';
+    font-family: 'Montserrat' !important;
 }
 
 
@@ -50,6 +50,7 @@ body {
     color: rgba(255, 255, 255, 0.788);
     margin-left: -3%;
     margin-right: 0;
+    font-size: small;
 }
 
 input:-webkit-autofill,
@@ -83,6 +84,7 @@ input:-webkit-autofill{
     outline: none;
     font-weight: bold;
     box-shadow: 3px 3px 3px #45494a;
+    font-size: small;
 }
 
 
