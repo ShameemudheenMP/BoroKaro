@@ -14,6 +14,14 @@
       <input class="form-control" name="proofimg" type="file" id="formID" style="width: 528px;">
     </div>
     <button type="submit" class="btn btn-success" style="width: 120px;">Submit</button>
+    <br>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger" style="width: 280px" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
   </form>
 </div>
 {% endblock %}

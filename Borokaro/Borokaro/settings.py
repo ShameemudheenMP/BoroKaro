@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'crispy_forms',
     'crispy_bootstrap5',
-    'mathfilters'
+    'mathfilters',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,8 @@ AUTH_USER_MODEL = 'main.User'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}
