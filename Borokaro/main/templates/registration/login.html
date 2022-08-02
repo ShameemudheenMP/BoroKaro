@@ -34,6 +34,13 @@
                         <input type="password" id="password" name="password" class="textinputs" placeholder="PASSWORD"><br><br>
                     </div>
                 </div><br>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
                 <!-- USED TO ALLOW REDIRECTS AFTER LOGIN -->
                 <input type="hidden" name="next" value="{{ request.GET.next }}" />
                 

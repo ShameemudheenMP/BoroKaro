@@ -131,9 +131,16 @@
                         </div><br>
                     </div>
                 </div>
-                <a href="index.html"><input type="submit" value="REGISTER" class="submitbutton"></a><br>
+                <a href="#"><input type="submit" value="REGISTER" class="submitbutton"></a><br>
             </form>
             <div class="bottom">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
                 <div><p>Already have an account?<a href="/login" style="margin-left:5px ;">LOGIN</a> </p> </div>
             </div>
         </div>

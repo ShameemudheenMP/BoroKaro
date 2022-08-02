@@ -2,6 +2,14 @@
 {% load static %}
 {% block content %}
 <div class="mt-5 pt-5 mt-lg-2 pt-lg-2 container-fluid content p-0 m-0 d-flex flex-column align-items-center pb-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success fw-bold" style="width: 265px" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <br>
     <h3 class="fw-bold mb-3">LEND A PRODUCT</i></h3>
     <form class="d-flex flex-column align-items-center justify-content-center" method="post" action="/lend/" enctype="multipart/form-data">
         {% csrf_token %}
