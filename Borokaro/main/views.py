@@ -173,7 +173,7 @@ def actlend(request,idn):
         verif=Verif()
         addr=request.POST.get('address')
         if len(request.FILES) != 0:
-            threshold = 0.68
+            threshold = 0.75
             verif.user = user
             verif.image = request.FILES['proofimg']
             verif.save()
@@ -210,9 +210,9 @@ def actlend(request,idn):
                 skip = 0
             # match1 = jellyfish.jaro_distance(addrsp,textsp[-20:len(text_detected):1])
             # match2 = jellyfish.jaro_distance(addrsp,textsp[0:21:1])
-            print(textsp[start+skip+16 : start+skip+16+len(addrsp) : 1])
+            print(textsp[start+skip+16 : len(textsp) : 1])
             print(addrsp)
-            match = jellyfish.jaro_distance(textsp[start+skip+16 : start+skip+16+len(addrsp)+15 : 1], addrsp)
+            match = jellyfish.jaro_distance(textsp[start+skip+16 : len(textsp) : 1], addrsp)
             # bestmatch = 0
             # if (addrsp in textsp):
             #     bestmatch = 1
